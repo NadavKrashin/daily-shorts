@@ -1,4 +1,8 @@
-# Wait, Why? (automated animated-explainer studio)
+# Why in Clay (automated animated-explainer studio)
+
+> **Now produced with Higgsfield.** Episodes are made by scheduled Claude runs following
+> [`channel/why-in-clay.md`](channel/why-in-clay.md) (Claymotion look, Kevin narration). This app handles approvals,
+> publishing, analytics and reports, and runs in autonomous mode (`config/company.yaml`).
 
 *The world is weirder than you think.* A production-minded system that discovers topics, researches and
 fact-checks them, writes scripts, storyboards scenes, renders 60-second vertical animated explainers, runs

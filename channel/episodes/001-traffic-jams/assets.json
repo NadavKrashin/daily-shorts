@@ -1,0 +1,42 @@
+{
+ "loc_highway_overhead": {
+  "id": "f18fb7f0-aff9-4513-bd66-d0dbfa099359",
+  "desc": "LOCATION (overhead three-lane dark clay highway with sandy shoulders and one orange clay cone)"
+ },
+ "loc_ring_track": {
+  "id": "b4773465-cdab-472b-82e6-2d4c6efd4b1f",
+  "desc": "LOCATION (circular dark clay test track in a green clay field, seen from above)"
+ },
+ "loc_ring_trackside": {
+  "id": "1f17a716-df1d-40a6-8ef8-cc4bd1cf950a",
+  "desc": "LOCATION (low trackside view of the curved clay ring track with a grey guardrail)"
+ },
+ "loc_lane_column": {
+  "id": "50beae10-82f7-45aa-853b-901e3895bab2",
+  "desc": "LOCATION (one long single-lane dark clay road between green clay hills)"
+ },
+ "loc_chart_board": {
+  "id": "cea30509-f289-40cd-aa6b-8bdaf16d5491",
+  "desc": "LOCATION (upright cream clay chart board with a pressed grid and three grooved lanes, clay ruler in front)"
+ },
+ "loc_highway_roadside": {
+  "id": "7b93d928-21a9-4204-a04f-f6b7f0056a4e",
+  "desc": "LOCATION (roadside view of a two-lane dark clay highway with a grey lamppost)"
+ },
+ "prop_sand_car": {
+  "id": "37981cf0-c134-4c96-972b-925a2f1b7820",
+  "desc": "PROP sand-beige clay hatchback (repeat it for every other car)"
+ },
+ "prop_blue_car": {
+  "id": "09cfb19d-0bc5-422d-950f-99fedf06babe",
+  "desc": "PROP cobalt-blue clay hatchback"
+ },
+ "prop_lavender_car": {
+  "id": "51741428-9cf2-444b-a655-3fe7b283c3d7",
+  "desc": "PROP lavender clay hatchback"
+ },
+ "prop_red_strip": {
+  "id": "74f5202c-7e9a-4536-b358-c5306a7990ee",
+  "desc": "PROP signal-red clay strip and red clay dots"
+ }
+}

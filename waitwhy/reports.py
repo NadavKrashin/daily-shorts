@@ -95,7 +95,7 @@ def recommendations(f: dict, cfg: dict) -> list[str]:
 
 
 def render_daily(f: dict, recs: list[str]) -> str:
-    lines = [f"WAIT, WHY? - daily CEO report {f['date']}  (mode: {f['mode']}{', DRY RUN' if f['dry_run'] else ''})", "",
+    lines = [f"WHY IN CLAY - daily CEO report {f['date']}  (mode: {f['mode']}{', DRY RUN' if f['dry_run'] else ''})", "",
              "VERIFIED FACTS",
              f"- Videos published (last 24h): {f['videos_published_yesterday']} "
              f"({f['posts_published_yesterday']} platform posts; {f['dry_run_mock_posts_24h']} dry-run mock posts excluded)",
@@ -122,7 +122,7 @@ def send_daily(session: Session, cfg: dict) -> dict:
     f = daily_facts(session, cfg)
     recs = recommendations(f, cfg)
     text = render_daily(f, recs)
-    _deliver(session, cfg, f"Wait, Why? daily report {f['date']}", text, "last_daily_report")
+    _deliver(session, cfg, f"Why in Clay daily report {f['date']}", text, "last_daily_report")
     record_decision(session, "coo", "daily_report", recs[0], output={"facts": f, "recommendations": recs})
     return {"sent": True, "recommendations": recs}
 
@@ -139,7 +139,7 @@ def send_weekly(session: Session, cfg: dict) -> dict:
     st = budget.status(session, cfg)
     cats = m.cohort_stats(rows, "category")
     text = "\n".join([
-        f"WAIT, WHY? - weekly review (week ending {now.date()})",
+        f"WHY IN CLAY - weekly review (week ending {now.date()})",
         f"- Public posts this week: {pub}",
         f"- Publishing reliability: {ok}/{len(jobs)} publication jobs published"
         if jobs else "- Publishing reliability: no publication jobs this week",
@@ -150,7 +150,7 @@ def send_weekly(session: Session, cfg: dict) -> dict:
         "Top improvements (impact / effort): 1) ship consistently 5/week before optimising; "
         "2) connect analytics on every platform; 3) A/B hook styles only once n>=5 per cohort.",
     ])
-    _deliver(session, cfg, "Wait, Why? weekly review", text, "last_weekly_review")
+    _deliver(session, cfg, "Why in Clay weekly review", text, "last_weekly_review")
     return {"sent": True}
 
 
@@ -159,7 +159,7 @@ def send_monthly(session: Session, cfg: dict) -> dict:
     pubs = session.execute(select(func.count()).select_from(Video).where(Video.state.in_(["PUBLISHED", "ANALYZING"]))).scalar()
     unit = finance.avg_cost_per_published_video(session)
     text = "\n".join([
-        f"WAIT, WHY? - monthly management report {st['month']}",
+        f"WHY IN CLAY - monthly management report {st['month']}",
         "1. Executive summary: see sections below (facts only).",
         f"2. Audience: {len(m.all_post_metrics(session))} public posts tracked",
         f"3. Content: {pubs} videos published to date",
@@ -171,7 +171,7 @@ def send_monthly(session: Session, cfg: dict) -> dict:
         "because of a single outlier.",
         f"8. Proposed next-month budget: ${cfg['monthly_budget_usd']} (unchanged; change requires owner approval)",
     ])
-    _deliver(session, cfg, f"Wait, Why? monthly report {st['month']}", text, "last_monthly_report")
+    _deliver(session, cfg, f"Why in Clay monthly report {st['month']}", text, "last_monthly_report")
     return {"sent": True}
 
 

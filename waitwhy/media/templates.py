@@ -142,7 +142,7 @@ def big_number(ctx: FrameCtx) -> Image.Image:
 def end_card(ctx: FrameCtx) -> Image.Image:
     img = background(ctx.pal)
     draw_logo(img, ctx, (W / 2, 820), 200 * st.ease_out_back(ctx.t / 0.6))
-    name = ctx.extras.get("brand_name", "Wait, Why?")
+    name = ctx.extras.get("brand_name", "Why in Clay")
     st.text_center(img, (W / 2, 1090), name, st.font("Inter-ExtraBold", 96), ctx.pal.text, stroke=4,
                    alpha=st.clamp01((ctx.t - 0.25) / 0.3))
     st.text_center(img, (W / 2, 1185), ctx.extras.get("tagline", ""), st.font("Inter-Medium", 42), ctx.pal.muted,

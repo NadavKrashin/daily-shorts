@@ -41,7 +41,7 @@ from waitwhy.settings import get_config, secrets
 from waitwhy.states import KANBAN_COLUMNS, S
 
 HERE = Path(__file__).resolve().parent.parent / "web"
-app = FastAPI(title="Wait, Why? - operations", docs_url="/api/docs", openapi_url="/api/openapi.json")
+app = FastAPI(title="Why in Clay - operations", docs_url="/api/docs", openapi_url="/api/openapi.json")
 app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
 templates = Jinja2Templates(directory=HERE / "templates")
 basic = HTTPBasic()

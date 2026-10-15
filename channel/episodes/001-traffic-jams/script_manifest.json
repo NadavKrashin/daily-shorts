@@ -1,0 +1,156 @@
+{
+ "topic": "Why traffic jams appear out of nowhere",
+ "genre": "education",
+ "animation_mode": "fully_animated",
+ "channel_type": "Explainer",
+ "style": "Claymotion",
+ "through_line": {
+  "name": "red brake-light clay strip",
+  "asset": "prop_red_strip",
+  "progression": "one red clay dot, then two dots, then a chained red clay strip, then the strip sliding backwards against traffic",
+  "resolution": "a wide gap kept by the lavender car snips the red clay strip apart"
+ },
+ "arc": {
+  "hook": 1,
+  "build": [
+   2,
+   3,
+   4
+  ],
+  "turn": 5,
+  "payoff": 6
+ },
+ "blocks": [
+  {
+   "n": 1,
+   "arc_role": "hook",
+   "vo_line": "This enormous traffic jam has no cause. Drive to its very front and you'll find no accident, no roadwork, just cars accelerating away.",
+   "location": "loc_highway_overhead",
+   "through_line_state": "one red clay dot stamped on the asphalt behind the stopped cars",
+   "shots": [
+    "WIDE high overhead: three clay lanes packed with stalled clay cars, slow push-in",
+    "CU low angle: a stopped sand-beige car's tail lights flick red with a stamp",
+    "MEDIUM lateral tracking: the camera glides past the queue toward the jam's front",
+    "ECU top-down: a single red clay dot stamps onto the asphalt",
+    "MEDIUM high angle: at the front the blue car pulls away onto empty road and settles"
+   ],
+   "assets_used": [
+    "loc_highway_overhead",
+    "prop_sand_car",
+    "prop_blue_car",
+    "prop_red_strip"
+   ],
+   "audio": "soft clay squish as the camera pushes in, a low toy-engine hum bed, a crisp clay thud as the red dot stamps down, a quick whoosh as the blue car pulls away"
+  },
+  {
+   "n": 2,
+   "arc_role": "build",
+   "vo_line": "In two thousand eight, Japanese researchers placed twenty-two cars on a circular track and instructed drivers to cruise at thirty kilometres per hour.",
+   "location": "loc_ring_track",
+   "through_line_state": "the red clay dot rests on the ring while every car cruises evenly",
+   "shots": [
+    "WIDE overhead: clay cars slide onto a circular clay track one after another",
+    "MEDIUM low angle: evenly spaced cars roll past the inner curb",
+    "CU lateral: the blue car rolls steadily, its wheels turning",
+    "ECU macro: the red clay dot sits motionless on the track edge",
+    "MEDIUM high angle: the whole ring circulates smoothly, then settles into rhythm"
+   ],
+   "assets_used": [
+    "loc_ring_track",
+    "prop_sand_car",
+    "prop_blue_car",
+    "prop_red_strip"
+   ],
+   "audio": "soft clay pops as cars drop onto the track one by one, a steady toy-engine hum bed, light ticking of turning wheels"
+  },
+  {
+   "n": 3,
+   "arc_role": "build",
+   "vo_line": "Smooth driving lasted only briefly, because whenever one motorist eased off slightly, the follower behind reacted late and braked noticeably harder.",
+   "location": "loc_ring_trackside",
+   "through_line_state": "a second red dot snaps down beside the first as a follower brakes",
+   "shots": [
+    "CU lateral: the blue car eases off and a gap opens ahead of it",
+    "MEDIUM low angle: the sand-beige car behind closes in fast",
+    "ECU rear view: the sand-beige car's brake lights flare red with a hard stamp",
+    "MEDIUM top-down: a second red clay dot snaps beside the first",
+    "WIDE high angle: the trackside curve shows the cars bunching, then holds steady"
+   ],
+   "assets_used": [
+    "loc_ring_trackside",
+    "prop_blue_car",
+    "prop_sand_car",
+    "prop_red_strip"
+   ],
+   "audio": "a short squeaky brake scrape, a whoosh as the gap opens, a firm clay thud on the brake flare and the second red dot"
+  },
+  {
+   "n": 4,
+   "arc_role": "build",
+   "vo_line": "Each next driver braked a little harder still, so that one tiny wobble kept growing until it became a full stop-and-go wave.",
+   "location": "loc_lane_column",
+   "through_line_state": "the red dots chain into one long strip running down the column",
+   "shots": [
+    "WIDE lateral: a long column of clay cars rolls along a single clay lane",
+    "CU rear view: tail lights flare one after another, each a beat later",
+    "ECU top-down: red clay dots snap together into a chain",
+    "MEDIUM low angle: the last car jolts to a full stop with a bump",
+    "WIDE high overhead: the red clay strip stretches the whole column and settles"
+   ],
+   "assets_used": [
+    "loc_lane_column",
+    "prop_sand_car",
+    "prop_red_strip"
+   ],
+   "audio": "rolling toy-engine rumble bed, quick ticks on each tail-light flare, a soft squelch as the dots join, a bump thud on the full stop"
+  },
+  {
+   "n": 5,
+   "arc_role": "turn",
+   "vo_line": "Here's the surprise: the wave travels backwards, and on real highways jams drift upstream at roughly fifteen to twenty kilometres an hour.",
+   "location": "loc_chart_board",
+   "through_line_state": "the red clay strip slides backwards down the chart while the car tokens move forwards",
+   "shots": [
+    "WIDE overhead: clay car tokens slide upward along grooved clay lanes",
+    "CU top-down: the red clay strip curls and slides downward, against the cars",
+    "MEDIUM low angle: a clay arrow pointing backwards stamps onto the clay board",
+    "ECU macro: the clay strip's edge creeps backwards across the grid lines",
+    "MEDIUM high angle: cars climb as the red clay band sinks, then everything settles"
+   ],
+   "assets_used": [
+    "loc_chart_board",
+    "prop_red_strip",
+    "prop_sand_car"
+   ],
+   "audio": "soft sliding clay sounds as tokens climb, a slow sticky clay stretch as the strip slides back, a clay thud as the arrow lands"
+  },
+  {
+   "n": 6,
+   "arc_role": "payoff",
+   "vo_line": "Later experiments showed one smoothly driven car can calm these waves, so the jam's only cause, and cure, might be you.",
+   "location": "loc_highway_roadside",
+   "through_line_state": "the lavender car's wide gap snips the red clay strip apart",
+   "shots": [
+    "MEDIUM low lateral: the lavender car cruises steadily with a wide gap ahead",
+    "CU high angle: the empty asphalt gap between the lavender car and the car ahead",
+    "ECU top-down: the red clay strip snaps apart into scraps",
+    "MEDIUM roadside: traffic behind flows evenly past the camera",
+    "WIDE high angle: the whole highway moves freely and settles into a calm final frame"
+   ],
+   "assets_used": [
+    "loc_highway_roadside",
+    "prop_lavender_car",
+    "prop_sand_car",
+    "prop_red_strip"
+   ],
+   "audio": "calm toy-engine hum bed, a soft clay snap as the red strip breaks apart, a gentle whoosh of flowing cars"
+  }
+ ],
+ "sources": [
+  "https://ir.library.osaka-u.ac.jp/repo/ouka/all/93262/NewJPhys_10_033001.pdf",
+  "https://doi.org/10.1088/1367-2630/10/3/033001",
+  "https://arxiv.org/abs/1705.01693",
+  "https://arxiv.org/abs/cond-mat/0408138",
+  "https://arxiv.org/abs/1012.5160"
+ ]
+}

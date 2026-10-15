@@ -13,12 +13,15 @@
 | D-009 | 2026-10-15 | Audience-timezone publishing slots (US Eastern) rotating 12:00 / 17:00 / 19:30 weekdays | Owner timezone ≠ audience; start with reasonable defaults, learn from data | ≥ 20 posts per platform with 7-day data |
 | D-010 | 2026-10-15 | Script facts must cite fact-sheet claim IDs; numbers without citations fail the script gate | Numbers are where errors hide | — |
 | D-011 | 2026-10-15 | Spending approvals are written in their own DB transaction | The stage transaction is rolled back when a job parks; the approval request must survive (bug found by `test_budget_exhausted_halfway…`) | — |
+| D-012 | 2026-10-15 | Videos are produced by scheduled Claude runs with Higgsfield, not the in-app renderer | The owner preferred the Higgsfield output; the recipe is `channel/why-in-clay.md`. The app keeps approvals, publishing and analytics | Owner |
+| D-013 | 2026-10-15 | Channel renamed **Why in Clay**; look = Claymotion preset, narrator = Kevin | Owner picked Kevin + Claymotion from the audition and asked for a unique name containing "clay". @whyinclay was free on YouTube; Clayplained, Clay Curious, clay why and ClaySics were taken | Owner |
+| D-014 | 2026-10-15 | Operating mode switched to autonomous | Owner: "I need this to be automatic." Production spends credits without asking (cap 200 credits per episode, pause under 200 balance). Real-money spend, account connections and sponsorships stay with the owner | Owner |
 
 ## Assumptions (to confirm)
 
-* **Brand name "Wait, Why?" is a working title.** Trademark, domain and handle availability have **not** been checked
-  (needs a USPTO/EUIPO search and handle checks on all four platforms). Owner approval required before committing.
-* Owner wants supervised mode (human approval of every video) for at least the first 20 videos.
+* **"Why in Clay" has had a handle check only** (YouTube free, TikTok not found on 2026-10-15). No trademark search
+  yet. The owner still has to claim the handles. A similar new channel, "Smush Science" (@SmushScience), makes clay
+  science videos.
 * The ElevenLabs account will be on a paid plan that grants commercial rights, with a stock/designed voice.
 * Higgsfield API funds are separate from the web subscription, so a top-up is needed for API use.
 * Audience: English-speaking 16–35. Demographics stay unverified until platform analytics arrive.

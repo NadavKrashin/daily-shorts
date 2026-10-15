@@ -1,0 +1,27 @@
+{
+ "note": "One entry per produced episode, newest last. Scheduled runs read this to skip topics already made and append their own entry.",
+ "episodes": [
+  {
+   "number": 1,
+   "slug": "why-traffic-jams-appear-out-of-nowhere",
+   "title": "Why Traffic Jams Appear Out of Nowhere",
+   "thumbnail_hook": "The Jam With No Cause",
+   "produced_on": "2026-10-15",
+   "status": "produced_not_published",
+   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/c9c976a4-05ac-498e-b5f7-9b1c24d07476.mp4",
+   "thumbnail_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/5df59c23-26b6-4eea-8f0e-bafa47bfd13a.png",
+   "credits_spent": 151.15,
+   "sources": [
+    "https://doi.org/10.1088/1367-2630/10/3/033001",
+    "https://arxiv.org/abs/1705.01693",
+    "https://arxiv.org/abs/cond-mat/0408138",
+    "https://arxiv.org/abs/1012.5160"
+   ],
+   "known_issues": [
+    "Scene 1 mixes blue and lavender cars into the jam",
+    "Scene 6 uses a sand car as the smooth driver instead of the lavender car",
+    "Hook scored WEAK (31) on hookscore.py; thumbnail text is 5 words"
+   ]
+  }
+ ]
+}

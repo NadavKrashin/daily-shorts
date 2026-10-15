@@ -1,10 +1,10 @@
-# Central, non-secret business configuration for "Wait, Why?".
+# Central, non-secret business configuration for "Why in Clay".
 # Credentials NEVER go here - they live in environment variables / a secret manager (see .env.example).
 # Any key can be overridden at runtime from the dashboard Settings page (stored in system_settings);
 # keys listed under `protected_keys` require an explicit typed confirmation and are audit-logged.
 
-business_name: "Wait, Why?"          # working title - trademark/handle check pending (docs/decisions.md)
-tagline: "The world is weirder than you think."
+business_name: "Why in Clay"         # @whyinclay free on YouTube 2026-10-15; owner must claim handles (docs/decisions.md)
+tagline: "Everyday mysteries, explained in clay."
 language: en
 timezone: Asia/Jerusalem              # owner timezone: drives the daily operations schedule
 audience_timezones: [America/New_York, America/Los_Angeles, Europe/London, Australia/Sydney]
@@ -35,10 +35,10 @@ max_generation_retries_per_scene: 2
 max_ai_scenes_per_video: 4            # cost guard: everything else is deterministic motion graphics
 
 # --- Autonomy & safety ----------------------------------------------------------
-operating_mode: supervised            # supervised | controlled | autonomous
-content_approval_required: true       # forced true in supervised mode
-auto_publish_enabled: false
-dry_run_mode: true                    # true => publishing + paid generation use mock adapters
+operating_mode: autonomous            # supervised | controlled | autonomous (owner asked for full automation 2026-10-15)
+content_approval_required: false      # forced true in supervised mode
+auto_publish_enabled: true            # only takes effect once platform credentials exist and dry_run_mode is off
+dry_run_mode: true                    # true => publishing + paid generation use mock adapters; turn off after platforms are connected
 script_approval_required: false       # optional extra human gate before storyboarding
 outreach_sending_enabled: false       # sponsorship emails are drafted only, never auto-sent
 
@@ -113,10 +113,10 @@ script:
   structure: [hook, mystery, setup, explanation, reveal, conclusion]
 
 brand:
-  voice: "warm, curious, clear, moderate energy, never shouty"
+  voice: "bright, punchy, curious, fast but clear (narrator: Kevin); see channel/voice.md"
   visual_style: >-
-    Premium stylised 3D-illustration look: miniature, clean environments, soft shadows,
-    bright controlled palette, high contrast, generous negative space, smooth camera moves.
+    Handmade claymation miniatures (Higgsfield Claymotion preset); the locked formula is
+    channel/style.txt and the full recipe is channel/why-in-clay.md.
   palette:
     background: "#0F172A"
     surface: "#1E293B"
@@ -129,7 +129,7 @@ brand:
     muted: "#94A3B8"
   font_bold: "Inter-Bold"
   font_regular: "Inter-Medium"
-  end_card_text: "Wait, Why?"
+  end_card_text: "Why in Clay"
 
 # --- Providers & model routing (swap freely; adapters live in waitwhy/providers) -
 providers:

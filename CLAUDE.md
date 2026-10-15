@@ -1,0 +1,39 @@
+# Why in Clay (repo: daily-shorts)
+
+An automated YouTube Shorts studio. Videos are produced by scheduled Claude runs with the
+Higgsfield connector, following `channel/why-in-clay.md`. The `waitwhy` app (FastAPI + Postgres)
+handles approvals, publishing, analytics and reports.
+
+## Standing instructions from the owner
+
+The owner wants this to run automatically. Do not stop to ask for approval inside these limits:
+
+- Produce episodes and spend Higgsfield credits per `channel/why-in-clay.md` (about 150 credits per
+  episode, hard cap 200 per episode, pause when the balance is under 200).
+- Pick topics, write scripts, retry failed takes and scenes, and choose titles and thumbnails.
+- Commit and push work to the working branch.
+
+Still the owner's call (say so once, plainly, and carry on with everything else):
+
+- Anything that costs real money outside the existing Higgsfield credits (hosting, a plan upgrade,
+  buying credits, paid APIs).
+- Creating or connecting accounts (YouTube, Instagram, Facebook, TikTok, hosting). Only the owner can
+  log in and grant access.
+- Sponsorship deals and outreach emails.
+
+Never fabricate facts, sources, analytics, revenue or test results, and never claim something is
+published or deployed without checking.
+
+## Skills
+
+`.claude/skills/yt-*` is the MIT-licensed YouTube agent skill pack
+(github.com/Jakeschincariol/youtube-agent-skill). Before using it, copy `channel/voice.md` to
+`~/.claude/youtube/voice.md`. In automated runs, skip each skill's closing "ship it, or change it?"
+question.
+
+## Layout
+
+- `channel/`: the channel recipe, voice file, style formula, episode log and per-episode manifests.
+- `config/company.yaml`: business config (autonomous mode, budgets, schedules).
+- `waitwhy/`: the app. Tests: `SKIP_SLOW=1 pytest`.
+- `docs/`: architecture, setup, deployment, runbook, compliance.
