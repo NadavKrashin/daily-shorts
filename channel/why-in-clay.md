@@ -15,7 +15,7 @@ worked example: copy its file shapes.
 | Motion token | `smooth simple handcrafted motion, subtle stop-motion feel` (dimensional style: no "3D render" in negatives) |
 | Palette | sky blue, grass green, warm sand, cream; ONE signal-red accent reserved for the episode's through-line prop and warning marks |
 | Narrator | **Kevin**, `voice_id f1373f24-3b96-433f-9a68-e595810ef608`, `voice_type preset`, model `text2speech_v2` variant `elevenlabs` |
-| Delivery phrase (verbatim every line) | `energetic curious YouTube science explainer, bright punchy delivery, measured unhurried pace, crisp articulation` |
+| Prompt format (every line) | `[excited] {line}`: one plain tag, nothing else. Descriptive brackets and per-line moods get SPOKEN by this voice (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
 | Captions | bottom centre, sentence case, max 4 words a cue: `subtitle_paper_burn.py --style bold --no-caps --font-key montserrat --stroke-frac 0.045 --profile faceless` |
 | Thumbnail | 16:9, `nano_banana_pro` 4k, clay medium, people-free, hook text 3-4 words baked in and checked letter for letter |
 
@@ -27,8 +27,15 @@ worked example: copy its file shapes.
 - **Hook (scene 1):** write five candidate first lines, score them with
   `python3 .claude/skills/yt-script/hookscore.py hooks.txt`, and use the best. Aim for a verdict
   above WEAK. The hook confirms the title and opens a question the viewer cannot close.
-- **Through-line:** one signal-red clay prop that changes state in every scene and resolves in the
-  payoff (episode 1: one red dot, two dots, a chain, a strip sliding backwards, snapped apart).
+- **Through-line:** one signal-red element that changes state in every scene and resolves in the
+  payoff. It must be something the viewer already understands (brake lights, a warning sign, a
+  thermometer) or something the narration names. Abstract symbols the voice never explains read as
+  random (episode 1's lone red clay dot at 0:17 confused the owner).
+  The script validator requires `through_line.asset` in every block's `assets_used`, so make it a
+  prop that is naturally in every scene (episode 1's final through-line is the brake lights on the
+  sand car).
+- **Direction of travel:** for anything that moves, state which way it faces and moves in the shot
+  text, and put the reverse motion in the negatives (episode 1 had a car reversing at 0:37).
 - **Arc:** hook (1), build (2-4), turn (5), payoff (6). The payoff answers the hook.
 - **Facts:** every claim traces to a primary or reputable source found this run. Put the URLs in
   the manifest's `sources`. Prefer "roughly" over a false-precise number. Never invent a figure,
@@ -55,10 +62,13 @@ follow them, except where this file says otherwise.
    `validate_motion_script.py --script script_manifest.json --duration-seconds 60` until `valid: true`.
 3. **Narration first** (cheap; it proves the script fits before the 120-credit video spend). One
    `generate_audio_batch` with all six lines in the format
-   `[ {delivery phrase}, {mood}, starts speaking immediately] [00:00-00:09] {line}`. Convert with the
-   narration workflow's reverse-trim recipe, then measure with `measure_narration_takes.py`. Rewrite
-   only the failing lines (max 3 attempts per line; the third needs new words). Keep the manifest's
-   `vo_line` equal to what was actually spoken.
+   `[excited] {line}` (this overrides the narration workflow's timecode format, which leaked words).
+   Convert with the narration workflow's reverse-trim recipe, measure with
+   `measure_narration_takes.py`, then run `python3 check_takes.py script_manifest.json work/voices`
+   (upload `channel/tools/check_takes.py` to the sandbox). It fails any take containing words that are
+   not in the script. The workflow's own `verify_takes.py` is NOT enough: it passed all three bad
+   takes in episode 1. The captions show script words, so they hide spoken mistakes. Regenerate only
+   failing lines (max 3 attempts per line; the third needs new words).
 4. **Assets.** `generate_image_batch`, `seedream_v5_pro`, `1k`, style key `313e8a54-...` as
    `image_references`. Locations 9:16, empty sets, dark clay asphalt where there is a road. Props 1:1
    on a plain pale sky-blue background. Look at every image before using it and regenerate any set
@@ -67,6 +77,8 @@ follow them, except where this file says otherwise.
 5. **Scenes.** `python3 channel/tools/build_blocks.py channel/episodes/NNN-slug > block_reqs.json`,
    then one `generate_video_batch` with that array. Wait with `jobs_wait`. Check each clip: audio
    stream present, about 4 cuts near 2/4/6/8 s, frames match the sets and props, no people or text.
+   Look at a strip of frames every 0.5 s for each shot, not one frame per shot: reversing cars and
+   stray objects only show up as motion.
    Regenerate a scene only for a named failure (wrong style, missing audio, person or text on
    screen), at most twice.
 6. **Assemble + captions + upload** in ONE background `sandbox_exec`: `media_upload` first, then

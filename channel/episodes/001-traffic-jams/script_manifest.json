@@ -5,10 +5,10 @@
  "channel_type": "Explainer",
  "style": "Claymotion",
  "through_line": {
-  "name": "red brake-light clay strip",
-  "asset": "prop_red_strip",
-  "progression": "one red clay dot, then two dots, then a chained red clay strip, then the strip sliding backwards against traffic",
-  "resolution": "a wide gap kept by the lavender car snips the red clay strip apart"
+  "name": "red brake lights",
+  "asset": "prop_sand_car",
+  "progression": "one car's brake lights flick on, then the follower's flare harder, then a whole column glows red, then the red band slides backwards on the chart",
+  "resolution": "behind the smooth driver the brake lights go dark and traffic flows"
  },
  "arc": {
   "hook": 1,
@@ -47,19 +47,18 @@
    "arc_role": "build",
    "vo_line": "In two thousand eight, Japanese researchers placed twenty-two cars on a circular track and instructed drivers to cruise at thirty kilometres per hour.",
    "location": "loc_ring_track",
-   "through_line_state": "the red clay dot rests on the ring while every car cruises evenly",
+   "through_line_state": "no red yet: every car cruises evenly, brake lights off",
    "shots": [
     "WIDE overhead: clay cars slide onto a circular clay track one after another",
     "MEDIUM low angle: evenly spaced cars roll past the inner curb",
     "CU lateral: the blue car rolls steadily, its wheels turning",
-    "ECU macro: the red clay dot sits motionless on the track edge",
+    "ECU macro: a sand-beige car's front wheel rolls steadily past the cream inner curb",
     "MEDIUM high angle: the whole ring circulates smoothly, then settles into rhythm"
    ],
    "assets_used": [
     "loc_ring_track",
     "prop_sand_car",
-    "prop_blue_car",
-    "prop_red_strip"
+    "prop_blue_car"
    ],
    "audio": "soft clay pops as cars drop onto the track one by one, a steady toy-engine hum bed, light ticking of turning wheels"
   },
@@ -87,22 +86,22 @@
   {
    "n": 4,
    "arc_role": "build",
-   "vo_line": "Each next driver braked a little harder still, so that one tiny wobble kept growing until it became a full stop-and-go wave.",
+   "vo_line": "Every following driver braked a little harder, so one tiny wobble kept gradually amplifying until it became a complete stop-and-go traffic wave.",
    "location": "loc_lane_column",
-   "through_line_state": "the red dots chain into one long strip running down the column",
+   "through_line_state": "every brake light in the column glows red",
    "shots": [
-    "WIDE lateral: a long column of clay cars rolls along a single clay lane",
-    "CU rear view: tail lights flare one after another, each a beat later",
-    "ECU top-down: red clay dots snap together into a chain",
-    "MEDIUM low angle: the last car jolts to a full stop with a bump",
-    "WIDE high overhead: the red clay strip stretches the whole column and settles"
+    "WIDE lateral: a long column of clay cars, all pointing the same way, rolls forward along a single clay lane",
+    "CU rear view from behind the column: tail lights flare red one after another, each a beat later, as each car slows",
+    "ECU top-down: the gaps between bumpers shrink as the cars bunch up nose to tail",
+    "MEDIUM low angle from the roadside: the last car rolls forward, nose first, and jolts to a full stop with a bump",
+    "WIDE high overhead: the whole column stands still with every brake light glowing red, then settles"
    ],
    "assets_used": [
     "loc_lane_column",
-    "prop_sand_car",
-    "prop_red_strip"
+    "prop_sand_car"
    ],
-   "audio": "rolling toy-engine rumble bed, quick ticks on each tail-light flare, a soft squelch as the dots join, a bump thud on the full stop"
+   "audio": "rolling toy-engine rumble bed, quick ticks on each tail-light flare, a soft squeak of brakes, a bump thud on the full stop",
+   "direction_note": "Every car faces the same direction and only ever moves forward (nose first). No car ever reverses or moves backwards."
   },
   {
    "n": 5,
