@@ -12,6 +12,10 @@ The owner wants this to run automatically. Do not stop to ask for approval insid
   episode, hard cap 200 per episode, pause when the balance is under 200).
 - Pick topics, write scripts, retry failed takes and scenes, and choose titles and thumbnails.
 - Commit and push work to the working branch.
+- Fix any problem the owner reports, in that episode and in the recipe, even if the fix takes the
+  episode past its 200-credit cap (the 200-credit balance floor still applies).
+- Make judgement calls yourself and report what you decided. Do not end a report with "tell me if
+  you want X" or "should I...?" when X is inside these limits: just do it.
 
 Still the owner's call (say so once, plainly, and carry on with everything else):
 

@@ -26,21 +26,21 @@
    "arc_role": "hook",
    "vo_line": "This enormous traffic jam has no cause. Drive to its very front and you'll find no accident, no roadwork, just cars accelerating away.",
    "location": "loc_highway_overhead",
-   "through_line_state": "one red clay dot stamped on the asphalt behind the stopped cars",
+   "through_line_state": "every car in the jam shows red brake lights",
    "shots": [
-    "WIDE high overhead: three clay lanes packed with stalled clay cars, slow push-in",
+    "WIDE high overhead: three clay lanes packed with stalled sand-beige clay cars, every one with glowing red brake lights, slow push-in",
     "CU low angle: a stopped sand-beige car's tail lights flick red with a stamp",
     "MEDIUM lateral tracking: the camera glides past the queue toward the jam's front",
-    "ECU top-down: a single red clay dot stamps onto the asphalt",
+    "ECU top-down: two stopped sand-beige cars sit nose to tail, the rear car's brake lights glowing red",
     "MEDIUM high angle: at the front the blue car pulls away onto empty road and settles"
    ],
    "assets_used": [
     "loc_highway_overhead",
     "prop_sand_car",
-    "prop_blue_car",
-    "prop_red_strip"
+    "prop_blue_car"
    ],
-   "audio": "soft clay squish as the camera pushes in, a low toy-engine hum bed, a crisp clay thud as the red dot stamps down, a quick whoosh as the blue car pulls away"
+   "audio": "soft clay squish as the camera pushes in, a low toy-engine hum bed, a soft brake squeak, a quick whoosh as the blue car pulls away",
+   "direction_note": "Every car in the jam is sand-beige; the cobalt-blue car is the only blue car. All cars face the same way and only move forward."
   },
   {
    "n": 2,
@@ -67,21 +67,21 @@
    "arc_role": "build",
    "vo_line": "Smooth driving lasted only briefly, because whenever one motorist eased off slightly, the follower behind reacted late and braked noticeably harder.",
    "location": "loc_ring_trackside",
-   "through_line_state": "a second red dot snaps down beside the first as a follower brakes",
+   "through_line_state": "brake lights flare red down the line of cars",
    "shots": [
     "CU lateral: the blue car eases off and a gap opens ahead of it",
     "MEDIUM low angle: the sand-beige car behind closes in fast",
     "ECU rear view: the sand-beige car's brake lights flare red with a hard stamp",
-    "MEDIUM top-down: a second red clay dot snaps beside the first",
+    "MEDIUM top-down: behind the sand-beige car a second sand-beige car's brake lights flare red even brighter",
     "WIDE high angle: the trackside curve shows the cars bunching, then holds steady"
    ],
    "assets_used": [
     "loc_ring_trackside",
     "prop_blue_car",
-    "prop_sand_car",
-    "prop_red_strip"
+    "prop_sand_car"
    ],
-   "audio": "a short squeaky brake scrape, a whoosh as the gap opens, a firm clay thud on the brake flare and the second red dot"
+   "audio": "a short squeaky brake scrape, a whoosh as the gap opens, a firm clay thud as the brake lights flare",
+   "direction_note": "All cars face the same way and only move forward."
   },
   {
    "n": 4,
@@ -128,21 +128,21 @@
    "arc_role": "payoff",
    "vo_line": "Later experiments showed one smoothly driven car can calm these waves, so the jam's only cause, and cure, might be you.",
    "location": "loc_highway_roadside",
-   "through_line_state": "the lavender car's wide gap snips the red clay strip apart",
+   "through_line_state": "no brake lights glowing anywhere: traffic flows",
    "shots": [
-    "MEDIUM low lateral: the lavender car cruises steadily with a wide gap ahead",
-    "CU high angle: the empty asphalt gap between the lavender car and the car ahead",
-    "ECU top-down: the red clay strip snaps apart into scraps",
-    "MEDIUM roadside: traffic behind flows evenly past the camera",
-    "WIDE high angle: the whole highway moves freely and settles into a calm final frame"
+    "MEDIUM low lateral: the lavender car cruises steadily forward with a wide empty gap ahead of it",
+    "CU high angle: the long empty stretch of asphalt between the lavender car and the car ahead",
+    "ECU rear view: the lavender car's brake lights stay dark as it coasts smoothly forward",
+    "MEDIUM roadside: sand-beige cars behind it flow evenly past the camera, brake lights off",
+    "WIDE high angle: the whole highway moves freely forward and settles into a calm final frame"
    ],
    "assets_used": [
     "loc_highway_roadside",
     "prop_lavender_car",
-    "prop_sand_car",
-    "prop_red_strip"
+    "prop_sand_car"
    ],
-   "audio": "calm toy-engine hum bed, a soft clay snap as the red strip breaks apart, a gentle whoosh of flowing cars"
+   "audio": "calm toy-engine hum bed, a gentle whoosh of flowing cars, a soft settling click at the end",
+   "direction_note": "The lavender car is the smooth driver and is clearly visible in shots 1-3. All cars face the same way and only move forward."
   }
  ],
  "sources": [

@@ -15,7 +15,7 @@ worked example: copy its file shapes.
 | Motion token | `smooth simple handcrafted motion, subtle stop-motion feel` (dimensional style: no "3D render" in negatives) |
 | Palette | sky blue, grass green, warm sand, cream; ONE signal-red accent reserved for the episode's through-line prop and warning marks |
 | Narrator | **Kevin**, `voice_id f1373f24-3b96-433f-9a68-e595810ef608`, `voice_type preset`, model `text2speech_v2` variant `elevenlabs` |
-| Prompt format (every line) | `[excited] {line}`: one plain tag, nothing else. Descriptive brackets and per-line moods get SPOKEN by this voice (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
+| Prompt format (every line) | `[curious] {line}`: one plain tag, nothing else (`[excited]` made Kevin rush past the rate limit). Descriptive brackets and per-line moods get SPOKEN by this voice (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
 | Captions | bottom centre, sentence case, max 4 words a cue: `subtitle_paper_burn.py --style bold --no-caps --font-key montserrat --stroke-frac 0.045 --profile faceless` |
 | Thumbnail | 16:9, `nano_banana_pro` 4k, clay medium, people-free, hook text 3-4 words baked in and checked letter for letter |
 
@@ -62,7 +62,7 @@ follow them, except where this file says otherwise.
    `validate_motion_script.py --script script_manifest.json --duration-seconds 60` until `valid: true`.
 3. **Narration first** (cheap; it proves the script fits before the 120-credit video spend). One
    `generate_audio_batch` with all six lines in the format
-   `[excited] {line}` (this overrides the narration workflow's timecode format, which leaked words).
+   `[curious] {line}` (this overrides the narration workflow's timecode format, which leaked words).
    Convert with the narration workflow's reverse-trim recipe, measure with
    `measure_narration_takes.py`, then run `python3 check_takes.py script_manifest.json work/voices`
    (upload `channel/tools/check_takes.py` to the sandbox). It fails any take containing words that are
@@ -104,6 +104,7 @@ follow them, except where this file says otherwise.
 - Never publish anywhere from a scheduled run until the publishing app is deployed with platform
   accounts connected. Until then a run ends with links, not posts.
 - Never spend more than 200 credits on one episode. If retries would cross that, ship what passes
-  and report the gap.
+  and report the gap. The one exception: fixing a problem the owner reported may go past 200 (the
+  200-credit balance floor still applies).
 - Never fabricate analytics, facts, sources or test results. If a check could not run, say so.
 - Never use a real person's likeness or voice, and never use copyrighted characters or music.
