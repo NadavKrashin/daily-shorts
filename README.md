@@ -32,7 +32,7 @@ waitwhy migrate && waitwhy init            # schema + org/brand + 36 scored back
 waitwhy demo                               # full dry-run lifecycle for the traffic-jam explainer
 waitwhy api                                # dashboard on http://localhost:8000
 waitwhy worker & waitwhy scheduler &       # background processing + daily schedule (Asia/Jerusalem)
-pytest                                     # 64 tests (SKIP_SLOW=1 skips the full-render test)
+pytest                                     # 68 tests (SKIP_SLOW=1 skips the full-render test)
 ```
 
 Docker: `cp .env.example .env && docker compose up -d --build` (see [docs/deployment.md](docs/deployment.md)).
