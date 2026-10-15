@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block content %}
+<h1>Content pipeline</h1>
+<div class="kanban">
+{% for c in cols %}<div class="col"><h3><span>{{ c.name }}</span><span>{{ c.videos|length }}</span></h3>
+ {% for v in c.videos %}<a class="vcard" href="/videos/{{ v.id }}"><b>{{ v.title }}</b><small>{{ v.state }}{% if v.blocked_reason and v.state in ('BLOCKED',) %} · {{ v.blocked_reason[:60] }}{% endif %}</small></a>{% endfor %}
+</div>{% endfor %}
+</div>
+<h2>Top ideas (scored backlog)</h2>
+<div class="card scroll"><table><tr><th>Score</th><th>Topic</th><th>Category</th><th>Flags</th><th></th></tr>
+{% for t in ideas %}<tr><td><b>{{ t.score_total }}</b></td><td>{{ t.title }}<div class="muted">{{ t.angle }}</div></td><td>{{ t.category }}</td>
+<td>{% for f in t.risk_flags %}<span class="chip warn">{{ f }}</span>{% endfor %}</td>
+<td><form class="inline" method="post" action="/topics/{{ t.id }}/produce"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="primary">Produce</button></form></td></tr>{% endfor %}
+</table>
+<form class="inline" method="post" action="/topics" style="margin-top:10px"><input type="hidden" name="csrf" value="{{ csrf }}">
+<input name="title" placeholder="New topic title" required><select name="category">{% for c in cfg.content_categories %}<option>{{ c }}</option>{% endfor %}</select>
+<input name="angle" placeholder="Angle / surprising mechanism"><button>Add topic</button></form></div>
+<h2>Queue</h2>
+<div class="card scroll"><table><tr><th>Job</th><th>Status</th><th>Run at</th><th>Attempts</th><th>Last error</th></tr>
+{% for j in jobs %}<tr><td>{{ j.type }}</td><td><span class="chip {{ 'warn' if j.status=='blocked' else '' }}">{{ j.status }}</span></td><td>{{ j.run_at.strftime('%m-%d %H:%M') }}</td><td>{{ j.attempts }}/{{ j.max_attempts }}</td><td class="muted">{{ (j.last_error or '')[:120] }}</td></tr>{% else %}<tr><td colspan="5" class="muted">Queue empty.</td></tr>{% endfor %}
+</table></div>
+{% endblock %}

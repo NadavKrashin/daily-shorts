@@ -1,0 +1,167 @@
+1
+00:00:00,200 --> 00:00:01,163
+Nobody crashed.
+
+2
+00:00:01,163 --> 00:00:02,069
+Nobody merged.
+
+3
+00:00:02,069 --> 00:00:03,145
+So why did all
+
+4
+00:00:03,145 --> 00:00:04,674
+this traffic just stop?
+
+5
+00:00:05,233 --> 00:00:06,356
+Get to the front,
+
+6
+00:00:06,356 --> 00:00:07,908
+and there's nothing there.
+
+7
+00:00:07,908 --> 00:00:08,657
+No accident.
+
+8
+00:00:08,657 --> 00:00:09,405
+No roadwork.
+
+9
+00:00:09,967 --> 00:00:11,573
+In a 2008 study,
+
+10
+00:00:11,573 --> 00:00:13,903
+researchers in Japan put
+
+11
+00:00:13,903 --> 00:00:15,268
+22 cars on a
+
+12
+00:00:15,268 --> 00:00:17,437
+230-metre circular track,
+
+13
+00:00:18,000 --> 00:00:19,379
+and asked every driver
+
+14
+00:00:19,379 --> 00:00:20,554
+to cruise at about
+
+15
+00:00:20,554 --> 00:00:21,882
+30 kilometres an hour.
+
+16
+00:00:22,433 --> 00:00:23,813
+The smooth flow didn't
+
+17
+00:00:23,813 --> 00:00:24,132
+last.
+
+18
+00:00:24,132 --> 00:00:25,512
+When one driver eases
+
+19
+00:00:25,512 --> 00:00:26,362
+off a little,
+
+20
+00:00:26,900 --> 00:00:28,195
+the driver behind reacts
+
+21
+00:00:28,195 --> 00:00:29,177
+a moment late and
+
+22
+00:00:29,177 --> 00:00:30,382
+brakes a little harder.
+
+23
+00:00:30,382 --> 00:00:31,587
+The next driver brakes
+
+24
+00:00:31,587 --> 00:00:32,257
+harder still.
+
+25
+00:00:32,800 --> 00:00:34,442
+Those tiny delays grow
+
+26
+00:00:34,442 --> 00:00:36,024
+into a stop-and-go wave
+
+27
+00:00:36,024 --> 00:00:37,605
+that travels backwards,
+
+28
+00:00:37,605 --> 00:00:39,004
+against the traffic.
+
+29
+00:00:39,567 --> 00:00:40,642
+On real highways,
+
+30
+00:00:40,642 --> 00:00:42,041
+waves like this drift
+
+31
+00:00:42,041 --> 00:00:43,815
+backwards at roughly fifteen
+
+32
+00:00:43,815 --> 00:00:45,321
+to twenty kilometres an
+
+33
+00:00:45,321 --> 00:00:45,644
+hour.
+
+34
+00:00:46,200 --> 00:00:47,507
+Later experiments found
+
+35
+00:00:47,507 --> 00:00:48,912
+a single smoothly driven
+
+36
+00:00:48,912 --> 00:00:50,219
+car could dampen these
+
+37
+00:00:50,219 --> 00:00:50,558
+waves.
+
+38
+00:00:51,100 --> 00:00:52,111
+So leave a little
+
+39
+00:00:52,111 --> 00:00:52,754
+extra space.
+
+40
+00:00:52,754 --> 00:00:53,719
+You might be the
+
+41
+00:00:53,719 --> 00:00:54,776
+one who smooths it
+
+42
+00:00:54,776 --> 00:00:55,076
+out.

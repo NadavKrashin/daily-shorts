@@ -1,0 +1,36 @@
+{
+  "topic": "Why traffic jams appear out of nowhere",
+  "core_explanation": "In dense enough traffic, smooth flow is unstable: a small speed fluctuation is amplified as each following driver reacts with a delay and brakes a little harder. The disturbance grows into a stop-and-go wave (a 'phantom' jam) that travels backwards, against the direction of traffic, even with no accident or bottleneck.",
+  "claims": [
+    {"id": "C1", "text": "In a 2008 study, Japanese researchers put 22 cars on a 230 m circular track and asked drivers to cruise at about 30 km/h.", "importance": "central", "status": "verified", "source_ids": ["S1", "S2", "S6"], "notes": "Paper: 'The drivers were requested to cruise at about 30 km/h'; authors at Nagoya University and other Japanese institutions."},
+    {"id": "C2", "text": "Even with no bottleneck, the uniform flow broke down and a jam emerged from small fluctuations.", "importance": "central", "status": "verified", "source_ids": ["S1", "S6"], "notes": "Paper abstract: 'even a tiny fluctuation grows larger and then the homogeneous movement cannot be maintained'."},
+    {"id": "C3", "text": "The stop-and-go jam travels backwards, against the direction of traffic.", "importance": "central", "status": "verified", "source_ids": ["S1", "S4", "S5"], "notes": ""},
+    {"id": "C4", "text": "Small disturbances are amplified because following drivers react with a delay and brake harder than the car ahead (string instability).", "importance": "central", "status": "verified", "source_ids": ["S1", "S3"], "notes": "Described as the instability of homogeneous flow; our 'brakes a little harder' wording is the standard intuitive description of amplification."},
+    {"id": "C5", "text": "On real highways, such jams typically drift backwards at roughly 15-20 km/h.", "importance": "supporting", "status": "verified", "source_ids": ["S1", "S4", "S5"], "notes": "S1: ~20 km/h; S4: -15 +/- 5 km/h; S5: about -14.5 to -17 km/h. Use the range, not a single number."},
+    {"id": "C6", "text": "Field experiments later showed that controlling the speed of a single (automated) vehicle can dampen these waves.", "importance": "central", "status": "verified", "source_ids": ["S3"], "notes": "Stern et al. 2018; single primary peer-reviewed source is acceptable for this narrow claim. The car was automated - say 'smoothly driven', not 'a human driver'."},
+    {"id": "C7", "text": "Leaving extra space and driving smoothly may help absorb such waves.", "importance": "supporting", "status": "partially_verified", "source_ids": ["S3"], "notes": "Inference from C6 applied to human drivers; must be phrased as 'might/could', never as a guarantee."}
+  ],
+  "sources": [
+    {"id": "S1", "url": "https://ir.library.osaka-u.ac.jp/repo/ouka/all/93262/NewJPhys_10_033001.pdf", "title": "Traffic jams without bottlenecks - experimental evidence for the physical mechanism of the formation of a jam", "publisher": "New Journal of Physics (IOP / DPG), open access via University of Osaka", "source_type": "peer_reviewed", "accessed_on": "2026-10-15", "key_excerpt": "22 vehicles, 230 m circuit, ~30 km/h; tiny fluctuations grow; jam cluster propagates backward at roughly 20 km/h, the common value measured on real highways."},
+    {"id": "S2", "url": "https://doi.org/10.1088/1367-2630/10/3/033001", "title": "Sugiyama et al. (2008) New J. Phys. 10 033001", "publisher": "New Journal of Physics (IOP / DPG), open access via University of Osaka", "source_type": "peer_reviewed", "accessed_on": "2026-10-15", "key_excerpt": "DOI landing page of S1."},
+    {"id": "S3", "url": "https://arxiv.org/abs/1705.01693", "title": "Dissipation of stop-and-go waves via control of autonomous vehicles: Field experiments (Stern et al., Transp. Res. C 2018)", "publisher": "Transportation Research Part C / arXiv", "source_type": "peer_reviewed", "accessed_on": "2026-10-15", "key_excerpt": "Ring experiments with >20 vehicles: waves emerge consistently and can be dampened by controlling the velocity of a single vehicle."},
+    {"id": "S4", "url": "https://arxiv.org/abs/cond-mat/0408138", "title": "Empirical Features of Congested Traffic States and Their Implications for Traffic Modeling (Schoenhof & Helbing)", "publisher": "Transportation Science / arXiv", "source_type": "peer_reviewed", "accessed_on": "2026-10-15", "key_excerpt": "Stop-and-go waves propagate upstream at about -15 +/- 5 km/h."},
+    {"id": "S5", "url": "https://arxiv.org/abs/1012.5160", "title": "Common Traffic Congestion Features studied in USA, UK, and Germany (Kerner et al.)", "publisher": "Physica A / arXiv", "source_type": "peer_reviewed", "accessed_on": "2026-10-15", "key_excerpt": "Wide moving jam downstream fronts move upstream at roughly -14.5 to -17 km/h on freeways in three countries."},
+    {"id": "S6", "url": "https://www.sciencedaily.com/releases/2008/03/080304075707.htm", "title": "Shockwave Traffic Jams Recreated For First Time", "publisher": "ScienceDaily (Institute of Physics press release)", "source_type": "secondary", "accessed_on": "2026-10-15", "key_excerpt": "Press summary of S1."}
+  ],
+  "uncertainties": [
+    "Jams only self-organise above a critical density; at low density small fluctuations die out.",
+    "Exact backward speeds vary by road and dataset (some studies report lower values).",
+    "The single-vehicle damping result comes from automated vehicles in controlled ring experiments; real multi-lane highways are more complex."
+  ],
+  "misleading_simplifications": [
+    "Saying any single brake tap inevitably causes a massive jam.",
+    "Saying the jam moves forward with the cars.",
+    "Presenting simulation visuals as footage of the real experiment.",
+    "Implying one considerate human driver is guaranteed to fix a jam."
+  ],
+  "safe_analogies": ["A wave in a stadium crowd: people stay in place while the wave travels around the stands."],
+  "risk_level": "standard",
+  "risk_reasons": [],
+  "verdict": "verified"
+}

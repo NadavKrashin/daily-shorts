@@ -1,0 +1,26 @@
+{
+  "title": "Why Traffic Jams Appear Out of Nowhere",
+  "alt_hooks": [
+    "Nobody crashed. Nobody merged. So why did all this traffic just stop?",
+    "This traffic jam has no cause. And it's moving backwards.",
+    "Somewhere behind you, a traffic jam is being born, and no one did anything wrong."
+  ],
+  "chosen_hook_index": 0,
+  "hook_style": "paradox",
+  "story_structure": "hook-mystery-experiment-mechanism-reveal-takeaway",
+  "segments": [
+    {"beat": "hook", "text": "Nobody crashed. Nobody merged. So why did all this traffic just stop?", "claim_ids": [], "visual_intent": "3-lane highway frozen in stop-and-go traffic"},
+    {"beat": "mystery", "text": "Get to the front, and there's nothing there. No accident. No roadwork.", "claim_ids": ["C2"], "visual_intent": "camera flies to the empty front of the jam"},
+    {"beat": "setup", "text": "In a 2008 study, researchers in Japan put 22 cars on a 230-metre circular track,", "claim_ids": ["C1"], "visual_intent": "ring track draws on, 22 cars appear"},
+    {"beat": "setup", "text": "and asked every driver to cruise at about 30 kilometres an hour.", "claim_ids": ["C1"], "visual_intent": "cars circulate evenly, speed readout 30"},
+    {"beat": "explanation", "text": "The smooth flow didn't last. When one driver eases off a little,", "claim_ids": ["C2"], "visual_intent": "blue car slows slightly"},
+    {"beat": "explanation", "text": "the driver behind reacts a moment late and brakes a little harder. The next driver brakes harder still.", "claim_ids": ["C4"], "visual_intent": "column of cars, braking bars growing"},
+    {"beat": "reveal", "text": "Those tiny delays grow into a stop-and-go wave that travels backwards, against the traffic.", "claim_ids": ["C3", "C4"], "visual_intent": "ring jam with opposing arrows"},
+    {"beat": "reveal", "text": "On real highways, waves like this drift backwards at roughly fifteen to twenty kilometres an hour.", "claim_ids": ["C5"], "visual_intent": "space-time diagram, backward stripes"},
+    {"beat": "conclusion", "text": "Later experiments found a single smoothly driven car could dampen these waves.", "claim_ids": ["C6"], "visual_intent": "two rings: all human vs one smooth car"},
+    {"beat": "conclusion", "text": "So leave a little extra space. You might be the one who smooths it out.", "claim_ids": ["C7"], "visual_intent": "smooth highway, purple car keeps a gap, end card"}
+  ],
+  "conclusion": "So leave a little extra space. You might be the one who smooths it out.",
+  "why_compelling": "Opens on a relatable paradox (a jam with no cause), resolves it with a real, visual experiment, then delivers a second twist (the jam moves backwards) and ends with a practical, empowering takeaway.",
+  "scores": {"clarity": 86, "originality": 70, "accuracy": 92, "pacing": 82, "hook_strength": 84}
+}

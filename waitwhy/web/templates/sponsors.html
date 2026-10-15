@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}
+<h1>Sponsorship pipeline</h1>
+<p class="muted">Outreach is drafted only. Nothing is ever sent automatically{% if not cfg.outreach_sending_enabled %} (sending is disabled in settings){% endif %}. Contracts, offers and sponsored publications always need your approval.</p>
+<form class="inline" method="post" action="/jobs/sponsor-research"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Research new prospects (needs live LLM)</button></form>
+<div class="card scroll" style="margin-top:10px"><table><tr><th>Company</th><th>Product</th><th>Fit</th><th>Concept</th><th>Status</th><th></th></tr>
+{% for sp in sponsors %}<tr><td><a href="{{ sp.website }}" target="_blank" rel="noopener">{{ sp.company }}</a></td><td>{{ sp.product }}</td><td class="muted">{{ sp.fit_reason }}</td><td class="muted">{{ sp.video_concept }}</td><td><span class="chip">{{ sp.status }}</span></td>
+<td>{% if sp.id in drafts %}<details><summary>draft</summary><pre>{{ drafts[sp.id].subject }}
+
+{{ drafts[sp.id].body }}</pre></details>{% else %}<form class="inline" method="post" action="/sponsors/{{ sp.id }}/draft"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Draft outreach</button></form>{% endif %}</td></tr>{% else %}<tr><td colspan="6" class="muted">No prospects yet.</td></tr>{% endfor %}</table></div>
+<h2>Add prospect</h2><form class="inline" method="post" action="/sponsors"><input type="hidden" name="csrf" value="{{ csrf }}"><input name="company" placeholder="Company" required><input name="website" placeholder="https://"><input name="product" placeholder="Product"><input name="fit_reason" placeholder="Why it fits"><input name="video_concept" placeholder="Video concept"><button>Add</button></form>
+<h2>Rate guidance</h2><pre>{{ rate|tojson(indent=1) }}</pre>
+{% endblock %}

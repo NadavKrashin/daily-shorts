@@ -1,0 +1,11 @@
+{
+  "memo": "Hand-curated research pack (verified 2026-10-15 by reading the primary sources). Sugiyama et al. 2008 (New J. Phys. 10 033001, CC BY 4.0): 22 vehicles on a 230 m circular road; drivers requested to cruise at about 30 km/h with near-uniform spacing; 'even a tiny fluctuation grows larger and then the homogeneous movement cannot be maintained'; a jam cluster appears and propagates backward; the cluster travels backward at roughly 20 km/h, 'the common value of the velocity of a jam measured on real highways'; title claim: jams without bottlenecks - a bottleneck is a trigger, not the essential origin. Empirical highway studies: stop-and-go waves propagate upstream at about -15 +/- 5 km/h (Schoenhof & Helbing, cond-mat/0408138); Kerner et al. (1012.5160) report about -14.5 to -17 km/h on German, US and UK freeways. Stern et al. 2018 (Transp. Res. C 89, arXiv 1705.01693): ring experiments with 20+ vehicles - waves emerge consistently and can be dampened by controlling the velocity of a single (autonomous) vehicle. Caveats: jams do not form at every density - the ring density was chosen to be in the unstable regime; a single brake tap does not inevitably create a jam.",
+  "hits": [
+    {"url": "https://ir.library.osaka-u.ac.jp/repo/ouka/all/93262/NewJPhys_10_033001.pdf", "title": "Traffic jams without bottlenecks - experimental evidence for the physical mechanism of the formation of a jam (open-access PDF)"},
+    {"url": "https://doi.org/10.1088/1367-2630/10/3/033001", "title": "Sugiyama et al. 2008, New Journal of Physics 10 033001"},
+    {"url": "https://arxiv.org/abs/1705.01693", "title": "Dissipation of stop-and-go waves via control of autonomous vehicles: Field experiments"},
+    {"url": "https://arxiv.org/abs/cond-mat/0408138", "title": "Empirical Features of Congested Traffic States and Their Implications for Traffic Modeling"},
+    {"url": "https://arxiv.org/abs/1012.5160", "title": "Common Traffic Congestion Features studied in USA, UK, and Germany employing Kerner's Three-Phase Traffic Theory"},
+    {"url": "https://www.sciencedaily.com/releases/2008/03/080304075707.htm", "title": "ScienceDaily (2008): Shockwave Traffic Jams Recreated For First Time"}
+  ]
+}

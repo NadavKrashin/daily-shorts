@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% block content %}
+<h1>Business at a glance</h1>
+<div class="grid">
+ <div class="card kpi"><div class="l">Published this month</div><div class="v">{{ published_month }}</div><div class="s">distinct videos, real posts only{% if mock_published %} · {{ mock_published }} dry-run posts excluded{% endif %}</div></div>
+ <div class="card kpi"><div class="l">Total views (all platforms)</div><div class="v">{{ "{:,}".format(total_views) if total_views is not none else "—" }}</div><div class="s">sum of platform views, not unique viewers{% if views_partial %} · some platforms unavailable{% endif %}</div></div>
+ <div class="card kpi"><div class="l">Operating spend (MTD)</div><div class="v">${{ "%.2f"|format(budget.total_spend_usd) }}</div><div class="s">budget ${{ budget.monthly_budget_usd|int }} · cap ${{ budget.hard_cap_usd|int }}{% if budget.simulated_usage_usd %} · ${{ "%.2f"|format(budget.simulated_usage_usd) }} simulated{% endif %}</div></div>
+ <div class="card kpi"><div class="l">Confirmed revenue (MTD)</div><div class="v">${{ "%.2f"|format(revenue) }}</div><div class="s">received payments only</div></div>
+ <div class="card kpi"><div class="l">Cash contribution (MTD)</div><div class="v {{ 'bad' if contribution < 0 else 'ok' }}">${{ "%.2f"|format(contribution) }}</div><div class="s">revenue − spend</div></div>
+ <div class="card kpi"><div class="l">Pipeline</div><div class="v">{{ inventory.in_flight }}</div><div class="s">in production · {{ inventory.finished_videos }} finished · {{ inventory.candidate_topics }} ideas</div></div>
+</div>
+<div class="two" style="margin-top:14px">
+ <div class="card"><h3>Needs attention</h3>
+  {% for n in attention %}<div style="margin:6px 0"><span class="chip {{ 'bad' if n.severity in ('critical','high') else '' }}">{{ n.severity }}</span> {{ n.title }}{% if n.occurrences > 1 %} <span class="muted">×{{ n.occurrences }}</span>{% endif %}</div>{% else %}<p class="muted">Nothing open.</p>{% endfor %}
+  <p><a href="/incidents">All incidents →</a></p>
+  <h3>Pipeline health</h3>
+  {% if health %}<div class="muted">checked {{ health.checked_at[:16] }} UTC</div>
+   <div>Scheduler: {% if health.scheduler_age_s is not none and health.scheduler_age_s < 300 %}<span class="ok">alive</span>{% else %}<span class="bad">not running</span>{% endif %} · Workers: <b>{{ health.live_workers }}</b> · Storage: {{ "ok" if health.storage_ok else "DOWN" }}</div>
+   <div>Dead jobs 24h: {{ health.dead_jobs_24h }} · Blocked: {{ health.blocked_jobs }}</div>
+  {% else %}<p class="muted">No health check yet.</p>{% endif %}
+  <form class="inline" method="post" action="/jobs/run/health_check"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Run health check</button></form>
+  <h3>Integrations</h3>
+  {% for k, ok in creds.items() %}<span class="chip {{ 'ok' if ok else '' }}" style="margin:2px">{{ k }}{{ ' ✓' if ok else '' }}</span>{% endfor %}
+ </div>
+ <div class="card"><h3>Latest daily CEO report</h3>
+  {% if report %}<pre>{{ report.text }}</pre>{% else %}<p class="muted">Not generated yet.</p>{% endif %}
+  <form class="inline" method="post" action="/jobs/run/daily_report"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Generate now</button></form>
+ </div>
+</div>
+{% endblock %}

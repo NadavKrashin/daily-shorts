@@ -1,0 +1,26 @@
+{
+ "youtube_title_candidates": [
+  "Why Traffic Jams Appear Out of Nowhere",
+  "The Traffic Jam With No Cause",
+  "Why Jams Move Backwards"
+ ],
+ "youtube_title": "Why Traffic Jams Appear Out of Nowhere",
+ "youtube_description": "No crash, no roadwork - so why did traffic stop? In 2008 researchers put 22 cars on a circular track and watched a jam appear out of nothing. Here's the physics of phantom traffic jams.\n\nVisuals are a computer simulation (Intelligent Driver Model) re-creating the experiment's setup, not footage of it.\n\nSources:\n- Sugiyama et al. (2008), New J. Phys. 10 033001 - https://doi.org/10.1088/1367-2630/10/3/033001\n- Stern et al. (2018), Transp. Res. C - https://arxiv.org/abs/1705.01693\n- Schoenhof & Helbing, Empirical features of congested traffic - https://arxiv.org/abs/cond-mat/0408138\n- Kerner et al., congestion features in USA, UK, Germany - https://arxiv.org/abs/1012.5160",
+ "instagram_caption": "No crash. No roadwork. So why did traffic stop? 🚗 The answer is a wave that moves backwards. (Simulation re-creating a 2008 experiment.)",
+ "tiktok_caption": "The traffic jam with no cause 🤯 #traffic #physics",
+ "facebook_caption": "Ever been stuck in a jam that just... ends? Here's the physics of phantom traffic jams.",
+ "hashtags": [
+  "#physics",
+  "#traffic",
+  "#science",
+  "#explained"
+ ],
+ "call_to_action": "Follow for more things you never knew.",
+ "cover_text": "Jams with no cause",
+ "disclosure": {
+  "ai_generated_visuals": false,
+  "realistic_synthetic_media": false,
+  "paid_promotion": false,
+  "notes": "Deterministic computer simulation; labelled on screen. No generative AI imagery."
+ }
+}

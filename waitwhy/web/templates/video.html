@@ -1,0 +1,54 @@
+{% extends "base.html" %}{% block title %}{{ v.title }}{% endblock %}{% block content %}
+<h1>{{ v.title }}</h1>
+<p><span class="chip">{{ v.state }}</span> <span class="muted">content id {{ v.id }} · {{ v.category }} · hook: {{ v.hook_style or '—' }} · {{ v.animation_technique or '—' }}</span>
+{% if v.blocked_reason %}<br><span class="warn">{{ v.blocked_reason }}</span>{% endif %}</p>
+<div class="two">
+ <div>
+  {% set cur = versions[0] if versions else none %}
+  {% if cur %}<video controls preload="metadata" poster="/media/{{ cur.thumbnail_key }}" src="/media/{{ cur.storage_key }}"></video>
+   <p class="muted">v{{ cur.version }} · {{ "%.1f"|format(cur.duration_s) }}s · {{ cur.status }}
+   · <a href="/media/{{ cur.captions_key }}">captions.srt</a> · <a href="/media/{{ cur.thumbnail_key }}">cover</a></p>
+   {% if cur.manifest.publishable is false %}<p class="warn"><b>Not publishable:</b> {{ cur.manifest.qc_waivers|join('; ') }}</p>{% endif %}
+  {% endif %}
+  <div class="card"><h3>Actions</h3>
+   <form class="inline" method="post" action="/videos/{{ v.id }}/revise"><input type="hidden" name="csrf" value="{{ csrf }}">
+    <select name="from_stage"><option value="edit">Re-edit (reuse assets)</option><option value="generate">Regenerate missing assets</option><option value="storyboard">New storyboard</option><option value="script">New script</option><option value="research">Redo research</option></select>
+    <input name="notes" placeholder="What should change?"><button>Request changes</button></form>
+   <form class="inline" method="post" action="/videos/{{ v.id }}/reschedule"><input type="hidden" name="csrf" value="{{ csrf }}">
+    <input type="datetime-local" name="when" required><button>Reschedule (your timezone)</button></form>
+   <form class="inline" method="post" action="/videos/{{ v.id }}/cancel" onsubmit="return confirm('Cancel this video and all scheduled posts?')"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="danger">Cancel video</button></form>
+  </div>
+  <div class="card" style="margin-top:12px"><h3>Production cost</h3>
+   {% for kind, provider, mock, usd in usage %}<div>{{ kind }} · {{ provider }}{% if mock %} <span class="chip">simulated</span>{% endif %}: ${{ "%.4f"|format(usd or 0) }}</div>{% else %}<div class="muted">No paid usage recorded.</div>{% endfor %}
+   <div class="muted">Stage timings (s): {{ v.stage_timings }}</div>
+  </div>
+ </div>
+ <div>
+  <div class="card"><h3>Publications</h3><div class="scroll"><table><tr><th>Platform</th><th>Status</th><th>When</th><th>Post</th></tr>
+  {% for p in pubs %}<tr><td>{{ p.platform }}</td><td><span class="chip {{ 'ok' if p.status=='published' else ('bad' if p.status in ('failed','blocked') else 'warn') }}">{{ p.status }}</span>{% if p.dry_run %} <span class="chip">dry run</span>{% endif %}<div class="muted">{{ (p.last_error or '')[:160] }}</div></td>
+  <td>{{ p.scheduled_at.strftime('%Y-%m-%d %H:%M') if p.scheduled_at else '' }} UTC</td>
+  <td>{% set post = posts.get(p.id) %}{% if post %}<a href="{{ post.url }}">{{ post.privacy_status }}</a>{% endif %}
+  {% if p.status in ('manual_action_required','private_uploaded') %}<a href="/publications/{{ p.id }}/package">package</a>{% endif %}</td></tr>{% else %}<tr><td colspan="4" class="muted">Not scheduled.</td></tr>{% endfor %}</table></div>
+  {% for m in post_metrics %}<div class="muted">{{ m.platform }}: views {{ m.latest.get('views', '—') if m.latest else 'unavailable' }} · 7d {{ m.windows['7d'] if m.windows['7d'] is not none else 'n/a yet' }}</div>{% endfor %}
+  </div>
+  {% if script %}<details class="card" style="margin-top:12px" open><summary>Script v{{ script.version }} ({{ script.word_count }} words, ~{{ script.est_duration_s }}s)</summary>
+   <p><b>Hooks:</b></p><ol>{% for h in script.data.alt_hooks %}<li>{{ h }}{% if loop.index0 == script.data.chosen_hook_index %} <span class="chip ok">chosen</span>{% endif %}</li>{% endfor %}</ol>
+   {% for sgm in script.data.segments %}<p><span class="chip">{{ sgm.beat }}</span> {{ sgm.text }} <span class="muted">{{ sgm.claim_ids|join(',') }}</span></p>{% endfor %}
+   <p class="muted">{{ script.data.why_compelling }} · scores {{ script.scores }}</p></details>{% endif %}
+  {% if fc %}<details class="card" style="margin-top:12px"><summary>Fact sheet v{{ fc.version }} — {{ fc.status }}{% if fc.is_mock %} (MOCK){% endif %}</summary>
+   <p>{{ fc.fact_sheet.core_explanation }}</p>
+   <table><tr><th>Claim</th><th>Status</th><th>Sources</th></tr>{% for c in fc.fact_sheet.claims %}<tr><td>{{ c.id }}: {{ c.text }}<div class="muted">{{ c.notes }}</div></td><td>{{ c.status }}</td><td>{{ c.source_ids|join(', ') }}</td></tr>{% endfor %}</table>
+   <h3>Sources</h3>{% for sr in fc.fact_sheet.sources %}<div>{{ sr.id }} · <a href="{{ sr.url }}" rel="noopener" target="_blank">{{ sr.title }}</a> <span class="muted">({{ sr.publisher }}, {{ sr.source_type }}, accessed {{ sr.accessed_on }})</span></div>{% endfor %}
+   <h3>Avoid</h3><ul>{% for m in fc.fact_sheet.misleading_simplifications %}<li>{{ m }}</li>{% endfor %}</ul>
+   {% if fc.fact_sheet.validation_issues %}<p class="warn">Validation: {{ fc.fact_sheet.validation_issues|join('; ') }}</p>{% endif %}</details>{% endif %}
+  {% if board %}<details class="card" style="margin-top:12px"><summary>Storyboard v{{ board.version }} ({{ board.scenes|length }} scenes)</summary>
+   <div class="scroll"><table><tr><th>#</th><th>Time</th><th>Narration</th><th>Visual</th><th>Method</th></tr>
+   {% for sc in board.scenes %}<tr><td>{{ sc.scene_number }}</td><td>{{ "%.1f"|format(sc.start_s) }}–{{ "%.1f"|format(sc.end_s) }}</td><td>{{ sc.narration }}</td><td>{{ sc.data.visual_description }}<div class="muted">{{ sc.data.camera_movement }} · {{ sc.data.transition }}</div></td><td>{{ sc.render_method }}<div class="muted">{{ sc.template }}</div></td></tr>{% endfor %}</table></div></details>{% endif %}
+  {% for vv in versions %}{% set r = reviews.get(vv.id) %}{% if r %}<details class="card" style="margin-top:12px"><summary>QC v{{ vv.version }}: {{ 'PASSED' if r.passed else 'FAILED' }} ({{ r.score }})</summary>
+   <p>{{ r.notes }}</p><table>{% for c in r.checks %}<tr><td>{{ '✅' if c.passed else ('🟡' if c.waived_in_dry_run else '❌') }}</td><td>{{ c.category }}</td><td>{{ c.name }}{% if not c.mandatory %} <span class="muted">(advisory)</span>{% endif %}</td><td class="muted">{{ c.detail }}</td></tr>{% endfor %}</table></details>{% endif %}{% endfor %}
+  <details class="card" style="margin-top:12px"><summary>History & agent decisions</summary>
+   {% for h in history %}<div class="muted">{{ h.created_at.strftime('%m-%d %H:%M:%S') }} · {{ h.actor }} · {{ h.before.state if h.before else '' }} → {{ h.after.state if h.after else '' }} {{ h.details.reason or '' }}</div>{% endfor %}
+   <hr>{% for r in runs %}<div><span class="chip">{{ r.agent }}</span> {{ r.decision or r.task }} <span class="muted">{{ r.provider }}/{{ r.model }} {{ r.prompt_name }}@{{ r.prompt_version }}</span></div>{% endfor %}</details>
+  {% for a in approvals %}<div class="muted">approval {{ a.kind }}: {{ a.status }} {{ a.decided_by or '' }}</div>{% endfor %}
+ </div>
+</div>{% endblock %}

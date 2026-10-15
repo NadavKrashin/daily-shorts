@@ -1,0 +1,270 @@
+{
+ "renderer_version": "1.0.0",
+ "fps": 30,
+ "total_s": 57.167,
+ "scenes": [
+  {
+   "scene_number": 1,
+   "start_s": 0.0,
+   "end_s": 5.033,
+   "template": "highway_jam",
+   "render_method": "programmatic",
+   "narration_start_s": 0.15,
+   "narration_end_s": 4.724,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_01_c123d7894b.mp4"
+  },
+  {
+   "scene_number": 2,
+   "start_s": 5.033,
+   "end_s": 9.767,
+   "template": "highway_flyover",
+   "render_method": "programmatic",
+   "narration_start_s": 5.183,
+   "narration_end_s": 9.456,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_02_4d735eb156.mp4"
+  },
+  {
+   "scene_number": 3,
+   "start_s": 9.767,
+   "end_s": 17.8,
+   "template": "ring_road",
+   "render_method": "programmatic",
+   "narration_start_s": 9.917,
+   "narration_end_s": 17.486,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_03_eed626b8f5.mp4"
+  },
+  {
+   "scene_number": 4,
+   "start_s": 17.8,
+   "end_s": 22.233,
+   "template": "ring_road",
+   "render_method": "programmatic",
+   "narration_start_s": 17.95,
+   "narration_end_s": 21.932,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_04_87f7e3b5a1.mp4"
+  },
+  {
+   "scene_number": 5,
+   "start_s": 22.233,
+   "end_s": 26.7,
+   "template": "ring_road",
+   "render_method": "programmatic",
+   "narration_start_s": 22.383,
+   "narration_end_s": 26.412,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_05_c6a5b390e0.mp4"
+  },
+  {
+   "scene_number": 6,
+   "start_s": 26.7,
+   "end_s": 32.6,
+   "template": "brake_chain",
+   "render_method": "programmatic",
+   "narration_start_s": 26.85,
+   "narration_end_s": 32.307,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_06_68608d91bb.mp4"
+  },
+  {
+   "scene_number": 7,
+   "start_s": 32.6,
+   "end_s": 39.367,
+   "template": "ring_road",
+   "render_method": "programmatic",
+   "narration_start_s": 32.75,
+   "narration_end_s": 39.054,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_07_ceadb3064e.mp4"
+  },
+  {
+   "scene_number": 8,
+   "start_s": 39.367,
+   "end_s": 46.0,
+   "template": "spacetime_diagram",
+   "render_method": "programmatic",
+   "narration_start_s": 39.517,
+   "narration_end_s": 45.693,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_08_ce861c5ca4.mp4"
+  },
+  {
+   "scene_number": 9,
+   "start_s": 46.0,
+   "end_s": 50.9,
+   "template": "ring_compare",
+   "render_method": "programmatic",
+   "narration_start_s": 46.15,
+   "narration_end_s": 50.608,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_09_5b738ca0fd.mp4"
+  },
+  {
+   "scene_number": 10,
+   "start_s": 50.9,
+   "end_s": 57.167,
+   "template": "highway_flow",
+   "render_method": "programmatic",
+   "narration_start_s": 51.05,
+   "narration_end_s": 55.055,
+   "clip": "/home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/clips/scene_10_3c6f475d5e.mp4"
+  }
+ ],
+ "caption_words": 138,
+ "caption_text": "Nobody crashed. Nobody merged. So why did all this traffic just stop? Get to the front, and there's nothing there. No accident. No roadwork. In a 2008 study, researchers in Japan put 22 cars on a 230-metre circular track, and asked every driver to cruise at about 30 kilometres an hour. The smooth flow didn't last. When one driver eases off a little, the driver behind reacts a moment late and brakes a little harder. The next driver brakes harder still. Those tiny delays grow into a stop-and-go wave that travels backwards, against the traffic. On real highways, waves like this drift backwards at roughly fifteen to twenty kilometres an hour. Later experiments found a single smoothly driven car could dampen these waves. So leave a little extra space. You might be the one who smooths it out.",
+ "audio": {
+  "loudnorm_input": {
+   "input_i": "-12.00",
+   "input_tp": "0.03",
+   "input_lra": "3.10",
+   "input_thresh": "-22.57",
+   "output_i": "-14.36",
+   "output_tp": "-1.91",
+   "output_lra": "2.80",
+   "output_thresh": "-24.79",
+   "normalization_type": "dynamic",
+   "target_offset": "0.36"
+  },
+  "clipping_ratio": 0.0
+ },
+ "rights": [
+  {
+   "asset": "narration scene 1",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 2",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 3",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 4",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 5",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 6",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 7",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 8",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 9",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "narration scene 10",
+   "note": "development placeholder; replace with licensed brand voice",
+   "source": "piper-local",
+   "license": "Piper voice model (dataset CC BY-NC-SA 4.0) - NON-COMMERCIAL",
+   "commercial_use": false
+  },
+  {
+   "asset": "visual scene 1",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 2",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 3",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 4",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 5",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 6",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 7",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 8",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 9",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "visual scene 10",
+   "license": "original work (in-house render)",
+   "commercial_use": true,
+   "source": "waitwhy-renderer"
+  },
+  {
+   "asset": "music bed + sfx",
+   "license": "original procedural composition (in-house)",
+   "commercial_use": true,
+   "source": "waitwhy-audio"
+  }
+ ],
+ "scene_clips_reused": 0,
+ "deliverables": {
+  "final.mp4": "videos/why-traffic-jams-appear-out-of-nowhere/v1/final.mp4",
+  "captions.srt": "videos/why-traffic-jams-appear-out-of-nowhere/v1/captions.srt",
+  "captions.ass": "videos/why-traffic-jams-appear-out-of-nowhere/v1/captions.ass",
+  "thumbnail.jpg": "videos/why-traffic-jams-appear-out-of-nowhere/v1/thumbnail.jpg",
+  "mix.wav": "videos/why-traffic-jams-appear-out-of-nowhere/v1/mix.wav"
+ }
+}

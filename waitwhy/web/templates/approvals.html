@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block content %}
+<h1>Approvals</h1>
+{% for it in items %}{% set a = it.a %}<div class="card" style="margin-bottom:12px">
+ <div class="two"><div>{% if it.vv %}<video controls preload="metadata" poster="/media/{{ it.vv.thumbnail_key }}" src="/media/{{ it.vv.storage_key }}"></video>{% endif %}</div>
+ <div><h3><span class="chip">{{ a.kind }}</span> {{ it.v.title if it.v else a.target_type }}</h3>
+  <p>{{ a.reason }}</p>{% if a.payload %}<pre>{{ a.payload|tojson(indent=1) }}</pre>{% endif %}
+  {% if it.review %}<p>QC {{ 'passed' if it.review.passed else 'FAILED' }} · score {{ it.review.score }}</p>
+   {% if it.vv.manifest.publishable is false %}<p class="warn"><b>Not publishable for real:</b> {{ it.vv.manifest.qc_waivers|join('; ') }}</p>{% endif %}
+   {% for c in it.review.checks if not c.passed %}<div class="warn">• {{ c.name }}: {{ c.detail }}</div>{% endfor %}{% endif %}
+  {% if it.v %}<p><a href="/videos/{{ it.v.id }}">Script, sources, storyboard →</a></p>{% endif %}
+  <form method="post" action="/approvals/{{ a.id }}/decide"><input type="hidden" name="csrf" value="{{ csrf }}">
+   <textarea name="notes" placeholder="Notes (required for changes)"></textarea>
+   <div class="inline" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+   <button class="primary" name="decision" value="approved">Approve</button>
+   <button name="decision" value="changes_requested">Request changes</button>
+   <button class="danger" name="decision" value="rejected">Reject</button></div></form>
+ </div></div></div>
+{% else %}<p class="muted">Nothing waiting for you.</p>{% endfor %}
+<h2>Recently decided</h2>
+<div class="card scroll"><table><tr><th>When</th><th>Kind</th><th>Decision</th><th>By</th><th>Notes</th></tr>
+{% for a in recent %}<tr><td>{{ a.decided_at.strftime('%m-%d %H:%M') if a.decided_at }}</td><td>{{ a.kind }}</td><td>{{ a.status }}</td><td>{{ a.decided_by }}</td><td class="muted">{{ a.decision_notes or a.reason }}</td></tr>{% endfor %}</table></div>
+{% endblock %}

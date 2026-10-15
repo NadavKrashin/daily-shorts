@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block content %}
+<h1>Settings</h1>
+<div class="two"><div class="card"><h3>Change a setting</h3>
+<p class="muted">Overrides config/company.yaml at runtime. Values are JSON. Protected keys ({{ cfg.protected_keys|join(', ') }}) require typing <code>I AUTHORIZE &lt;key&gt;</code> and are recorded as approvals.</p>
+<form method="post" action="/settings"><input type="hidden" name="csrf" value="{{ csrf }}">
+<p><input name="key" placeholder="key e.g. monthly_video_target" required style="width:100%"></p>
+<p><textarea name="value" placeholder='value e.g. 20 or "controlled" or {"slots":["12:00"]}' required></textarea></p>
+<p><input name="confirm" placeholder="I AUTHORIZE key (protected keys only)" style="width:100%"></p><button class="primary">Save</button></form>
+<h3>Automation</h3>
+{% if flags.automation_paused %}<form class="inline" method="post" action="/controls/automation_paused/off"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="primary">Resume automation</button></form>
+{% else %}<form class="inline" method="post" action="/controls/automation_paused/on"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="danger">Pause automation</button></form>{% endif %}
+<h3>Current overrides</h3>{% for o in overrides %}<div><code>{{ o.key }}</code> = <span class="muted">{{ o.value|tojson }}</span> <span class="muted">({{ o.updated_by }})</span></div>{% endfor %}
+<h3>Credentials (presence only — values never shown)</h3>{% for k, ok in creds.items() %}<span class="chip {{ 'ok' if ok else '' }}" style="margin:2px">{{ k }}{{ ' ✓' if ok else ' ✗' }}</span>{% endfor %}
+<h3>Prompt templates (versioned in git)</h3>{% for p in prompts %}<div><code>{{ p.name }}</code> v{{ p.version }} <span class="muted">{{ p.purpose }}</span></div>{% endfor %}
+</div><div class="card"><h3>Effective configuration</h3><pre>{{ cfg_json }}</pre></div></div>
+{% endblock %}

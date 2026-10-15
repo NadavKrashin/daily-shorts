@@ -1,0 +1,102 @@
+{"organization": "Wait, Why?", "brand": "Wait, Why?", "seeded_topics": 36}
+
+=== production started for 'Why Traffic Jams Appear Out of Nowhere' (score 86.9); providers: llm=mock, tts=piper, visuals=mock
+
+=== pipeline processed 7 jobs -> video state READY_FOR_REVIEW
+render v1: 57.2s -> /home/user/daily-shorts/data/media/videos/why-traffic-jams-appear-out-of-nowhere/v1/final.mp4
+QC passed=True score=96.3 :: NOT PUBLISHABLE (dev stand-ins waived for dry run): rights_cleared: NOT cleared for commercial use: ['narration scene 1', 'narration scene 2', 'narration scene 3', 'narration scene 4', 'narration scene 5', 'narration scene 6', 'narration scene 7', 'narration scene 8', 'narration scene 9', 'narration scene 10']
+  [PASS           ] technical  video_stream                 present
+  [PASS           ] technical  audio_stream                 present
+  [PASS           ] technical  resolution                   1080x1920
+  [PASS           ] technical  frame_rate                   30.000 fps
+  [PASS           ] technical  video_codec                  h264
+  [PASS           ] technical  pixel_format                 yuv420p
+  [PASS           ] technical  frame_count                  1715 frames vs 1715 expected
+  [PASS           ] technical  audio_codec                  aac
+  [PASS           ] technical  duration                     57.17s
+  [PASS           ] technical  decode_clean                 0 decoder errors
+  [PASS           ] technical  no_black_frames              none >= 0.5s
+  [PASS           ] technical  no_excessive_silence         none >= 1.5s
+  [PASS           ] technical  loudness                     -14.0 LUFS (target -14)
+  [PASS           ] technical  true_peak                    -1.8 dBFS
+  [PASS           ] accuracy   fact_sheet_verified          fact sheet v1: verified
+  [PASS           ] accuracy   claims_supported             all script claims sourced
+  [PASS           ] accuracy   central_claims_verified      ok
+  [PASS           ] accuracy   no_mock_content              real content
+  [PASS           ] subtitles  subtitles_match_script       143 caption words vs 143 script words
+  [PASS           ] clarity    script_length                138 words
+  [PASS           ] continuity narration_within_scene       ok
+  [PASS           ] continuity continuity_specified         ok
+  [WAIVED(dry-run)] rights     rights_cleared               NOT cleared for commercial use: ['narration scene 1', 'narration scene 2', 'narration scene 3', 'narration scene 4', 'narration scene 5', 'narration scene 6', 'narration scene 7', 'narration scene 8', 'narration scene 9', 'narration scene 10']
+  [PASS           ] platform   platform_duration_limits     ok
+  [PASS           ] platform   disclosures_resolved         metadata=yes, uses_ai=False, sponsored=False, disclosure={'notes': 'Deterministic computer simulation; labelled on screen. No generative AI imagery.', 'paid_promotion': False, 'ai_generated_visuals': False, 'realistic_synthetic_media': False}
+  [PASS           ] brand      brand_end_card               end card present
+  [PASS           ] continuity narration_matches_visuals    SKIPPED: no multimodal model configured (mock LLM) - human reviewer must check
+
+=== simulated owner approval (in production this is the CEO clicking Approve in the dashboard)
+  scheduled youtube    at 2026-10-15T16:00:00+00:00 (dry_run=True)
+  scheduled instagram  at 2026-10-15T16:00:00+00:00 (dry_run=True)
+  scheduled facebook   at 2026-10-15T16:00:00+00:00 (dry_run=True)
+  scheduled tiktok     at 2026-10-15T16:00:00+00:00 (dry_run=True)
+
+=== publishing finished -> video state PUBLISHED
+  youtube    published                https://example.invalid/youtube/mock-youtube-9013870507 DRY RUN - nothing was posted
+  tiktok     manual_action_required    tiktok: manual posting required (dry run)
+  facebook   published                https://example.invalid/facebook/mock-facebook-9758437739 DRY RUN - nothing was posted
+  instagram  published                https://example.invalid/instagram/mock-instagram-1585305120 DRY RUN - nothing was posted
+analytics: {'snapshots': 3, 'skipped_recent': 0, 'errors': []} (mock posts report metrics as UNAVAILABLE - never fabricated)
+
+=== daily CEO report preview
+WAIT, WHY? - daily CEO report 2026-10-15  (mode: supervised, DRY RUN)
+
+VERIFIED FACTS
+- Videos published yesterday: 3
+- Recent views (14d, sum of per-platform views (not unique viewers)): UNKNOWN (some platforms not reporting)
+- Strongest recent: UNKNOWN / no data
+- Weakest recent (>=72h old): UNKNOWN / no data
+- Followers gained (recent): UNKNOWN
+- In production: 0; awaiting approval: 0
+- Scheduled: 0 
+- Spend MTD: $0.00 of $400 (variable $0.00, cap $500; simulated dry-run usage $0.00)
+- Avg production cost / published video: 0 USD
+- Confirmed revenue MTD: $0.00
+
+NEEDS ATTENTION
+- nothing open
+
+UNKNOWNS
+- youtube: not connected - metrics unavailable
+- instagram: not connected - metrics unavailable
+- facebook: not connected - metrics unavailable
+- tiktok: not connected - metrics unavailable
+
+RECOMMENDED ACTIONS
+1. System is in DRY-RUN: connect API keys (Anthropic, ElevenLabs) and switch dry_run_mode off to produce publishable videos.
+exit 0
+
+=== daily report re-generated after fixing the report to exclude dry-run mock posts (see commit history)
+WAIT, WHY? - daily CEO report 2026-10-15  (mode: supervised, DRY RUN)
+
+VERIFIED FACTS
+- Videos published (last 24h): 0 (0 platform posts; 3 dry-run mock posts excluded)
+- Recent views (14d, sum of per-platform views (not unique viewers)): UNKNOWN (some platforms not reporting)
+- Strongest recent: UNKNOWN / no data
+- Weakest recent (>=72h old): UNKNOWN / no data
+- Followers gained (recent): UNKNOWN
+- In production: 0; awaiting approval: 0
+- Scheduled: 0 
+- Spend MTD: $0.00 of $400 (variable $0.00, cap $500; simulated dry-run usage $0.00)
+- Avg production cost / published video: UNKNOWN
+- Confirmed revenue MTD: $0.00
+
+NEEDS ATTENTION
+- nothing open
+
+UNKNOWNS
+- youtube: not connected - metrics unavailable
+- instagram: not connected - metrics unavailable
+- facebook: not connected - metrics unavailable
+- tiktok: not connected - metrics unavailable
+
+RECOMMENDED ACTIONS
+1. System is in DRY-RUN: connect API keys (Anthropic, ElevenLabs) and switch dry_run_mode off to produce publishable videos.

@@ -1,0 +1,953 @@
+{
+ "generated_by": "seed backlog curated by the AI cofounder on 2026-10-15; scores are heuristics",
+ "topics": [
+  {
+   "slug": "why-traffic-jams-appear-out-of-nowhere",
+   "title": "Why Traffic Jams Appear Out of Nowhere",
+   "category": "everyday_mysteries",
+   "angle": "Small slowdowns amplify into a backward-moving stop-and-go wave",
+   "summary": "Small slowdowns amplify into a backward-moving stop-and-go wave. Explained visually in under 60 seconds.",
+   "keywords": [
+    "traffic",
+    "appear",
+    "nowhere",
+    "small",
+    "slowdowns",
+    "amplify"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 88,
+    "visual_potential": 92,
+    "audience_curiosity": 85,
+    "scientific_clarity": 90,
+    "evergreen": 95,
+    "originality": 60,
+    "feasibility": 95
+   },
+   "reasoning": "Editorial heuristic score 86.9. Strong points: hook strength, visual potential, scientific clarity, evergreen, feasibility. Not a virality prediction."
+  },
+  {
+   "slug": "why-airplanes-fly-curved-routes",
+   "title": "Why Airplanes Fly Curved Routes",
+   "category": "engineering_infrastructure",
+   "angle": "Great circles: the shortest path on a sphere looks curved on a flat map",
+   "summary": "Great circles: the shortest path on a sphere looks curved on a flat map. Explained visually in under 60 seconds.",
+   "keywords": [
+    "airplanes",
+    "curved",
+    "routes",
+    "great",
+    "circles",
+    "shortest"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 85,
+    "visual_potential": 90,
+    "audience_curiosity": 82,
+    "scientific_clarity": 95,
+    "evergreen": 95,
+    "originality": 55,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 85.3. Strong points: visual potential, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "how-undersea-internet-cables-work",
+   "title": "How Undersea Internet Cables Work",
+   "category": "technology_computing",
+   "angle": "~99% of intercontinental data travels as light through garden-hose-thick cables",
+   "summary": "~99% of intercontinental data travels as light through garden-hose-thick cables. Explained visually in under 60 seconds.",
+   "keywords": [
+    "undersea",
+    "internet",
+    "cables",
+    "intercontinental",
+    "travels",
+    "light"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 84,
+    "visual_potential": 88,
+    "audience_curiosity": 84,
+    "scientific_clarity": 88,
+    "evergreen": 92,
+    "originality": 62,
+    "feasibility": 80
+   },
+   "reasoning": "Editorial heuristic score 83.8. Strong points: visual potential, scientific clarity, evergreen. Not a virality prediction."
+  },
+  {
+   "slug": "why-qr-codes-still-work-when-damaged",
+   "title": "Why QR Codes Still Work When Damaged",
+   "category": "technology_computing",
+   "angle": "Reed-Solomon error correction stores redundant data so missing pieces can be rebuilt",
+   "summary": "Reed-Solomon error correction stores redundant data so missing pieces can be rebuilt. Explained visually in under 60 seconds.",
+   "keywords": [
+    "codes",
+    "still",
+    "damaged",
+    "solomon",
+    "error",
+    "correction"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 85,
+    "audience_curiosity": 78,
+    "scientific_clarity": 90,
+    "evergreen": 95,
+    "originality": 70,
+    "feasibility": 88
+   },
+   "reasoning": "Editorial heuristic score 83.1. Strong points: scientific clarity, evergreen, feasibility. Not a virality prediction."
+  },
+  {
+   "slug": "why-gps-needs-einstein",
+   "title": "Why GPS Needs Einstein",
+   "category": "space_astronomy",
+   "angle": "Satellite clocks drift ~38 microseconds/day from relativity; uncorrected, positions drift kilometres",
+   "summary": "Satellite clocks drift ~38 microseconds/day from relativity; uncorrected, positions drift kilometres. Explained visually in under 60 seconds.",
+   "keywords": [
+    "needs",
+    "einstein",
+    "satellite",
+    "clocks",
+    "drift",
+    "microseconds"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 90,
+    "visual_potential": 80,
+    "audience_curiosity": 88,
+    "scientific_clarity": 92,
+    "evergreen": 95,
+    "originality": 58,
+    "feasibility": 82
+   },
+   "reasoning": "Editorial heuristic score 84.9. Strong points: hook strength, audience curiosity, scientific clarity, evergreen. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "what-happens-when-lightning-hits-a-plane",
+   "title": "What Happens When Lightning Hits a Plane",
+   "category": "engineering_infrastructure",
+   "angle": "The aluminium skin acts as a Faraday cage; current flows around passengers",
+   "summary": "The aluminium skin acts as a Faraday cage; current flows around passengers. Explained visually in under 60 seconds.",
+   "keywords": [
+    "happens",
+    "lightning",
+    "plane",
+    "aluminium",
+    "faraday",
+    "current"
+   ],
+   "risk_flags": [
+    "safety"
+   ],
+   "scores": {
+    "hook_strength": 87,
+    "visual_potential": 88,
+    "audience_curiosity": 86,
+    "scientific_clarity": 88,
+    "evergreen": 92,
+    "originality": 55,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 84.4. Strong points: visual potential, scientific clarity, evergreen. Weaker: originality; flagged for human review: safety. Not a virality prediction."
+  },
+  {
+   "slug": "why-you-can-t-see-your-own-nose",
+   "title": "Why You Can't See Your Own Nose",
+   "category": "psychology_behavior",
+   "angle": "The brain filters constant, unchanging input (sensory adaptation / unconscious inference)",
+   "summary": "The brain filters constant, unchanging input (sensory adaptation / unconscious inference). Explained visually in under 60 seconds.",
+   "keywords": [
+    "brain",
+    "filters",
+    "constant",
+    "unchanging",
+    "input",
+    "sensory"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 86,
+    "visual_potential": 78,
+    "audience_curiosity": 88,
+    "scientific_clarity": 80,
+    "evergreen": 95,
+    "originality": 66,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 82.7. Strong points: audience curiosity, evergreen. Not a virality prediction."
+  },
+  {
+   "slug": "how-contactless-payments-work",
+   "title": "How Contactless Payments Work",
+   "category": "technology_computing",
+   "angle": "NFC: the card has no battery - the reader's magnetic field powers it",
+   "summary": "NFC: the card has no battery - the reader's magnetic field powers it. Explained visually in under 60 seconds.",
+   "keywords": [
+    "contactless",
+    "payments",
+    "battery",
+    "reader",
+    "magnetic",
+    "field"
+   ],
+   "risk_flags": [
+    "financial"
+   ],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 82,
+    "audience_curiosity": 80,
+    "scientific_clarity": 88,
+    "evergreen": 85,
+    "originality": 58,
+    "feasibility": 88
+   },
+   "reasoning": "Editorial heuristic score 80.3. Strong points: scientific clarity, feasibility. Weaker: originality; flagged for human review: financial. Not a virality prediction."
+  },
+  {
+   "slug": "why-steel-ships-float",
+   "title": "Why Steel Ships Float",
+   "category": "science_physics",
+   "angle": "Buoyancy depends on displaced water: a hull is mostly air",
+   "summary": "Buoyancy depends on displaced water: a hull is mostly air. Explained visually in under 60 seconds.",
+   "keywords": [
+    "steel",
+    "ships",
+    "float",
+    "buoyancy",
+    "depends",
+    "displaced"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 78,
+    "visual_potential": 90,
+    "audience_curiosity": 72,
+    "scientific_clarity": 95,
+    "evergreen": 95,
+    "originality": 45,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 81.2. Strong points: visual potential, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "how-your-phone-knows-where-you-are",
+   "title": "How Your Phone Knows Where You Are",
+   "category": "technology_computing",
+   "angle": "Trilateration from satellites plus Wi-Fi and cell-tower assistance",
+   "summary": "Trilateration from satellites plus Wi-Fi and cell-tower assistance. Explained visually in under 60 seconds.",
+   "keywords": [
+    "phone",
+    "knows",
+    "where",
+    "trilateration",
+    "satellites",
+    "tower"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 78,
+    "visual_potential": 86,
+    "audience_curiosity": 80,
+    "scientific_clarity": 88,
+    "evergreen": 85,
+    "originality": 55,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 80.2. Strong points: scientific clarity. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-the-monty-hall-problem-breaks-brains",
+   "title": "Why the Monty Hall Problem Breaks Brains",
+   "category": "math_probability",
+   "angle": "Switching wins 2/3 of the time because the host's choice carries information",
+   "summary": "Switching wins 2/3 of the time because the host's choice carries information. Explained visually in under 60 seconds.",
+   "keywords": [
+    "monty",
+    "problem",
+    "breaks",
+    "brains",
+    "switching",
+    "because"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 88,
+    "visual_potential": 80,
+    "audience_curiosity": 85,
+    "scientific_clarity": 98,
+    "evergreen": 99,
+    "originality": 40,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 84.0. Strong points: hook strength, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "the-birthday-paradox",
+   "title": "The Birthday Paradox",
+   "category": "math_probability",
+   "angle": "23 people give a >50% chance of a shared birthday because pairs grow quadratically",
+   "summary": "23 people give a >50% chance of a shared birthday because pairs grow quadratically. Explained visually in under 60 seconds.",
+   "keywords": [
+    "birthday",
+    "paradox",
+    "people",
+    "chance",
+    "shared",
+    "birthday"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 86,
+    "visual_potential": 82,
+    "audience_curiosity": 84,
+    "scientific_clarity": 98,
+    "evergreen": 99,
+    "originality": 45,
+    "feasibility": 94
+   },
+   "reasoning": "Editorial heuristic score 84.3. Strong points: scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-ice-is-slippery",
+   "title": "Why Ice Is Slippery",
+   "category": "science_physics",
+   "angle": "Still debated: a thin liquid-like surface layer, not just pressure melting",
+   "summary": "Still debated: a thin liquid-like surface layer, not just pressure melting. Explained visually in under 60 seconds.",
+   "keywords": [
+    "slippery",
+    "still",
+    "debated",
+    "liquid",
+    "surface",
+    "layer"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 82,
+    "visual_potential": 75,
+    "audience_curiosity": 84,
+    "scientific_clarity": 72,
+    "evergreen": 95,
+    "originality": 72,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 79.8. Strong points: evergreen. Not a virality prediction."
+  },
+  {
+   "slug": "why-mirrors-flip-left-and-right-but-not-up-and-down",
+   "title": "Why Mirrors Flip Left and Right (But Not Up and Down)",
+   "category": "everyday_mysteries",
+   "angle": "Mirrors actually reverse front-to-back; 'left-right' is how we interpret it",
+   "summary": "Mirrors actually reverse front-to-back; 'left-right' is how we interpret it. Explained visually in under 60 seconds.",
+   "keywords": [
+    "mirrors",
+    "right",
+    "mirrors",
+    "actually",
+    "reverse",
+    "front"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 86,
+    "visual_potential": 85,
+    "audience_curiosity": 85,
+    "scientific_clarity": 90,
+    "evergreen": 98,
+    "originality": 60,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 85.0. Strong points: scientific clarity, evergreen, feasibility. Not a virality prediction."
+  },
+  {
+   "slug": "why-the-sky-is-blue-but-sunsets-are-red",
+   "title": "Why the Sky Is Blue but Sunsets Are Red",
+   "category": "science_physics",
+   "angle": "Rayleigh scattering removes blue light along long sunset paths",
+   "summary": "Rayleigh scattering removes blue light along long sunset paths. Explained visually in under 60 seconds.",
+   "keywords": [
+    "sunsets",
+    "rayleigh",
+    "scattering",
+    "removes",
+    "light",
+    "along"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 76,
+    "visual_potential": 92,
+    "audience_curiosity": 78,
+    "scientific_clarity": 95,
+    "evergreen": 98,
+    "originality": 30,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 80.8. Strong points: visual potential, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "how-noise-cancelling-headphones-work",
+   "title": "How Noise-Cancelling Headphones Work",
+   "category": "technology_computing",
+   "angle": "Destructive interference: the headphone plays an inverted copy of the noise",
+   "summary": "Destructive interference: the headphone plays an inverted copy of the noise. Explained visually in under 60 seconds.",
+   "keywords": [
+    "noise",
+    "cancelling",
+    "headphones",
+    "destructive",
+    "interference",
+    "headphone"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 90,
+    "audience_curiosity": 80,
+    "scientific_clarity": 95,
+    "evergreen": 92,
+    "originality": 50,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 83.0. Strong points: visual potential, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-you-can-hear-the-sea-in-a-seashell",
+   "title": "Why You Can Hear the Sea in a Seashell",
+   "category": "everyday_mysteries",
+   "angle": "The shell resonates ambient noise at its own frequencies - not the ocean",
+   "summary": "The shell resonates ambient noise at its own frequencies - not the ocean. Explained visually in under 60 seconds.",
+   "keywords": [
+    "seashell",
+    "shell",
+    "resonates",
+    "ambient",
+    "noise",
+    "frequencies"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 84,
+    "visual_potential": 84,
+    "audience_curiosity": 84,
+    "scientific_clarity": 92,
+    "evergreen": 98,
+    "originality": 58,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 84.4. Strong points: scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-time-zones-are-so-weird",
+   "title": "Why Time Zones Are So Weird",
+   "category": "surprising_history",
+   "angle": "Railways forced standard time in 1883; politics shaped the borders since",
+   "summary": "Railways forced standard time in 1883; politics shaped the borders since. Explained visually in under 60 seconds.",
+   "keywords": [
+    "zones",
+    "weird",
+    "railways",
+    "forced",
+    "standard",
+    "politics"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 82,
+    "audience_curiosity": 78,
+    "scientific_clarity": 92,
+    "evergreen": 92,
+    "originality": 55,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 80.8. Strong points: scientific clarity, evergreen. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-bridges-have-gaps",
+   "title": "Why Bridges Have Gaps",
+   "category": "engineering_infrastructure",
+   "angle": "Expansion joints let steel and concrete grow and shrink with temperature",
+   "summary": "Expansion joints let steel and concrete grow and shrink with temperature. Explained visually in under 60 seconds.",
+   "keywords": [
+    "bridges",
+    "expansion",
+    "joints",
+    "steel",
+    "concrete",
+    "shrink"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 74,
+    "visual_potential": 88,
+    "audience_curiosity": 72,
+    "scientific_clarity": 95,
+    "evergreen": 95,
+    "originality": 52,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 80.5. Strong points: visual potential, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "how-elevators-almost-never-fall",
+   "title": "How Elevators Almost Never Fall",
+   "category": "engineering_infrastructure",
+   "angle": "Multiple cables plus Otis's 1850s safety brake that grips the rails",
+   "summary": "Multiple cables plus Otis's 1850s safety brake that grips the rails. Explained visually in under 60 seconds.",
+   "keywords": [
+    "elevators",
+    "almost",
+    "never",
+    "multiple",
+    "cables",
+    "safety"
+   ],
+   "risk_flags": [
+    "safety"
+   ],
+   "scores": {
+    "hook_strength": 84,
+    "visual_potential": 86,
+    "audience_curiosity": 82,
+    "scientific_clarity": 92,
+    "evergreen": 95,
+    "originality": 55,
+    "feasibility": 88
+   },
+   "reasoning": "Editorial heuristic score 83.7. Strong points: scientific clarity, evergreen, feasibility. Weaker: originality; flagged for human review: safety. Not a virality prediction."
+  },
+  {
+   "slug": "why-cats-always-land-on-their-feet",
+   "title": "Why Cats Always Land on Their Feet",
+   "category": "science_physics",
+   "angle": "The 'falling cat problem': twisting body halves to rotate with zero angular momentum",
+   "summary": "The 'falling cat problem': twisting body halves to rotate with zero angular momentum. Explained visually in under 60 seconds.",
+   "keywords": [
+    "always",
+    "their",
+    "falling",
+    "problem",
+    "twisting",
+    "halves"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 88,
+    "visual_potential": 86,
+    "audience_curiosity": 86,
+    "scientific_clarity": 88,
+    "evergreen": 95,
+    "originality": 52,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 84.2. Strong points: hook strength, scientific clarity, evergreen. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-your-brain-fills-in-your-blind-spot",
+   "title": "Why Your Brain Fills In Your Blind Spot",
+   "category": "psychology_behavior",
+   "angle": "Each eye has a blind spot where the optic nerve exits; the brain paints it in",
+   "summary": "Each eye has a blind spot where the optic nerve exits; the brain paints it in. Explained visually in under 60 seconds.",
+   "keywords": [
+    "brain",
+    "fills",
+    "blind",
+    "blind",
+    "where",
+    "optic"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 88,
+    "visual_potential": 84,
+    "audience_curiosity": 88,
+    "scientific_clarity": 92,
+    "evergreen": 98,
+    "originality": 60,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 86.1. Strong points: hook strength, audience curiosity, scientific clarity, evergreen, feasibility. Not a virality prediction."
+  },
+  {
+   "slug": "why-the-moon-looks-bigger-on-the-horizon",
+   "title": "Why the Moon Looks Bigger on the Horizon",
+   "category": "space_astronomy",
+   "angle": "The Moon illusion: same angular size, our brain misjudges distance",
+   "summary": "The Moon illusion: same angular size, our brain misjudges distance. Explained visually in under 60 seconds.",
+   "keywords": [
+    "looks",
+    "bigger",
+    "horizon",
+    "illusion",
+    "angular",
+    "brain"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 84,
+    "visual_potential": 84,
+    "audience_curiosity": 86,
+    "scientific_clarity": 85,
+    "evergreen": 99,
+    "originality": 50,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 82.8. Strong points: evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "how-we-know-the-earth-is-4-5-billion-years-old",
+   "title": "How We Know the Earth Is 4.5 Billion Years Old",
+   "category": "space_astronomy",
+   "angle": "Radiometric dating of meteorites and the oldest minerals",
+   "summary": "Radiometric dating of meteorites and the oldest minerals. Explained visually in under 60 seconds.",
+   "keywords": [
+    "earth",
+    "billion",
+    "years",
+    "radiometric",
+    "dating",
+    "meteorites"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 76,
+    "visual_potential": 74,
+    "audience_curiosity": 80,
+    "scientific_clarity": 92,
+    "evergreen": 98,
+    "originality": 48,
+    "feasibility": 78
+   },
+   "reasoning": "Editorial heuristic score 78.1. Strong points: scientific clarity, evergreen. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-wet-fingers-wrinkle",
+   "title": "Why Wet Fingers Wrinkle",
+   "category": "science_physics",
+   "angle": "Nerves actively shrink blood vessels; it's not just water absorption",
+   "summary": "Nerves actively shrink blood vessels; it's not just water absorption. Explained visually in under 60 seconds.",
+   "keywords": [
+    "fingers",
+    "wrinkle",
+    "nerves",
+    "actively",
+    "shrink",
+    "blood"
+   ],
+   "risk_flags": [
+    "medical"
+   ],
+   "scores": {
+    "hook_strength": 86,
+    "visual_potential": 80,
+    "audience_curiosity": 88,
+    "scientific_clarity": 82,
+    "evergreen": 92,
+    "originality": 70,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 83.5. Strong points: audience curiosity, evergreen; flagged for human review: medical. Not a virality prediction."
+  },
+  {
+   "slug": "why-barcodes-have-those-numbers",
+   "title": "Why Barcodes Have Those Numbers",
+   "category": "technology_computing",
+   "angle": "Check digits catch scanning errors with simple modular arithmetic",
+   "summary": "Check digits catch scanning errors with simple modular arithmetic. Explained visually in under 60 seconds.",
+   "keywords": [
+    "barcodes",
+    "those",
+    "numbers",
+    "check",
+    "digits",
+    "catch"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 72,
+    "visual_potential": 80,
+    "audience_curiosity": 76,
+    "scientific_clarity": 96,
+    "evergreen": 96,
+    "originality": 66,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 80.5. Strong points: scientific clarity, evergreen, feasibility. Not a virality prediction."
+  },
+  {
+   "slug": "why-the-titanic-s-rivets-mattered",
+   "title": "Why the Titanic's Rivets Mattered",
+   "category": "surprising_history",
+   "angle": "Weak wrought-iron rivets may have let seams open (contested)",
+   "summary": "Weak wrought-iron rivets may have let seams open (contested). Explained visually in under 60 seconds.",
+   "keywords": [
+    "titanic",
+    "rivets",
+    "mattered",
+    "wrought",
+    "rivets",
+    "seams"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 78,
+    "audience_curiosity": 80,
+    "scientific_clarity": 68,
+    "evergreen": 92,
+    "originality": 55,
+    "feasibility": 75
+   },
+   "reasoning": "Editorial heuristic score 76.2. Strong points: evergreen. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "how-bees-build-perfect-hexagons",
+   "title": "How Bees Build Perfect Hexagons",
+   "category": "science_physics",
+   "angle": "Hexagons tile space with the least wax per area; physics helps shape them",
+   "summary": "Hexagons tile space with the least wax per area; physics helps shape them. Explained visually in under 60 seconds.",
+   "keywords": [
+    "build",
+    "perfect",
+    "hexagons",
+    "hexagons",
+    "space",
+    "least"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 90,
+    "audience_curiosity": 80,
+    "scientific_clarity": 82,
+    "evergreen": 98,
+    "originality": 52,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 81.5. Strong points: visual potential, evergreen. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-clocks-run-clockwise",
+   "title": "Why Clocks Run Clockwise",
+   "category": "surprising_history",
+   "angle": "Sundial shadows in the Northern Hemisphere move that way",
+   "summary": "Sundial shadows in the Northern Hemisphere move that way. Explained visually in under 60 seconds.",
+   "keywords": [
+    "clocks",
+    "clockwise",
+    "sundial",
+    "shadows",
+    "northern",
+    "hemisphere"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 82,
+    "visual_potential": 85,
+    "audience_curiosity": 82,
+    "scientific_clarity": 85,
+    "evergreen": 98,
+    "originality": 60,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 83.0. Strong points: evergreen, feasibility. Not a virality prediction."
+  },
+  {
+   "slug": "how-glass-is-actually-made",
+   "title": "How Glass Is Actually Made",
+   "category": "engineering_infrastructure",
+   "angle": "Molten sand cooled too fast to crystallise; float glass rides on liquid tin",
+   "summary": "Molten sand cooled too fast to crystallise; float glass rides on liquid tin. Explained visually in under 60 seconds.",
+   "keywords": [
+    "glass",
+    "actually",
+    "molten",
+    "cooled",
+    "crystallise",
+    "float"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 78,
+    "visual_potential": 88,
+    "audience_curiosity": 76,
+    "scientific_clarity": 92,
+    "evergreen": 95,
+    "originality": 60,
+    "feasibility": 85
+   },
+   "reasoning": "Editorial heuristic score 82.0. Strong points: visual potential, scientific clarity, evergreen. Not a virality prediction."
+  },
+  {
+   "slug": "why-the-exponential-grains-on-a-chessboard-explode",
+   "title": "Why the Exponential Grains on a Chessboard Explode",
+   "category": "math_probability",
+   "angle": "Doubling 64 times gives ~18 quintillion grains - more than all the world's rice",
+   "summary": "Doubling 64 times gives ~18 quintillion grains - more than all the world's rice. Explained visually in under 60 seconds.",
+   "keywords": [
+    "exponential",
+    "grains",
+    "chessboard",
+    "explode",
+    "doubling",
+    "times"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 82,
+    "visual_potential": 86,
+    "audience_curiosity": 80,
+    "scientific_clarity": 99,
+    "evergreen": 99,
+    "originality": 40,
+    "feasibility": 95
+   },
+   "reasoning": "Editorial heuristic score 83.2. Strong points: scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-you-feel-lighter-in-an-elevator",
+   "title": "Why You Feel Lighter in an Elevator",
+   "category": "science_physics",
+   "angle": "Your scale measures normal force, which drops when the elevator accelerates down",
+   "summary": "Your scale measures normal force, which drops when the elevator accelerates down. Explained visually in under 60 seconds.",
+   "keywords": [
+    "lighter",
+    "elevator",
+    "scale",
+    "measures",
+    "normal",
+    "force"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 74,
+    "visual_potential": 86,
+    "audience_curiosity": 72,
+    "scientific_clarity": 96,
+    "evergreen": 98,
+    "originality": 58,
+    "feasibility": 92
+   },
+   "reasoning": "Editorial heuristic score 81.1. Strong points: scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "why-airplane-windows-are-round",
+   "title": "Why Airplane Windows Are Round",
+   "category": "engineering_infrastructure",
+   "angle": "Square corners concentrated stress - the 1950s de Havilland Comet disasters",
+   "summary": "Square corners concentrated stress - the 1950s de Havilland Comet disasters. Explained visually in under 60 seconds.",
+   "keywords": [
+    "airplane",
+    "windows",
+    "round",
+    "square",
+    "corners",
+    "concentrated"
+   ],
+   "risk_flags": [
+    "safety"
+   ],
+   "scores": {
+    "hook_strength": 88,
+    "visual_potential": 86,
+    "audience_curiosity": 86,
+    "scientific_clarity": 95,
+    "evergreen": 95,
+    "originality": 50,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 85.3. Strong points: hook strength, scientific clarity, evergreen, feasibility. Weaker: originality; flagged for human review: safety. Not a virality prediction."
+  },
+  {
+   "slug": "why-stars-twinkle-but-planets-don-t",
+   "title": "Why Stars Twinkle but Planets Don't",
+   "category": "space_astronomy",
+   "angle": "Point-like starlight is bent by turbulent air; planets are tiny discs that average it out",
+   "summary": "Point-like starlight is bent by turbulent air; planets are tiny discs that average it out. Explained visually in under 60 seconds.",
+   "keywords": [
+    "stars",
+    "twinkle",
+    "planets",
+    "point",
+    "starlight",
+    "turbulent"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 84,
+    "audience_curiosity": 80,
+    "scientific_clarity": 92,
+    "evergreen": 99,
+    "originality": 55,
+    "feasibility": 88
+   },
+   "reasoning": "Editorial heuristic score 82.4. Strong points: scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  },
+  {
+   "slug": "the-speed-of-a-sneeze",
+   "title": "The Speed of a Sneeze",
+   "category": "psychology_behavior",
+   "angle": "Viral claims of 100 mph are exaggerated; measured speeds are far lower",
+   "summary": "Viral claims of 100 mph are exaggerated; measured speeds are far lower. Explained visually in under 60 seconds.",
+   "keywords": [
+    "speed",
+    "sneeze",
+    "viral",
+    "claims",
+    "exaggerated",
+    "measured"
+   ],
+   "risk_flags": [
+    "medical"
+   ],
+   "scores": {
+    "hook_strength": 82,
+    "visual_potential": 72,
+    "audience_curiosity": 82,
+    "scientific_clarity": 70,
+    "evergreen": 92,
+    "originality": 66,
+    "feasibility": 80
+   },
+   "reasoning": "Editorial heuristic score 77.5. Strong points: evergreen; flagged for human review: medical. Not a virality prediction."
+  },
+  {
+   "slug": "why-golf-balls-have-dimples",
+   "title": "Why Golf Balls Have Dimples",
+   "category": "science_physics",
+   "angle": "Dimples create a thin turbulent layer that cuts drag and lets balls fly farther",
+   "summary": "Dimples create a thin turbulent layer that cuts drag and lets balls fly farther. Explained visually in under 60 seconds.",
+   "keywords": [
+    "balls",
+    "dimples",
+    "dimples",
+    "create",
+    "turbulent",
+    "layer"
+   ],
+   "risk_flags": [],
+   "scores": {
+    "hook_strength": 80,
+    "visual_potential": 88,
+    "audience_curiosity": 80,
+    "scientific_clarity": 92,
+    "evergreen": 98,
+    "originality": 50,
+    "feasibility": 90
+   },
+   "reasoning": "Editorial heuristic score 82.7. Strong points: visual potential, scientific clarity, evergreen, feasibility. Weaker: originality. Not a virality prediction."
+  }
+ ]
+}

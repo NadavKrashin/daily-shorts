@@ -1,0 +1,578 @@
+{
+ "title": "Why Traffic Jams Appear Out of Nowhere",
+ "style": {
+  "look": "stylised top-down miniature world: soft drop shadows, rounded toy-like cars, slate asphalt, deep green grass, dark navy UI panels",
+  "lighting": "soft overhead light, shadows offset down-right, vignette",
+  "palette": [
+   {
+    "role": "background",
+    "hex": "#0F172A"
+   },
+   {
+    "role": "primary/hero car",
+    "hex": "#38BDF8"
+   },
+   {
+    "role": "accent",
+    "hex": "#FACC15"
+   },
+   {
+    "role": "stopped",
+    "hex": "#EF4444"
+   },
+   {
+    "role": "moving",
+    "hex": "#22C55E"
+   },
+   {
+    "role": "smooth car",
+    "hex": "#A78BFA"
+   }
+  ],
+  "camera_geography": "Highway traffic always flows bottom-to-top; ring traffic always counter-clockwise; jams move the opposite way.",
+  "typography": "Inter ExtraBold uppercase headlines (top third), Inter Bold captions (lower-middle safe zone)"
+ },
+ "recurring_objects": [
+  {
+   "id": "hero_car",
+   "description": "the car whose small slowdown starts the wave",
+   "canonical_color": "#38BDF8",
+   "reference_prompt": "small rounded toy-like sky-blue hatchback, top-down"
+  },
+  {
+   "id": "smooth_car",
+   "description": "the smoothly driven car that damps waves",
+   "canonical_color": "#A78BFA",
+   "reference_prompt": "small rounded toy-like lavender hatchback, top-down"
+  },
+  {
+   "id": "ring_track",
+   "description": "230 m single-lane circular test track",
+   "canonical_color": "#334155",
+   "reference_prompt": "circular asphalt test track with green infield, top-down"
+  },
+  {
+   "id": "highway",
+   "description": "3-lane highway, traffic flows upward",
+   "canonical_color": "#334155",
+   "reference_prompt": "three-lane highway through green countryside, top-down"
+  }
+ ],
+ "scenes": [
+  {
+   "scene_number": 1,
+   "beat": "hook",
+   "narration": "Nobody crashed. Nobody merged. So why did all this traffic just stop?",
+   "start_s": 0.0,
+   "end_s": 5.15,
+   "visual_description": "A three-lane highway seen from above, packed with red and orange cars stopped in a jam, no obstacle in sight.",
+   "camera_angle": "top-down drone, 60 m above road",
+   "camera_movement": "slow push-in while tracking the jam backwards",
+   "main_objects": [
+    "3-lane highway",
+    "22 cars per lane",
+    "trees"
+   ],
+   "behavior": "cars crawl and stop in a stop-and-go cluster; brake lights flicker",
+   "color_direction": "cars coloured by speed: red stopped, green moving; asphalt slate, grass green",
+   "animation_motion": "IDM simulation playback at 1x",
+   "on_screen_text": "NO CRASH. NO ROADWORK?",
+   "sound_effects": [
+    "low traffic rumble"
+   ],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "highway_jam",
+   "template_params": [
+    {
+     "key": "sim_start",
+     "value": "255"
+    },
+    {
+     "key": "push_in",
+     "value": "0.14"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_01.mp4"
+   ]
+  },
+  {
+   "scene_number": 2,
+   "beat": "mystery",
+   "narration": "Get to the front, and there's nothing there. No accident. No roadwork.",
+   "start_s": 5.15,
+   "end_s": 10.3,
+   "visual_description": "Camera flies forward over the jam to its front where the road is clear; labels 'No accident', 'No roadwork' pop up.",
+   "camera_angle": "top-down drone",
+   "camera_movement": "fast fly-forward along the road to the front of the jam",
+   "main_objects": [
+    "3-lane highway",
+    "jam front",
+    "question mark"
+   ],
+   "behavior": "at the front of the jam cars accelerate away into free road",
+   "color_direction": "red cluster gives way to green cars",
+   "animation_motion": "camera ease-in-out over 70% of scene; NO ACCIDENT / NO ROADWORK pills pop in",
+   "on_screen_text": "",
+   "sound_effects": [
+    "whoosh",
+    "pop",
+    "pop"
+   ],
+   "transition": "slide",
+   "render_method": "programmatic",
+   "template": "highway_flyover",
+   "template_params": [
+    {
+     "key": "sim_start",
+     "value": "255"
+    },
+    {
+     "key": "prev_dur",
+     "value": "4.5"
+    },
+    {
+     "key": "fly_m",
+     "value": "48"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_02.mp4"
+   ]
+  },
+  {
+   "scene_number": 3,
+   "beat": "setup",
+   "narration": "In a 2008 study, researchers in Japan put 22 cars on a 230-metre circular track,",
+   "start_s": 10.3,
+   "end_s": 16.61,
+   "visual_description": "A circular test track draws itself; 22 small cars appear evenly spaced; labels '22 cars' and '230 m track'.",
+   "camera_angle": "top-down, centred on track",
+   "camera_movement": "static; track draws on",
+   "main_objects": [
+    "230 m circular track",
+    "22 cars"
+   ],
+   "behavior": "track sweeps into existence, cars appear one by one",
+   "color_direction": "slate track, green infield, all cars green",
+   "animation_motion": "arc reveal 1 s, cars pop in over 1.4 s",
+   "on_screen_text": "",
+   "sound_effects": [
+    "pop"
+   ],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "ring_road",
+   "template_params": [
+    {
+     "key": "mode",
+     "value": "\"intro\""
+    },
+    {
+     "key": "sim_start",
+     "value": "0"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_03.mp4"
+   ]
+  },
+  {
+   "scene_number": 4,
+   "beat": "setup",
+   "narration": "and asked every driver to cruise at about 30 kilometres an hour.",
+   "start_s": 16.61,
+   "end_s": 21.76,
+   "visual_description": "Cars drive evenly around the ring; a centre readout shows ~30 km/h.",
+   "camera_angle": "top-down",
+   "camera_movement": "static",
+   "main_objects": [
+    "ring track",
+    "22 cars",
+    "speed readout"
+   ],
+   "behavior": "cars circulate counter-clockwise evenly",
+   "color_direction": "all cars green",
+   "animation_motion": "IDM playback 1x; live average speed",
+   "on_screen_text": "CRUISE AT ~30 KM/H",
+   "sound_effects": [],
+   "transition": "cut",
+   "render_method": "programmatic",
+   "template": "ring_road",
+   "template_params": [
+    {
+     "key": "mode",
+     "value": "\"steady\""
+    },
+    {
+     "key": "sim_start",
+     "value": "0"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_04.mp4"
+   ]
+  },
+  {
+   "scene_number": 5,
+   "beat": "explanation",
+   "narration": "The smooth flow didn't last. When one driver eases off a little,",
+   "start_s": 21.76,
+   "end_s": 26.91,
+   "visual_description": "Camera eases toward the blue car, whose speed label drops slightly.",
+   "camera_angle": "top-down",
+   "camera_movement": "gentle zoom toward the blue car",
+   "main_objects": [
+    "ring track",
+    "blue car",
+    "22 cars"
+   ],
+   "behavior": "the highlighted blue car slows by a few km/h",
+   "color_direction": "blue hero car, others by speed",
+   "animation_motion": "IDM playback 1x with a small perturbation at sim t=10 s",
+   "on_screen_text": "ONE DRIVER EASES OFF",
+   "sound_effects": [
+    "soft brake squeak"
+   ],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "ring_road",
+   "template_params": [
+    {
+     "key": "mode",
+     "value": "\"perturb\""
+    },
+    {
+     "key": "sim_start",
+     "value": "8"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_05.mp4"
+   ]
+  },
+  {
+   "scene_number": 6,
+   "beat": "explanation",
+   "narration": "the driver behind reacts a moment late and brakes a little harder. The next driver brakes harder still.",
+   "start_s": 26.91,
+   "end_s": 34.38,
+   "visual_description": "A column of five cars; each brakes a moment after the one ahead, with a longer braking bar each time.",
+   "camera_angle": "top-down column",
+   "camera_movement": "static",
+   "main_objects": [
+    "column of 5 cars",
+    "braking bars"
+   ],
+   "behavior": "cars brake in sequence, each later and harder; bars grow",
+   "color_direction": "bars yellow to red",
+   "animation_motion": "0.75 s delay between cars",
+   "on_screen_text": "EACH ONE BRAKES HARDER",
+   "sound_effects": [
+    "brake squeak x4"
+   ],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "brake_chain",
+   "template_params": [
+    {
+     "key": "n",
+     "value": "5"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_06.mp4"
+   ]
+  },
+  {
+   "scene_number": 7,
+   "beat": "reveal",
+   "narration": "Those tiny delays grow into a stop-and-go wave that travels backwards, against the traffic.",
+   "start_s": 34.38,
+   "end_s": 40.3,
+   "visual_description": "The ring now has a red stop-and-go cluster; a red arrow shows the jam moving clockwise while a green arrow shows the cars moving counter-clockwise.",
+   "camera_angle": "top-down",
+   "camera_movement": "static",
+   "main_objects": [
+    "ring track",
+    "jam cluster",
+    "arrows"
+   ],
+   "behavior": "stop-and-go cluster rotates clockwise while cars drive counter-clockwise",
+   "color_direction": "red cluster, green elsewhere; red JAM arrow, green CARS arrow",
+   "animation_motion": "IDM playback 3x with arrows drawing on",
+   "on_screen_text": "A WAVE MOVES BACKWARDS",
+   "sound_effects": [
+    "rumble"
+   ],
+   "transition": "zoom",
+   "render_method": "programmatic",
+   "template": "ring_road",
+   "template_params": [
+    {
+     "key": "mode",
+     "value": "\"jam\""
+    },
+    {
+     "key": "sim_start",
+     "value": "200"
+    },
+    {
+     "key": "speedup",
+     "value": "3"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_07.mp4"
+   ]
+  },
+  {
+   "scene_number": 8,
+   "beat": "reveal",
+   "narration": "On real highways, waves like this drift backwards at roughly fifteen to twenty kilometres an hour.",
+   "start_s": 40.3,
+   "end_s": 46.99,
+   "visual_description": "A time vs position chart of every simulated car; red bands slope backwards; an arrow traces the band; pill states the real-highway speed range.",
+   "camera_angle": "flat chart",
+   "camera_movement": "left-to-right reveal",
+   "main_objects": [
+    "time-position plot",
+    "car trajectories",
+    "guide arrow"
+   ],
+   "behavior": "trajectories draw from left to right; red stripes slope downward",
+   "color_direction": "trajectories coloured by speed",
+   "animation_motion": "reveal over 55% of scene, then arrow + pill",
+   "on_screen_text": "THE JAM DRIFTS BACKWARDS",
+   "sound_effects": [
+    "whoosh"
+   ],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "spacetime_diagram",
+   "template_params": [
+    {
+     "key": "t_max",
+     "value": "300"
+    },
+    {
+     "key": "highlight_text",
+     "value": "\"HIGHWAYS: ~15-20 KM/H BACKWARDS\""
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_08.mp4"
+   ]
+  },
+  {
+   "scene_number": 9,
+   "beat": "conclusion",
+   "narration": "Later experiments found a single smoothly driven car could dampen these waves.",
+   "start_s": 46.99,
+   "end_s": 52.14,
+   "visual_description": "Two identical rings side by side: all-human drivers jam to a stop; with one smooth purple car the flow keeps moving.",
+   "camera_angle": "top-down, two rings",
+   "camera_movement": "static",
+   "main_objects": [
+    "two ring tracks",
+    "purple smooth car"
+   ],
+   "behavior": "left ring stop-and-go; right ring with one purple car flows without stopping",
+   "color_direction": "left reds, right greens, purple smooth car",
+   "animation_motion": "two IDM sims side by side at 2x",
+   "on_screen_text": "+1 SMOOTH CAR = NO FULL STOPS",
+   "sound_effects": [],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "ring_compare",
+   "template_params": [
+    {
+     "key": "sim_start",
+     "value": "230"
+    },
+    {
+     "key": "speedup",
+     "value": "2"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_09.mp4"
+   ]
+  },
+  {
+   "scene_number": 10,
+   "beat": "conclusion",
+   "narration": "So leave a little extra space. You might be the one who smooths it out.",
+   "start_s": 52.14,
+   "end_s": 60.25,
+   "visual_description": "Smooth highway flow; a purple car keeps a bracketed 'GAP' ahead; the 'Wait, Why?' end card fades in.",
+   "camera_angle": "top-down drone",
+   "camera_movement": "tracks the purple car",
+   "main_objects": [
+    "3-lane highway",
+    "purple smooth car",
+    "gap bracket",
+    "end card"
+   ],
+   "behavior": "traffic flows; purple car keeps a visible gap; brand end card fades in",
+   "color_direction": "mostly green flow, purple bracket",
+   "animation_motion": "gap bracket grows; end card blend over last 1.8 s",
+   "on_screen_text": "LEAVE A GAP",
+   "sound_effects": [
+    "pop",
+    "outro chime"
+   ],
+   "transition": "crossfade",
+   "render_method": "programmatic",
+   "template": "highway_flow",
+   "template_params": [
+    {
+     "key": "sim_start",
+     "value": "220"
+    },
+    {
+     "key": "show_gap",
+     "value": "true"
+    },
+    {
+     "key": "end_card_s",
+     "value": "1.8"
+    }
+   ],
+   "generation_prompt": "",
+   "negative_prompt": "",
+   "continuity": [
+    "traffic always flows upward on the highway / counter-clockwise on the ring",
+    "3 lanes on every highway shot",
+    "22 cars on the ring",
+    "blue hero car = car 0, purple smooth car is the only purple object",
+    "speed colour scale: red stopped -> yellow -> green moving",
+    "all simulation shots carry a SIMULATION tag"
+   ],
+   "input_assets": [
+    "IDM simulation (seeded, deterministic)"
+   ],
+   "output_assets": [
+    "scene_10.mp4"
+   ]
+  }
+ ]
+}

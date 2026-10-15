@@ -1,0 +1,199 @@
+# Central, non-secret business configuration for "Wait, Why?".
+# Credentials NEVER go here - they live in environment variables / a secret manager (see .env.example).
+# Any key can be overridden at runtime from the dashboard Settings page (stored in system_settings);
+# keys listed under `protected_keys` require an explicit typed confirmation and are audit-logged.
+
+business_name: "Wait, Why?"          # working title - trademark/handle check pending (docs/decisions.md)
+tagline: "The world is weirder than you think."
+language: en
+timezone: Asia/Jerusalem              # owner timezone: drives the daily operations schedule
+audience_timezones: [America/New_York, America/Los_Angeles, Europe/London, Australia/Sydney]
+
+# --- Output format --------------------------------------------------------------
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  default_duration_seconds: 60
+  min_duration_seconds: 45
+  max_duration_seconds: 75             # FB Reels API accepts 3-90 s; keep headroom
+  video_codec: h264
+  audio_codec: aac
+  target_loudness_lufs: -14
+  true_peak_db: -1.5
+  caption_safe_zone: {top: 260, bottom: 480, left: 60, right: 180}   # avoid app UI overlays
+
+# --- Volume & budget ------------------------------------------------------------
+monthly_video_target: 20
+weekly_video_target: 5
+monthly_budget_usd: 400               # operating target; alerts at 50/80/95 %
+monthly_hard_cap_usd: 500             # variable spend above this needs explicit approval
+target_cost_per_video_usd: 20
+max_cost_per_video_usd: 35            # per-video ceiling; exceeding pauses that video for approval
+budget_alert_thresholds: [0.5, 0.8, 0.95]
+max_generation_retries_per_scene: 2
+max_ai_scenes_per_video: 4            # cost guard: everything else is deterministic motion graphics
+
+# --- Autonomy & safety ----------------------------------------------------------
+operating_mode: supervised            # supervised | controlled | autonomous
+content_approval_required: true       # forced true in supervised mode
+auto_publish_enabled: false
+dry_run_mode: true                    # true => publishing + paid generation use mock adapters
+script_approval_required: false       # optional extra human gate before storyboarding
+outreach_sending_enabled: false       # sponsorship emails are drafted only, never auto-sent
+
+protected_keys:                       # changing these is a "special authorization" action
+  - monthly_budget_usd
+  - monthly_hard_cap_usd
+  - max_cost_per_video_usd
+  - operating_mode
+  - auto_publish_enabled
+  - dry_run_mode
+  - outreach_sending_enabled
+  - platforms
+
+# --- Schedules (owner timezone) -------------------------------------------------
+daily_report_time: "09:00"
+weekly_review_day: sunday
+schedules:
+  health_check:      {cron: "0 7 * * *"}
+  analytics_collect: {cron: "30 7 * * *"}
+  strategy_analysis: {cron: "0 8 * * *"}
+  content_planning:  {cron: "30 8 * * *"}
+  daily_report:      {cron: "0 9 * * *"}
+  weekly_review:     {cron: "0 10 * * 0"}
+  monthly_review:    {cron: "0 10 1 * *"}
+  publish_due:       {cron: "*/5 * * * *"}
+  recover_stalled:   {cron: "*/5 * * * *"}
+  production_tick:   {cron: "15 * * * *"}
+  db_backup:         {cron: "30 3 * * *"}
+
+# Publication slots are expressed in the AUDIENCE timezone, not the owner's.
+# Until real data exists we rotate through these to learn which slot works.
+publishing_slots:
+  timezone: America/New_York
+  slots: ["12:00", "17:00", "19:30"]
+  days: [mon, tue, wed, thu, fri]
+
+# --- Inventory targets (minimums, not reasons to overproduce) -------------------
+inventory_targets:
+  candidate_topics: 30
+  researched_topics: 10
+  production_ready: 5
+  finished_videos: 3
+
+# --- Content strategy -----------------------------------------------------------
+content_categories:
+  - everyday_mysteries
+  - science_physics
+  - technology_computing
+  - psychology_behavior
+  - space_astronomy
+  - engineering_infrastructure
+  - math_probability
+  - surprising_history
+
+topic_scoring_weights:               # editorial heuristics, NOT validated virality predictions
+  hook_strength: 0.25
+  visual_potential: 0.20
+  audience_curiosity: 0.15
+  scientific_clarity: 0.15
+  evergreen: 0.10
+  originality: 0.10
+  feasibility: 0.05
+min_topic_score_for_production: 70
+duplicate_similarity_threshold: 0.6
+
+high_risk_topic_flags: [medical, legal, financial, safety, breaking_news]
+
+script:
+  min_words: 115
+  max_words: 150
+  banned_openers: ["did you know", "hey guys", "welcome back", "in this video"]
+  structure: [hook, mystery, setup, explanation, reveal, conclusion]
+
+brand:
+  voice: "warm, curious, clear, moderate energy, never shouty"
+  visual_style: >-
+    Premium stylised 3D-illustration look: miniature, clean environments, soft shadows,
+    bright controlled palette, high contrast, generous negative space, smooth camera moves.
+  palette:
+    background: "#0F172A"
+    surface: "#1E293B"
+    primary: "#38BDF8"
+    accent: "#FACC15"
+    warning: "#F97316"
+    danger: "#EF4444"
+    success: "#22C55E"
+    text: "#F8FAFC"
+    muted: "#94A3B8"
+  font_bold: "Inter-Bold"
+  font_regular: "Inter-Medium"
+  end_card_text: "Wait, Why?"
+
+# --- Providers & model routing (swap freely; adapters live in waitwhy/providers) -
+providers:
+  llm: anthropic              # anthropic | mock
+  tts: elevenlabs             # elevenlabs | piper (dev-only, non-commercial voice) | mock
+  image: higgsfield           # higgsfield | mock
+  video: higgsfield           # higgsfield | mock
+  storage: local              # local | s3
+models:
+  research: claude-opus-5-5         # complex research + fact-check
+  factcheck: claude-opus-5-5
+  script: claude-opus-5-5
+  storyboard: claude-opus-5-5
+  qa: claude-opus-5-5
+  strategy: claude-opus-5-5
+  metadata: claude-haiku-5-5        # simple formatting/classification
+  classify: claude-haiku-5-5
+  topic_scoring: claude-haiku-5-5
+llm_effort:
+  research: high
+  factcheck: high
+  script: high
+  storyboard: medium
+  qa: high
+  strategy: medium
+  metadata: low
+  classify: low
+  topic_scoring: low
+higgsfield:
+  # Model = URL path on api.higgsfield.ai. Verify paths/body fields at docs.higgsfield.ai/docs/models.md
+  image_model_path: "higgsfield-ai/soul/v2/standard"
+  video_model_path: "REPLACE-with-verified-video-model-path"   # e.g. a Kling/Seedance text-to-video path
+  image_body_defaults: {aspect_ratio: "9:16"}
+  video_body_defaults: {aspect_ratio: "9:16", duration: 5}
+  supports_seed: false
+  video_seconds_per_scene: 5
+  video_usd_per_second: 0.10     # estimate; Higgsfield quotes e.g. Kling 2.6 at $0.07/s
+  image_usd: 0.04
+  max_wait_s: 900
+elevenlabs:
+  model_id: eleven_multilingual_v2
+  stability: 0.45
+  similarity_boost: 0.8
+  style: 0.15
+
+# --- Platforms ------------------------------------------------------------------
+platforms:
+  youtube:
+    enabled: true
+    publishing_mode: api_private_until_audit   # unverified API projects are forced private
+    made_for_kids: false
+    category_id: "27"                          # Education
+  instagram:
+    enabled: true
+    publishing_mode: api                       # needs professional account + content_publish permission
+  facebook:
+    enabled: true
+    publishing_mode: api                       # Page token with pages_manage_posts
+  tiktok:
+    enabled: true
+    publishing_mode: pending_compliance_review # manual_handoff until an audited integration exists
+meta_graph_version: v25.0
+
+notifications:
+  channels: [log]            # log | email | telegram | webhook
+  daily_digest: true
+  min_severity_push: high    # low-severity items are batched into the daily report

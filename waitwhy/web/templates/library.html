@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}
+<h1>Video library</h1>
+<div class="card scroll"><table><tr><th>Title</th><th>Category</th><th>State</th><th>Created</th><th>Cost (incl. simulated)</th></tr>
+{% for v in videos %}<tr><td><a href="/videos/{{ v.id }}">{{ v.title }}</a></td><td>{{ v.category }}</td><td><span class="chip">{{ v.state }}</span></td><td>{{ v.created_at.strftime('%Y-%m-%d') }}</td><td>${{ "%.2f"|format(costs[v.id]) }}</td></tr>{% else %}<tr><td colspan="5" class="muted">No videos yet.</td></tr>{% endfor %}</table></div>
+{% endblock %}

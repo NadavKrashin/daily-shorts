@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Wait, Why? ops{% endblock %}</title>
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%2338BDF8'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23FACC15' font-family='Arial' font-weight='900'>?</text></svg>">
+</head><body>
+<header><div class="bar"><div class="brand">Wait, <span>Why?</span> <span class="muted" style="font-weight:600;font-size:13px">ops</span></div>
+<span class="chip">{{ cfg.operating_mode }}</span>{% if cfg.dry_run_mode %}<span class="chip warn">DRY RUN</span>{% endif %}
+<div class="pause">
+{% if flags.publishing_paused %}
+<form method="post" action="/controls/publishing_paused/off"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="primary">Resume publishing</button></form>
+{% else %}
+<form method="post" action="/controls/publishing_paused/on" onsubmit="return confirm('Pause ALL publishing on every platform?')"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="danger big">⏸ Pause all publishing</button></form>
+{% endif %}
+</div></div>
+<nav>{% set p = request.url.path %}
+<a href="/" class="{{ 'on' if p == '/' }}">Overview</a>
+<a href="/pipeline" class="{{ 'on' if p.startswith('/pipeline') }}">Pipeline</a>
+<a href="/approvals" class="{{ 'on' if p.startswith('/approvals') }}">Approvals {% if nav_pending %}<span class="badge">{{ nav_pending }}</span>{% endif %}</a>
+<a href="/calendar" class="{{ 'on' if p.startswith('/calendar') }}">Calendar</a>
+<a href="/library" class="{{ 'on' if p.startswith('/library') or p.startswith('/videos') }}">Library</a>
+<a href="/analytics" class="{{ 'on' if p.startswith('/analytics') }}">Analytics</a>
+<a href="/finance" class="{{ 'on' if p.startswith('/finance') }}">Finance</a>
+<a href="/sponsors" class="{{ 'on' if p.startswith('/sponsors') }}">Sponsors</a>
+<a href="/agents" class="{{ 'on' if p.startswith('/agents') }}">Agents</a>
+<a href="/incidents" class="{{ 'on' if p.startswith('/incidents') }}">Incidents {% if nav_incidents %}<span class="badge">{{ nav_incidents }}</span>{% endif %}</a>
+<a href="/settings" class="{{ 'on' if p.startswith('/settings') }}">Settings</a></nav></header>
+<main>
+{% if flags.publishing_paused %}<div class="banner paused">All publishing is PAUSED. Nothing will be uploaded until you resume.</div>{% endif %}
+{% if flags.automation_paused %}<div class="banner paused">Automation is PAUSED: only health checks, reports and analytics run.</div>{% endif %}
+{% if cfg.dry_run_mode %}<div class="banner dry">Dry-run mode: publishing uses mock adapters and paid generators are mocked. Nothing goes live.</div>{% endif %}
+{% block content %}{% endblock %}
+</main></body></html>
