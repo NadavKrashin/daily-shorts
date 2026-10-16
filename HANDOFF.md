@@ -43,10 +43,9 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
     `channel/episodes.json` entries into videos, runs QC, then auto-approves and schedules them.
   - Episode 1 is imported (QC 95.5) and scheduled.
   - `dry_run_mode` is still true, so nothing posts until the owner turns it off in the dashboard.
-- **Branches: `main` is what the Mac runs.** The production session works on
-  `claude/happy-cannon-dzuzwj` and, after every push there, fast-forwards `main`
-  (`git push origin HEAD:main`). Without that step new episodes never reach the app. Never force-push
-  `main`. If it has diverged, stop and report instead.
+- **Only one branch: `main`** (owner's choice, 2026-10-16). Everything, including the production
+  runs, commits and pushes straight to `main`, and the Mac pulls it every 15 minutes. The old
+  `claude/happy-cannon-dzuzwj` branch was retired. Never force-push `main`.
 
 ## What the owner still has to do (details in `docs/setup-guide.md`)
 
@@ -93,7 +92,7 @@ dashboard Agents page. Never claim it is live without checking.
 - **Docker image:** it installs the package into site-packages, so it relies on `WAITWHY_ROOT=/app`.
   The compose file mounts `./channel` read-only.
 
-## Recent commits (branch `claude/happy-cannon-dzuzwj`)
+## Recent commits (`main`)
 
 - `6e73cb6`: overlays, episode importer, Docker root fix, config-copy fix, setup guide.
 - `cc49ae9`: episode 1 v4 (red dots removed).

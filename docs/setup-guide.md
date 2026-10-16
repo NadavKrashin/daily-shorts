@@ -50,7 +50,7 @@ Hetzner, DigitalOcean or AWS Lightsail. Check the provider's current price. Then
 `docs/deployment.md`:
 
 ```bash
-git clone -b claude/happy-cannon-dzuzwj git@github.com:NadavKrashin/daily-shorts.git && cd daily-shorts
+git clone -b main git@github.com:NadavKrashin/daily-shorts.git && cd daily-shorts
 cp .env.example .env && chmod 600 .env   # APP_ENV=production, DASHBOARD_PASSWORD, SECRET_KEY, POSTGRES_PASSWORD
 docker compose up -d --build
 ( crontab -l; echo '*/15 * * * * git -C ~/daily-shorts pull --ff-only -q' ) | crontab -

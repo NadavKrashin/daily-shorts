@@ -9,7 +9,7 @@
 set -euo pipefail
 
 REPO="git@github.com:NadavKrashin/daily-shorts.git"
-BRANCH="claude/happy-cannon-dzuzwj"   # the scheduled runs push new episodes here
+BRANCH="main"   # the only branch; the scheduled runs push new episodes here
 DIR="${REPO_DIR:-$HOME/daily-shorts}"
 KEY="$HOME/.ssh/daily_shorts"
 

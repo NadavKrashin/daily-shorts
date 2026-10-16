@@ -46,13 +46,12 @@ Then:
 
 ```bash
 printf 'Host github.com\n  IdentityFile ~/.ssh/daily_shorts\n' >> ~/.ssh/config
-cd ~ && git clone -b claude/happy-cannon-dzuzwj git@github.com:NadavKrashin/daily-shorts.git
+cd ~ && git clone -b main git@github.com:NadavKrashin/daily-shorts.git
 cd ~/daily-shorts
 ```
 
 Clone into your home folder (`~/daily-shorts`), not Documents or Desktop. macOS blocks background jobs
-from those folders. Use the `claude/happy-cannon-dzuzwj` branch: the scheduled runs push each new
-episode there, and `main` is only a snapshot.
+from those folders. `main` is the only branch, and the scheduled runs push each new episode to it.
 
 ## 4. Configure and start (5 minutes)
 

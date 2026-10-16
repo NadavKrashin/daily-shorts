@@ -56,8 +56,7 @@ Python 3.12+, FFmpeg ≥ 6 with libass, Postgres 16, Inter font. `pip install .`
 under systemd. Same commands as above.
 
 ### Episodes from the production runs
-The scheduled Claude runs push each finished episode to `channel/episodes.json` on the branch
-`claude/happy-cannon-dzuzwj`. Compose mounts `./channel` into the containers read-only, and the
+The scheduled Claude runs push each finished episode to `channel/episodes.json` on `main`. Compose mounts `./channel` into the containers read-only, and the
 `import_episodes` job reads it every 30 minutes, so the host checkout must stay current:
 
 ```bash

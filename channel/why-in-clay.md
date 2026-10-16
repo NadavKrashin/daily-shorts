@@ -117,10 +117,9 @@ follow them, except where this file says otherwise.
    set to `passed` only if that check really ran and passed. Use status `produced_not_published`. The
    app's `import_episodes` job picks it up from there, runs its own technical QC, and publishes on the
    schedule once platforms are connected. Update `HANDOFF.md` (latest episode, credits left, any new
-   open items), then commit `channel/` and `HANDOFF.md` and push to the working branch. Then bring
-   `main` up to date: `git push origin HEAD:main`. The app on the owner's Mac runs from `main`, so
-   skipping this means the episode never gets published. This must be a fast-forward: never force it.
-   If it is rejected, `main` has diverged; say so in the report instead of overwriting it.
+   open items), then commit `channel/` and `HANDOFF.md` and push to `main`, the only branch. The app on
+   the owner's Mac pulls `main`, so an unpushed episode never gets published. If the push is rejected,
+   `git pull --rebase` and push again. Never force-push.
 9. **Report** in the final message: the video and thumbnail links, title, description draft
    (`yt-seo` rules), the sources, what failed and was fixed, and credits spent and remaining.
 

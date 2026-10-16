@@ -47,5 +47,6 @@ question.
 
 ## Branches
 
-The app on the owner's Mac mini runs from `main`. Work on `claude/happy-cannon-dzuzwj`, and after
-pushing there, fast-forward `main` to it with `git push origin HEAD:main`. Never force-push `main`.
+`main` is the only branch (the owner's choice, 2026-10-16). Commit and push directly to `main`; don't
+create other branches. The app on the owner's Mac mini runs from `main` and pulls it every 15 minutes.
+Never force-push `main`.
