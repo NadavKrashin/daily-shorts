@@ -59,7 +59,7 @@
    "title": "Why Your Brain Hides a Blind Spot 10 Moons Wide",
    "thumbnail_hook": "YOU CAN'T SEE THIS",
    "produced_on": "2026-10-16",
-   "status": "produced_not_published",
+   "status": "in_revision",
    "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4",
    "thumbnail_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/hf_20261016_142806_331565a1-444b-43e4-b2f4-72d231b1eff9.png",
    "credits_spent": 170.05,
@@ -99,7 +99,8 @@
     "captions": "passed",
     "visual_review": "passed"
    },
-   "overlays": "14 text and diagram overlays drawn by channel/tools/overlays.py, including a new to-scale blind-spot diagram (`field`)"
+   "overlays": "14 text and diagram overlays drawn by channel/tools/overlays.py, including a new to-scale blind-spot diagram (`field`)",
+   "hold_reason": "Owner feedback 2026-10-16: captions too small and too low, cards look templated, narration stiff. Fix, then set status back to produced_not_published so the app imports it."
   }
  ]
 }
