@@ -14,8 +14,10 @@ different one).
 | `youtube-banner.jpg` | YouTube banner. The title sits inside the 1546×423 area every device shows | 2560×1440 |
 | `intro-post.jpg` | Instagram has no banner: post this once and pin it, so the grid opens with the name | 1080×1350 |
 
-Made 2026-10-16 with Higgsfield `seedream_v5_pro` and the channel style key (jobs `055811b0`
-avatar, `cad44600` banner and post background); the lettering is Montserrat, added in code.
+Made 2026-10-16 with Higgsfield `seedream_v5_pro` and the channel style key. The title is sculpted
+clay inside the image, not typed on top (the owner rejected flat text as dated). Jobs: avatar
+`055811b0`; banner `5cda8efb`, widened with outpaint `2671d864` so the title fits the safe area; post
+`ff409eeb`, cropped to 4:5.
 
 ## YouTube (Studio → Customization)
 
