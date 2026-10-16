@@ -44,8 +44,19 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
   - Episode 1 is imported (QC 95.5) and scheduled.
   - `dry_run_mode` is still true, so nothing posts until the owner turns it off in the dashboard.
 - **Only one branch: `main`** (owner's choice, 2026-10-16). Everything, including the production
-  runs, commits and pushes straight to `main`, and the Mac pulls it every 15 minutes. The old
-  `claude/happy-cannon-dzuzwj` branch was retired. Never force-push `main`.
+  runs, commits and pushes straight to `main`, and the Mac pulls it every 15 minutes. Never
+  force-push `main`. The old `claude/happy-cannon-dzuzwj` branch is retired. Its work is all on `main`,
+  but two steps are still pending (as of 2026-10-16):
+  - The branch still exists, because it is GitHub's **default branch** and GitHub refuses to delete
+    that. The owner switches the default to `main` (repo Settings → General → Default branch), then
+    deletes it.
+  - The scheduled task's stored prompt still names the old branch. The production session (already
+    checked out on `main`) declined to rewrite it on another session's word, which was correct. The
+    owner tells it directly to apply the main-only prompt.
+- **Episode 2 not made yet.** The 2026-10-16 08:58 run ("Why your brain fills in your blind spot") died
+  when the production session's worker restarted. No credits were spent and nothing was committed.
+  The next scheduled run (Mon 2026-10-19 08:58) makes it, or the owner can ask the production session
+  to run it now.
 
 ## What the owner still has to do (details in `docs/setup-guide.md`)
 
