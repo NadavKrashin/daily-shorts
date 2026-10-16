@@ -8,7 +8,7 @@
 # running it again.
 set -euo pipefail
 
-REPO="git@github.com:NadavKrashin/daily-shorts.git"
+REPO="git@github.com:NadavKrashin/whyinclay.git"
 BRANCH="main"   # the only branch; the scheduled runs push new episodes here
 DIR="${REPO_DIR:-$HOME/daily-shorts}"
 KEY="$HOME/.ssh/daily_shorts"
@@ -48,9 +48,9 @@ if [ ! -d "$DIR/.git" ]; then
     echo
     cat "$KEY.pub"
     echo
-    echo "  1. Open https://github.com/NadavKrashin/daily-shorts/settings/keys/new"
+    echo "  1. Open https://github.com/NadavKrashin/whyinclay/settings/keys/new"
     echo "  2. Title: Mac mini.  Key: paste.  Leave 'Allow write access' OFF.  Click Add key."
-    open "https://github.com/NadavKrashin/daily-shorts/settings/keys/new" || true
+    open "https://github.com/NadavKrashin/whyinclay/settings/keys/new" || true
     stop "Then run this script again."
   fi
   say "Cloning the repository into $DIR"

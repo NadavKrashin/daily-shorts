@@ -46,7 +46,7 @@ Then:
 
 ```bash
 printf 'Host github.com\n  IdentityFile ~/.ssh/daily_shorts\n' >> ~/.ssh/config
-cd ~ && git clone -b main git@github.com:NadavKrashin/daily-shorts.git
+cd ~ && git clone -b main git@github.com:NadavKrashin/whyinclay.git daily-shorts
 cd ~/daily-shorts
 ```
 

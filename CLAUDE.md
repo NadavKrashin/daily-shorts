@@ -1,4 +1,4 @@
-# Why in Clay (repo: daily-shorts)
+# Why in Clay (repo: NadavKrashin/whyinclay, checked out as `daily-shorts`)
 
 **Start here:** read `HANDOFF.md` for the current state, open items and where to pick up. Update it at
 the end of any session that changes the state.
