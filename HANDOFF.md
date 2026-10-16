@@ -110,6 +110,7 @@ dashboard Agents page. Never claim it is live without checking.
   1 and 2) are queued by `publication.service.catch_up_platforms`, which runs with every
   `import_episodes` job and gives each its own next free slot. If the post fails with an auth error, the
   access token died with the suspension: generate a new one in the Meta app and put it in `.env`.
+  `scripts/check_instagram.py` (run on the Mac) checks the token without posting.
 - Alerts: `notifications.channels` is `[log, telegram]`. Telegram works once the owner runs
   `scripts/telegram_setup.py` on the Mac (until then the telegram channel just logs "not configured").
   TikTok "Action needed" alerts link to `dashboard_url`/calendar.
