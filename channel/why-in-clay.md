@@ -116,7 +116,8 @@ follow them, except where this file says otherwise.
    (yt-seo rules), `caption`, and `checks` with `narration_strict`, `captions` and `visual_review`
    set to `passed` only if that check really ran and passed. Use status `produced_not_published`. The
    app's `import_episodes` job picks it up from there, runs its own technical QC, and publishes on the
-   schedule once platforms are connected. Commit `channel/` and push to the working branch.
+   schedule once platforms are connected. Update `HANDOFF.md` (latest episode, credits left, any new
+   open items), then commit `channel/` and `HANDOFF.md` and push to the working branch.
 9. **Report** in the final message: the video and thumbnail links, title, description draft
    (`yt-seo` rules), the sources, what failed and was fixed, and credits spent and remaining.
 

@@ -1,5 +1,8 @@
 # Why in Clay (repo: daily-shorts)
 
+**Start here:** read `HANDOFF.md` for the current state, open items and where to pick up. Update it at
+the end of any session that changes the state.
+
 An automated YouTube Shorts studio. Videos are produced by scheduled Claude runs with the
 Higgsfield connector, following `channel/why-in-clay.md`. The `waitwhy` app (FastAPI + Postgres)
 handles approvals, publishing, analytics and reports.
