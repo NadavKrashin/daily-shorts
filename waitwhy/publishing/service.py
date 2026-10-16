@@ -50,6 +50,19 @@ def adapter_for(session: Session, cfg: dict, platform: str):
     raise PermanentError(f"unknown platform {platform}")
 
 
+def public_video_url(store, vv: VideoVersion) -> str | None:
+    """A public HTTPS link to this exact file, for platforms that fetch the video (Instagram).
+
+    Storage's own public link when it has one (S3/R2, or a public server). Otherwise, for episodes
+    imported from the production runs, the CDN copy they were downloaded from: the same bytes that
+    passed QC, so no R2 bucket is needed."""
+    url = store.public_url(vv.storage_key, 6 * 3600)
+    if url:
+        return url
+    src = (vv.manifest or {}).get("source_url") or ""
+    return src if src.startswith("https://") else None
+
+
 def is_publication_approved(session: Session, video: Video) -> bool:
     a = session.execute(select(Approval).where(Approval.video_id == video.id, Approval.kind == "publication")
                         .order_by(Approval.created_at.desc())).scalars().first()
@@ -147,7 +160,7 @@ def publish(session: Session, cfg: dict, pj: PublicationJob, actor: str = "agent
     store = registry.storage(cfg)
     req = ad.PublishRequest(
         idempotency_key=pj.idempotency_key, video_path=store.local_path(vv.storage_key),
-        public_video_url=store.public_url(vv.storage_key, 6 * 3600), thumbnail_path=store.local_path(vv.thumbnail_key)
+        public_video_url=public_video_url(store, vv), thumbnail_path=store.local_path(vv.thumbnail_key)
         if vv.thumbnail_key else None, title=pj.metadata_.get("title", video.title),
         description=pj.metadata_.get("description", ""), caption=pj.metadata_.get("caption", ""),
         hashtags=pj.metadata_.get("hashtags", []), disclosure=pj.metadata_.get("disclosure", {}),

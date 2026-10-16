@@ -68,13 +68,18 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
    change my own permissions: writing `.claude/settings.json` was blocked as self-modification. Don't
    try to work around that.
 2. Decide on credits: top up or upgrade, or cut the cadence.
-3. Claim "Why in Clay" / @whyinclay on YouTube, Instagram (Professional), Facebook Page and TikTok.
+3. ~~Claim the accounts~~ Done 2026-10-16: YouTube, Instagram (Professional, Education) and TikTok.
+   There is no Facebook Page, so Facebook publishing is off.
 4. ~~Deploy the app~~ Done 2026-10-16 on the Mac mini (see "App" above). Still to confirm: the
    dashboard opens from the owner's phone over Tailscale.
-5. Set up an R2/S3 bucket, then platform credentials:
-   - YouTube OAuth, plus the API audit (uploads stay private until Google approves it)
-   - Meta app and tokens
-   - TikTok: manual handoff by default
+5. Platform credentials: YouTube and Instagram connected 2026-10-16 (see "Platform accounts").
+   Still open:
+   - restart the services and confirm Settings shows youtube ✓ and instagram ✓
+   - get Google **Publish app** to work, then rerun `scripts/youtube_auth.py` (until then the token
+     lapses every 7 days)
+   - apply for the YouTube API audit (uploads stay private until Google approves it)
+   - TikTok stays a manual handoff
+   No R2 bucket is needed.
 6. Turn off `dry_run_mode` in the dashboard to go live.
 
 When the owner reports one of these done, help verify it: run the health check and look at the
@@ -91,6 +96,9 @@ dashboard Agents page. Never claim it is live without checking.
   `instagram_token_refresh` job (`waitwhy/publishing/tokens.py`). The renewed token lives in
   `data/state/instagram_token.json` (mode 600), never in the database, because the Settings page shows
   every DB setting. Its expiry date is in the `instagram_token_status` setting.
+- Instagram fetches each video from a public URL. For imported episodes that is the Higgsfield CDN
+  link in the version manifest (`source_url`): the same bytes that passed QC. See
+  `publishing.service.public_video_url`. No R2 bucket is needed.
 - YouTube: connected 2026-10-16 with `scripts/youtube_auth.py` (channel "Why In Clay", a brand
   account). The Google app was still in "Testing", so the refresh token lapses after 7 days until the
   owner gets **Publish app** to work and reruns the script. Uploads stay private until Google's API

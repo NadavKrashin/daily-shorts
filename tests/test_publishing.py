@@ -152,3 +152,23 @@ def test_supervised_mode_never_auto_approves(session, cfg):
     assert _auto_approvable(session, c2, v, Rv()) is True
     v.is_sponsored = True
     assert _auto_approvable(session, c2, v, Rv()) is False   # sponsored content always needs a human
+
+
+def test_imported_episode_uses_its_cdn_copy_for_instagram():
+    class NoPublicStorage:
+        def public_url(self, key, expires_s=3600):
+            return None
+
+    class Bucket:
+        def public_url(self, key, expires_s=3600):
+            return f"https://media.example/{key}"
+
+    from waitwhy.models import VideoVersion
+    cdn = "https://d2ol7oe51mr4n9.cloudfront.net/u/ep1.mp4"
+    imported = VideoVersion(storage_key="videos/x/v1.mp4", manifest={"source_url": cdn})
+    rendered = VideoVersion(storage_key="videos/y/v1.mp4", manifest={})
+    assert pub.public_video_url(NoPublicStorage(), imported) == cdn
+    assert pub.public_video_url(NoPublicStorage(), rendered) is None
+    assert pub.public_video_url(Bucket(), imported) == "https://media.example/videos/x/v1.mp4"
+    assert pub.public_video_url(NoPublicStorage(),
+                                VideoVersion(storage_key="k", manifest={"source_url": "file:///tmp/a.mp4"})) is None

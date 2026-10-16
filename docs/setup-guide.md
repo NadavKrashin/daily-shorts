@@ -60,12 +60,16 @@ The repository is private, so add a read-only **deploy key** for the server (Git
 → Deploy keys). The cron line is how new episodes reach the app. A domain with HTTPS (Caddy, see
 deployment.md) is optional but recommended for the dashboard.
 
-## 5. Storage that platforms can pull from (free tier is enough to start)
+## 5. Storage that platforms can pull from (not needed now)
 
-Instagram and Facebook fetch the video from a public URL. Do this:
-1. Create a Cloudflare R2 bucket (or S3/B2) with a public access URL.
-2. Set `S3_BUCKET`, `S3_ENDPOINT_URL`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` and `S3_PUBLIC_BASE_URL`.
-3. Set `providers.storage: s3` in `config/company.yaml`.
+Instagram and Facebook fetch the video from a public URL. Episodes made by the production runs
+already have one: the Higgsfield CDN copy that the app downloaded and checked. The publisher uses that
+link when storage has none, so nothing needs setting up here.
+
+You only need a bucket if you want the app to serve its own copies, for example videos rendered by the
+built-in renderer. Then create a Cloudflare R2 bucket (or S3/B2) with a public URL, set `S3_BUCKET`,
+`S3_ENDPOINT_URL`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` and `S3_PUBLIC_BASE_URL`, and set
+`providers.storage: s3`.
 
 ## 6. Connect the platforms (one at a time, YouTube first)
 
@@ -90,7 +94,7 @@ Nothing posts until you turn dry-run off (step 8), so connecting a platform is s
    Google approves it, uploads from a new API project are forced to **private**. The app detects this
    and gives you a "make public in YouTube Studio" task for each video.
 
-### Instagram (about 20 minutes; needs the R2 bucket from step 5 to post)
+### Instagram (about 20 minutes)
 The app uses Instagram's own login, so no Facebook Page is needed.
 1. In the Instagram app: Settings → Account type and tools → **Switch to professional account** →
    Creator → category Education.
