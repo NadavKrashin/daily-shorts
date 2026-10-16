@@ -11,8 +11,9 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
   - Files: `channel/episodes/002-blind-spot/` (manifest + assets). Sandbox working files: `~/ep2/`.
   - New overlay diagram `field` in `channel/tools/overlays.py`: one eye's visual field drawn to scale
     (blind spot 15 degrees out, about 5.5 x 7.5 degrees; moon 0.5 degrees).
-- **Episode 1 is finished:** "Why Traffic Jams Appear Out of Nowhere", v5 (status
-  `produced_not_published`, not posted anywhere).
+- **Episode 1 is live on YouTube, public** since its 2026-10-16 19:00 Israel slot (reported by the
+  owner). TikTok is the owner's manual post; Instagram is off while the account appeal is open.
+  "Why Traffic Jams Appear Out of Nowhere", v5.
   - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/e3fa913d-9646-4721-9e23-5613ac164da4.mp4
   - Older cuts and the reasons for each fix are listed in `channel/episodes.json`.
   - All four problems the owner reported are fixed: spoken words at 0:11 and 0:31, a red dot at 0:17
@@ -84,8 +85,7 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
    - restart the services and confirm Settings shows youtube ✓ and instagram ✓
    - get Google **Publish app** to work, then rerun `scripts/youtube_auth.py` (until then the token
      lapses every 7 days)
-   - ~~apply for the YouTube API audit~~ Submitted 2026-10-16; waiting for Google (uploads stay
-     private until it is approved)
+   - ~~apply for the YouTube API audit~~ Submitted 2026-10-16; waiting for Google
    - TikTok stays a manual handoff
    No R2 bucket is needed.
 6. ~~Turn off `dry_run_mode`~~ Done 2026-10-16 (as reported by the owner).
@@ -119,8 +119,8 @@ dashboard Agents page. Never claim it is live without checking.
   `publishing.service.public_video_url`. No R2 bucket is needed.
 - YouTube: connected 2026-10-16 with `scripts/youtube_auth.py` (channel "Why In Clay", a brand
   account). The Google app was still in "Testing", so the refresh token lapses after 7 days until the
-  owner gets **Publish app** to work and reruns the script. Uploads stay private until Google's API
-  audit is approved.
+  owner gets **Publish app** to work and reruns the script. Episode 1's upload came out public
+  before the audit was approved (see the audit section).
 
 ## YouTube API audit (submitted 2026-10-16)
 
@@ -128,8 +128,10 @@ dashboard Agents page. Never claim it is live without checking.
   attempt hung while loading; the second (new tab, small files, optional uploads skipped) showed
   "Your email has been sent. Thank you for submitting the YouTube API Services Form."
 - Waiting for Google's reply (it and any follow-up questions go to whyinclay@gmail.com). Reviews
-  usually take days to weeks. Until it is approved, uploads from the project are forced to private and
-  the dashboard gives a "make public in YouTube Studio" task for each video.
+  usually take days to weeks.
+- Google says unaudited projects' uploads are forced to private, but episode 1 came out **public** on
+  2026-10-16 (owner report). The adapter reads the real status back, so a later private upload would be
+  recorded as `private_uploaded` with a "make public in YouTube Studio" task.
 - The form answers are in a Google Doc in krashin23's Drive ("Audit form answers").
 - Materials:
   - privacy policy and terms of service: Google Docs in krashin23's Drive, published to the web; the
