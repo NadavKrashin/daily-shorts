@@ -113,6 +113,12 @@ def h_import(session: Session, job: WorkflowJob):
     return importer.import_all(session, cfg)
 
 
+@handler("instagram_token_refresh")
+def h_ig_token(session: Session, job: WorkflowJob):
+    from waitwhy.publishing import tokens
+    return tokens.refresh_instagram(session)
+
+
 @handler("publish_due")
 def h_publish_due(session: Session, job: WorkflowJob):
     from waitwhy.agents import coo

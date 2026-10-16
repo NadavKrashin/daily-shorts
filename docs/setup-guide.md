@@ -101,8 +101,9 @@ The app uses Instagram's own login, so no Facebook Page is needed.
 5. Copy the account's **user ID** and the **access token** it shows into `.env` as
    `INSTAGRAM_USER_ID` and `INSTAGRAM_ACCESS_TOKEN`.
    - Your own account works while the app stays in development mode; no App Review is needed.
-   - The token lasts about 60 days. The app does not renew it yet, so generate a new one before then.
-     When it expires the app raises a "publishing auth error" alert.
+   - The token lasts about 60 days. The app renews it every Monday and keeps the renewed copy in
+     `data/state/instagram_token.json` (private, never committed), so `.env` never needs editing again.
+     If a renewal fails, you get an alert while there is still time to make a new token.
 
 ### Facebook (off for now)
 `platforms.facebook.enabled` is `false` because there is no Facebook Page. To add it later:

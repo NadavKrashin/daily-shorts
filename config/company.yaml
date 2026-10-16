@@ -82,6 +82,7 @@ schedules:
   recover_stalled:   {cron: "*/5 * * * *"}
   production_tick:   {cron: "15 * * * *"}
   import_episodes:   {cron: "*/30 * * * *"}   # pick up episodes pushed by the scheduled Claude runs
+  instagram_token_refresh: {cron: "20 4 * * 1"}  # renew the 60-day Instagram token every Monday
   db_backup:         {cron: "30 3 * * *"}
 
 # Publication slots are expressed in the AUDIENCE timezone, not the owner's.

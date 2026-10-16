@@ -41,7 +41,8 @@ def adapter_for(session: Session, cfg: dict, platform: str):
         return ad.YouTubeAdapter(s.youtube_client_id, s.youtube_client_secret, s.youtube_refresh_token,
                                  pcfg.get("publishing_mode", ""))
     if platform == "instagram":
-        return ad.InstagramAdapter(s.instagram_user_id, s.instagram_access_token, s.instagram_graph_host, ver)
+        from waitwhy.publishing.tokens import current_token
+        return ad.InstagramAdapter(s.instagram_user_id, current_token(), s.instagram_graph_host, ver)
     if platform == "facebook":
         return ad.FacebookReelsAdapter(s.meta_page_id, s.meta_page_access_token, ver)
     if platform == "tiktok":

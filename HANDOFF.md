@@ -86,9 +86,15 @@ dashboard Agents page. Never claim it is live without checking.
   Page, so `platforms.facebook.enabled: false`.
 - Connecting them is the owner's part (`docs/setup-guide.md` step 6). YouTube uses
   `scripts/youtube_auth.py`.
-- Known gap (to-do): the Instagram long-lived token expires after about 60 days and the app doesn't
-  refresh it yet. Add a scheduled job that calls `graph.instagram.com/refresh_access_token` and stores
-  the new token, or at least warns a week before it expires.
+- Instagram: connected 2026-10-16 through a Meta app with no business portfolio ("Why In Clay-IG"),
+  with @whyinclay as an Instagram Tester. The 60-day token is renewed every Monday by the
+  `instagram_token_refresh` job (`waitwhy/publishing/tokens.py`). The renewed token lives in
+  `data/state/instagram_token.json` (mode 600), never in the database, because the Settings page shows
+  every DB setting. Its expiry date is in the `instagram_token_status` setting.
+- YouTube: connected 2026-10-16 with `scripts/youtube_auth.py` (channel "Why In Clay", a brand
+  account). The Google app was still in "Testing", so the refresh token lapses after 7 days until the
+  owner gets **Publish app** to work and reruns the script. Uploads stay private until Google's API
+  audit is approved.
 
 ## Open quality items (fix in future episodes, not urgent)
 
