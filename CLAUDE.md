@@ -44,3 +44,8 @@ question.
 - `config/company.yaml`: business config (autonomous mode, budgets, schedules).
 - `waitwhy/`: the app. Tests: `SKIP_SLOW=1 pytest`.
 - `docs/`: architecture, setup, deployment, runbook, compliance.
+
+## Branches
+
+The app on the owner's Mac mini runs from `main`. Work on `claude/happy-cannon-dzuzwj`, and after
+pushing there, fast-forward `main` to it with `git push origin HEAD:main`. Never force-push `main`.

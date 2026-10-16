@@ -26,11 +26,27 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
     (`list_triggers`).
 - **Credits:** 585.9 on the Higgsfield Plus plan as of 2026-10-16. An episode costs about 150, and runs
   pause by themselves under 200. Buying credits or changing the plan is the owner's call.
-- **App:** the `waitwhy` app is built and tested (79 passed, 1 skipped) but **not deployed**.
-  - Config: `production_source: claude_runs`.
-  - Every 30 minutes the `import_episodes` job turns `channel/episodes.json` entries into videos, runs
-    QC, then auto-approves and schedules them.
-  - `dry_run_mode` is still true, so nothing posts.
+- **App: running on the owner's Mac mini** (reported by the owner 2026-10-16; this cloud session can't
+  reach the Mac, so those details are as reported, not checked from here).
+  - Dashboard: https://atlass-mac-mini-2.tailf9f0e7.ts.net. Reachable only on the owner's tailnet
+    (Tailscale Serve; Funnel off). Login is user `ceo`; the password is in
+    `~/.why-in-clay-dashboard-password` on the Mac.
+  - It runs **natively, not in Docker**:
+    - Code: `~/daily-shorts`, on branch **`main`**.
+    - Postgres: a Homebrew service that only accepts connections from the Mac itself.
+    - Four launchd services start at login and restart if they crash: dashboard (listens on localhost
+      only; Tailscale forwards to it), worker, scheduler, and `git pull` every 15 minutes.
+    - Logs: `~/daily-shorts/logs/`.
+  - A separate `whyinclay` folder on the Mac is an older copy on the other branch; it isn't used.
+  - The owner's Cloudflare tunnel and studio.animoment.co.il are separate and must stay untouched.
+  - Config: `production_source: claude_runs`. Every 30 minutes the `import_episodes` job turns
+    `channel/episodes.json` entries into videos, runs QC, then auto-approves and schedules them.
+  - Episode 1 is imported (QC 95.5) and scheduled.
+  - `dry_run_mode` is still true, so nothing posts until the owner turns it off in the dashboard.
+- **Branches: `main` is what the Mac runs.** The production session works on
+  `claude/happy-cannon-dzuzwj` and, after every push there, fast-forwards `main`
+  (`git push origin HEAD:main`). Without that step new episodes never reach the app. Never force-push
+  `main`. If it has diverged, stop and report instead.
 
 ## What the owner still has to do (details in `docs/setup-guide.md`)
 
@@ -39,8 +55,8 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
    try to work around that.
 2. Decide on credits: top up or upgrade, or cut the cadence.
 3. Claim "Why in Clay" / @whyinclay on YouTube, Instagram (Professional), Facebook Page and TikTok.
-4. Deploy the app on the owner's Mac mini (`docs/deploy-mac-mini.md`; the owner chose this over Vercel,
-   which can't run the worker, scheduler or ffmpeg). A cloud VM per `docs/deployment.md` is the fallback.
+4. ~~Deploy the app~~ Done 2026-10-16 on the Mac mini (see "App" above). Still to confirm: the
+   dashboard opens from the owner's phone over Tailscale.
 5. Set up an R2/S3 bucket, then platform credentials:
    - YouTube OAuth, plus the API audit (uploads stay private until Google approves it)
    - Meta app and tokens
