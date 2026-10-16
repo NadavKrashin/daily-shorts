@@ -122,6 +122,26 @@ package" (video, cover, caption) and a "Mark as posted" box. TikTok only allows 
 for apps that pass its Content Posting API audit (developers.tiktok.com). Once it's approved, set the
 `TIKTOK_*` values and `TIKTOK_APP_AUDITED=true`.
 
+**Later option, once the channel earns money: Upload-Post** (the owner's decision 2026-10-16: post
+by hand for now). Compared on 2026-10-16:
+
+| Service | Automatic TikTok posting | Price then |
+|---|---|---|
+| Upload-Post | yes, Basic plan and up | Basic $24/mo, or $16/mo billed yearly |
+| Ayrshare | yes | from $149/mo |
+| Metricool | API only on the Advanced plan | price unconfirmed |
+| Buffer | no new API apps | n/a |
+
+Upload-Post's API covers what we need: `privacy_level=PUBLIC_TO_EVERYONE`, `post_mode=DIRECT_POST`
+(or `MEDIA_UPLOAD` for drafts), and `is_aigc=true` for TikTok's AI-generated label. It caps posts at
+15 a day per account. Sources: docs.upload-post.com/resources/pricing-and-limits and
+docs.upload-post.com/api/upload-video.
+
+To switch:
+1. The owner subscribes, connects @whyinclay, and puts the API key in `.env`.
+2. A session adds an Upload-Post TikTok adapter, keeping the manual package as the fallback.
+3. Check that the first post appears publicly.
+
 ## 7. Notifications (optional, free)
 
 Create a Telegram bot with @BotFather and set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. Then add

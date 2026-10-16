@@ -87,6 +87,10 @@ dashboard Agents page. Never claim it is live without checking.
 
 ## Platform accounts (2026-10-16)
 
+- TikTok: the owner posts by hand from the dashboard's download package (owner's choice,
+  2026-10-16). Automatic posting via Upload-Post (Basic plan, $24/mo then) is the chosen future option
+  once the channel earns money. The comparison and switch steps are in `docs/setup-guide.md` → TikTok.
+  Don't build the adapter until the owner asks.
 - The owner created the YouTube, TikTok and Instagram accounts for Why in Clay. There is no Facebook
   Page, so `platforms.facebook.enabled: false`.
 - Connecting them is the owner's part (`docs/setup-guide.md` step 6). YouTube uses
