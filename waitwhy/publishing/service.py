@@ -212,9 +212,10 @@ def publish(session: Session, cfg: dict, pj: PublicationJob, actor: str = "agent
     audit(session, actor, "publication.result", "publication_job", pj.id, platform=pj.platform, status=out.status,
           external_id=out.external_id, url=out.url, dry_run=pj.dry_run, detail=out.detail)
     if out.status in ("manual_action_required", "private_uploaded"):
+        link = f"\n\nOpen: {cfg['dashboard_url'].rstrip('/')}/calendar" if cfg.get("dashboard_url") else ""
         alert(session, "low" if pj.dry_run else "high", "manual_action",
-              f"Action needed: {pj.platform} for '{video.title}'", out.detail, dedupe_key=f"manual:{pj.id}",
-              video_id=video.id)
+              f"Action needed: {pj.platform} for '{video.title}'", (out.detail or "") + link,
+              dedupe_key=f"manual:{pj.id}", video_id=video.id)
     _evaluate(session, video, actor)
     return pj.status
 

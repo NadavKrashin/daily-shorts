@@ -144,10 +144,22 @@ To switch:
 2. A session adds an Upload-Post TikTok adapter, keeping the manual package as the fallback.
 3. Check that the first post appears publicly.
 
-## 7. Notifications (optional, free)
+## 7. Alerts on your phone (free, 3 minutes)
 
-Create a Telegram bot with @BotFather and set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. Then add
-`telegram` to `notifications.channels`. Email over any SMTP works too (`SMTP_*`, `NOTIFY_EMAIL_TO`).
+The app sends a Telegram message whenever something needs you: a TikTok post to make, a failed upload,
+an expiring token. Each TikTok message links to the dashboard's Calendar page.
+1. In Telegram, open **@BotFather**, send `/newbot`, and give it a name such as "Why in Clay alerts".
+2. On the Mac: `cd ~/daily-shorts && git pull && python3 scripts/telegram_setup.py`. Paste the token
+   BotFather gave you (it isn't shown), then send your new bot any message in Telegram.
+3. The script saves the keys to `.env`, sends a test message and restarts the app.
+
+Email over any SMTP works too (`SMTP_*`, `NOTIFY_EMAIL_TO`, and add `email` to `notifications.channels`).
+
+### Posting to TikTok each time
+At the video's slot you get the Telegram alert. Open the Calendar link, then **Download post package**
+(video, cover, caption). Upload at tiktok.com/upload or in the app, paste `caption.txt`, set the cover,
+turn on **AI-generated content**, and post. Paste the post's link next to the row and click **Mark as
+posted**. Slots are 19:00, 00:00 and 02:30 Israel time, so late ones can wait until the morning.
 
 ## 8. Go live
 

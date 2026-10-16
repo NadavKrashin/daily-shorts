@@ -7,6 +7,7 @@ business_name: "Why in Clay"         # @whyinclay free on YouTube 2026-10-15; ow
 tagline: "Everyday mysteries, explained in clay."
 language: en
 timezone: Asia/Jerusalem              # owner timezone: drives the daily operations schedule
+dashboard_url: https://atlass-mac-mini-2.tailf9f0e7.ts.net   # tailnet-only; used for links in alerts
 audience_timezones: [America/New_York, America/Los_Angeles, Europe/London, Australia/Sydney]
 
 # --- Output format --------------------------------------------------------------
@@ -212,6 +213,6 @@ platforms:
 meta_graph_version: v25.0
 
 notifications:
-  channels: [log]            # log | email | telegram | webhook
+  channels: [log, telegram]  # log | email | telegram | webhook. Telegram keys: scripts/telegram_setup.py
   daily_digest: true
   min_severity_push: high    # low-severity items are batched into the daily report

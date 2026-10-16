@@ -215,3 +215,21 @@ def test_database_times_are_utc_and_calendar_shows_owner_time(session, cfg):
     session.commit()
     r = TestClient(app).get("/calendar", auth=("ceo", "test-pass"))
     assert r.status_code == 200 and "19:00 Jerusalem · 16:00 UTC" in r.text
+
+
+def test_manual_action_alert_links_to_the_dashboard(session, cfg):
+    set_setting(session, "mock_publish_scenario", {"tiktok": "manual"})
+    set_setting(session, "dry_run_mode", False)
+    set_setting(session, "dashboard_url", "https://studio.example/")
+    v = f.ready_video(session, cfg)
+    c = get_config(session)
+    pub.schedule_video(session, c, v, "test")
+    pj = session.query(PublicationJob).filter_by(platform="tiktok").one()
+    orig = pub.adapter_for
+    pub.adapter_for = lambda s, cc, p: ad.MockAdapter(p, {"tiktok": "manual"})
+    try:
+        assert pub.publish(session, c, pj) == "manual_action_required"
+    finally:
+        pub.adapter_for = orig
+    n = session.query(Notification).filter(Notification.title.like("Action needed: tiktok%")).one()
+    assert n.severity == "high" and "\n\nOpen: https://studio.example/calendar" in n.body

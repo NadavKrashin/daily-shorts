@@ -111,6 +111,9 @@ dashboard Agents page. Never claim it is live without checking.
   cancelled at publish time. After a restore: check the token still works (regenerate it if not),
   set `enabled: true`, and post episode 1 to Instagram by hand or reschedule it. Don't open a second
   account while the appeal is open.
+- Alerts: `notifications.channels` is `[log, telegram]`. Telegram works once the owner runs
+  `scripts/telegram_setup.py` on the Mac (until then the telegram channel just logs "not configured").
+  TikTok "Action needed" alerts link to `dashboard_url`/calendar.
 - TikTok: the owner posts by hand from the dashboard's download package (owner's choice,
   2026-10-16). Automatic posting via Upload-Post (Basic plan, $24/mo then) is the chosen future option
   once the channel earns money. The comparison and switch steps are in `docs/setup-guide.md` → TikTok.
