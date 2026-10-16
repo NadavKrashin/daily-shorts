@@ -54,13 +54,12 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
     Mac, whose launchd services use that path.
   - The old `claude/happy-cannon-dzuzwj` branch is deleted, and `main` is the default branch
     (checked 2026-10-16).
-  - Still pending: the scheduled task's stored prompt names the old branch. The production session
-    (already on `main`) declined to rewrite it on another session's word, which was correct. The owner
-    tells it directly to apply the main-only prompt.
-- **Episode 2 not made yet.** The 2026-10-16 08:58 run ("Why your brain fills in your blind spot") died
-  when the production session's worker restarted. No credits were spent and nothing was committed.
-  The next scheduled run (Mon 2026-10-19 08:58) makes it, or the owner can ask the production session
-  to run it now.
+  - The scheduled task's stored prompt now says main-only (the owner had the production session apply
+    it; checked 2026-10-16).
+- **Episode 2 ("Why your brain fills in your blind spot") is not on `main` yet.** The 2026-10-16 08:58
+  run died when the production session's worker restarted (no credits spent). The owner then asked the
+  production session to run it again; check `channel/episodes.json` on `main` for whether it landed.
+  When it does, the Mac imports it within about 45 minutes (15-minute pull + 30-minute import).
 
 ## What the owner still has to do (details in `docs/setup-guide.md`)
 
@@ -77,7 +76,8 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
    - restart the services and confirm Settings shows youtube ✓ and instagram ✓
    - get Google **Publish app** to work, then rerun `scripts/youtube_auth.py` (until then the token
      lapses every 7 days)
-   - apply for the YouTube API audit (uploads stay private until Google approves it)
+   - ~~apply for the YouTube API audit~~ Submitted 2026-10-16; waiting for Google (uploads stay
+     private until it is approved)
    - TikTok stays a manual handoff
    No R2 bucket is needed.
 6. Turn off `dry_run_mode` in the dashboard to go live.
@@ -110,9 +110,13 @@ dashboard Agents page. Never claim it is live without checking.
 
 ## YouTube API audit (submitted 2026-10-16)
 
-- The owner submitted Google's YouTube API Services compliance audit form; waiting for Google's reply
-  (confirmation and any questions go to whyinclay@gmail.com). Until it is approved, uploads from the
-  project are forced to private.
+- The owner submitted Google's YouTube API Services compliance audit form on 2026-10-16. The first
+  attempt hung while loading; the second (new tab, small files, optional uploads skipped) showed
+  "Your email has been sent. Thank you for submitting the YouTube API Services Form."
+- Waiting for Google's reply (it and any follow-up questions go to whyinclay@gmail.com). Reviews
+  usually take days to weeks. Until it is approved, uploads from the project are forced to private and
+  the dashboard gives a "make public in YouTube Studio" task for each video.
+- The form answers are in a Google Doc in krashin23's Drive ("Audit form answers").
 - Materials:
   - privacy policy and terms of service: Google Docs in krashin23's Drive, published to the web; the
     privacy policy is also in `docs/privacy-policy.md`
