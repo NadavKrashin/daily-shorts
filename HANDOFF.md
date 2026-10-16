@@ -104,6 +104,26 @@ dashboard Agents page. Never claim it is live without checking.
   owner gets **Publish app** to work and reruns the script. Uploads stay private until Google's API
   audit is approved.
 
+## YouTube API audit (submitted 2026-10-16)
+
+- The owner submitted Google's YouTube API Services compliance audit form; waiting for Google's reply
+  (confirmation and any questions go to whyinclay@gmail.com). Until it is approved, uploads from the
+  project are forced to private.
+- Materials:
+  - privacy policy and terms of service: Google Docs in krashin23's Drive, published to the web; the
+    privacy policy is also in `docs/privacy-policy.md`
+  - diagrams: `docs/audit/`
+- What the form declared, which the app must stay within:
+  - client "Why in Clay Publisher": internal, single user, only the Why In Clay channel
+  - endpoints: `videos.insert` (at most 1 a day), `videos.list`, `channels.list`, Analytics `reports.query`
+  - default 10,000 units/day quota; no `search.list`
+- Any change to that use (other channels, new endpoints, other users) must be reported to YouTube
+  and approved first.
+- Promised in the privacy policy: if the owner revokes access, stored YouTube statistics are deleted
+  within 30 days. This is a manual step today.
+- When Google replies, draft answers for the owner from this section. Never invent capabilities or
+  numbers.
+
 ## Open quality items (fix in future episodes, not urgent)
 
 - Episode 1's hook scored WEAK (31) on `hookscore.py`, and its thumbnail text is 5 words (limit 3).
