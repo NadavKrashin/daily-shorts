@@ -117,7 +117,7 @@ def main() -> int:
     redirect = f"http://127.0.0.1:{port}"
     url = AUTH_URL + "?" + urllib.parse.urlencode({
         "client_id": client_id, "redirect_uri": redirect, "response_type": "code", "scope": " ".join(SCOPES),
-        "access_type": "offline", "prompt": "consent", "state": state,
+        "access_type": "offline", "prompt": "select_account consent", "state": state,
         "code_challenge": challenge, "code_challenge_method": "S256"})
     print("Opening your browser. Pick your Google account, then the Why in Clay channel.")
     print("If it doesn't open, paste this address into the browser:\n" + url + "\n")
