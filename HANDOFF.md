@@ -11,12 +11,19 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
   - All four problems the owner reported are fixed: spoken words at 0:11 and 0:31, a red dot at 0:17
     and a reversing car at 0:37.
   - v5 adds 14 on-screen text and diagram overlays (owner request: "more text and explanatory animations").
-- **Production is automatic.** The scheduled task `trig_01NvBXgrzynfnKVDVQZeGxzL` ("Why in Clay
+- **Production is automatic.** The scheduled task `trig_0182qs4pQ7PAjPxr7pJdhums` ("Why in Clay
   episode") runs Mon/Wed/Fri at 08:58 Asia/Jerusalem.
-  - It fires into session `session_01TgP7K6kDYwbqhy96bKL9fm` and follows `channel/why-in-clay.md`
-    steps 0-9, including step 6b (overlays).
-  - If that session is archived, the task stops: recreate it with the same prompt (read it with
-    `list_triggers`).
+  - It fires into a dedicated production session, `session_019RDtGY8g3sTANrfbpeBBTg` ("Why in Clay:
+    episode production", tag `why-in-clay:production`, Auto mode). That session has the repo and the
+    Higgsfield connector, which shows up there under a server-ID tool name. Its setup was checked on
+    2026-10-16.
+  - Each run follows `channel/why-in-clay.md` steps 0-9, including step 6b (overlays).
+  - Why a dedicated session: scheduled tasks that start a fresh session can't attach connectors on
+    this account, so a fresh session would have no Higgsfield.
+  - If the production session is archived, the task stops. To fix it, create a new session from the
+    repo with `create_session` (permission_mode auto), confirm Higgsfield `balance` works there, then
+    point a new task at it with `create_trigger` and `persistent_session_id`, reusing the prompt
+    (`list_triggers`).
 - **Credits:** 585.9 on the Higgsfield Plus plan as of 2026-10-16. An episode costs about 150, and runs
   pause by themselves under 200. Buying credits or changing the plan is the owner's call.
 - **App:** the `waitwhy` app is built and tested (79 passed, 1 skipped) but **not deployed**.
@@ -27,8 +34,9 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
 
 ## What the owner still has to do (details in `docs/setup-guide.md`)
 
-1. Keep the permission mode on Auto so scheduled runs don't stall. I can't change my own permissions:
-   writing `.claude/settings.json` was blocked as self-modification. Don't try to work around that.
+1. Don't archive the "Why in Clay: episode production" session, and keep it on Auto mode. I can't
+   change my own permissions: writing `.claude/settings.json` was blocked as self-modification. Don't
+   try to work around that.
 2. Decide on credits: top up or upgrade, or cut the cadence.
 3. Claim "Why in Clay" / @whyinclay on YouTube, Instagram (Professional), Facebook Page and TikTok.
 4. Rent a server and deploy (`docs/deployment.md`): a read-only deploy key plus a host cron `git pull`.

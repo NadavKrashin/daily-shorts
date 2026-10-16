@@ -13,9 +13,11 @@ into chat: put them in `.env` on the server.
 
 ## 1. Keep the scheduled runs unblocked (2 minutes)
 
-- Leave this Claude Code session's permission mode on **Auto** (the dropdown next to the prompt box).
-  The scheduled task fires into this session, and a tool-approval prompt with nobody there stalls it.
-- Don't archive this session. The scheduled task "Why in Clay episode" is bound to it.
+- Episodes are made in their own Claude Code session, **"Why in Clay: episode production"**. Your
+  normal chats are separate, so you can archive them freely.
+- Don't archive the production session. The scheduled task "Why in Clay episode" fires into it.
+- Keep its permission mode on **Auto**, as it is now. A tool-approval prompt with nobody there stalls
+  the run.
 
 ## 2. Higgsfield credits (your money)
 
