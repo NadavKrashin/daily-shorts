@@ -190,3 +190,28 @@ def test_job_scheduled_in_dry_run_publishes_live_after_switch(session, cfg, monk
     assert pub.publish(session, live, pj) == "published"
     assert seen == [False] and pj.dry_run is False
     assert session.query(PlatformPost).filter_by(platform="youtube").one().is_mock is False
+
+
+def test_job_for_platform_switched_off_after_scheduling_is_cancelled(session, cfg):
+    set_setting(session, "mock_publish_scenario", {"facebook": "ok"})
+    v = f.ready_video(session, cfg)
+    pub.schedule_video(session, get_config(session), v, "test")
+    session.commit()
+    set_setting(session, "platforms", {"facebook": {"enabled": False}})
+    pj = session.query(PublicationJob).filter_by(platform="facebook").one()
+    assert pub.publish(session, get_config(session), pj) == "cancelled"
+    assert session.query(PlatformPost).filter_by(platform="facebook").count() == 0
+    assert session.query(Notification).count() == 0
+
+
+def test_database_times_are_utc_and_calendar_shows_owner_time(session, cfg):
+    from fastapi.testclient import TestClient
+    from sqlalchemy import text
+
+    from waitwhy.api.app import app
+    assert session.execute(text("SHOW timezone")).scalar() == "UTC"
+    v = f.ready_video(session, cfg)
+    pub.schedule_video(session, get_config(session), v, "test", at=datetime(2026, 10, 16, 16, 0, tzinfo=timezone.utc))
+    session.commit()
+    r = TestClient(app).get("/calendar", auth=("ceo", "test-pass"))
+    assert r.status_code == 200 and "19:00 Jerusalem · 16:00 UTC" in r.text

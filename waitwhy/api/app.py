@@ -14,6 +14,7 @@ import uuid
 import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, StreamingResponse
@@ -44,6 +45,7 @@ HERE = Path(__file__).resolve().parent.parent / "web"
 app = FastAPI(title="Why in Clay - operations", docs_url="/api/docs", openapi_url="/api/openapi.json")
 app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
 templates = Jinja2Templates(directory=HERE / "templates")
+templates.env.filters["in_tz"] = lambda dt, tz: dt.astimezone(ZoneInfo(tz)).strftime("%H:%M") if dt else ""
 basic = HTTPBasic()
 Sessions = session_factory()
 

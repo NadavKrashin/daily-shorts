@@ -158,6 +158,8 @@ dashboard Agents page. Never claim it is live without checking.
   - Run: `SKIP_SLOW=1 .venv/bin/python -m pytest -q`.
   - Databases: `waitwhy`, `waitwhy_test`, `waitwhy_mig` (scratch). A fresh container may need Postgres
     and the venv reinstalled.
+- **Times:** the Mac's Postgres runs on Israel time; `db.get_engine` forces UTC sessions so labels
+  saying UTC are true. The Calendar shows owner time (`timezone` in config) and UTC side by side.
 - **Docker image:** it installs the package into site-packages, so it relies on `WAITWHY_ROOT=/app`.
   The compose file mounts `./channel` read-only.
 

@@ -139,6 +139,12 @@ def publish(session: Session, cfg: dict, pj: PublicationJob, actor: str = "agent
         pj.status = "published" if existing.is_public else "private_uploaded"
         return pj.status
     video = session.get(Video, pj.video_id)
+    if not cfg["platforms"].get(pj.platform, {}).get("enabled"):
+        # Switched off after the job was scheduled (e.g. Facebook, which has no Page): drop it quietly.
+        pj.status, pj.last_error = "cancelled", f"{pj.platform} is switched off in config"
+        audit(session, actor, "publication.cancelled", "publication_job", pj.id, reason=pj.last_error)
+        _evaluate(session, video, actor)
+        return pj.status
     if pj.status == "uploading":
         pj.status = "blocked"
         pj.last_error = "previous attempt was interrupted mid-upload - verify on the platform before retrying"

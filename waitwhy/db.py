@@ -14,7 +14,10 @@ from waitwhy.settings import secrets
 
 @functools.lru_cache
 def get_engine(url: str | None = None) -> Engine:
-    return create_engine(url or secrets().database_url, pool_pre_ping=True, pool_size=5, max_overflow=5)
+    # Timestamps come back in UTC whatever the server's own timezone is (the Mac's Postgres runs on
+    # Israel time), so times labelled UTC in the dashboard really are UTC.
+    return create_engine(url or secrets().database_url, pool_pre_ping=True, pool_size=5, max_overflow=5,
+                         connect_args={"options": "-c timezone=UTC"})
 
 
 def session_factory(url: str | None = None) -> sessionmaker[Session]:
