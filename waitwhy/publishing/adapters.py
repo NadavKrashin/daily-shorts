@@ -29,6 +29,27 @@ import httpx
 from waitwhy.errors import AuthError, PermanentError, PolicyError, TransientError
 
 
+MAX_HASHTAGS = 5   # TikTok allows at most 5; Instagram is capped the same way
+
+
+def post_text(caption: str, hashtags: list[str], platform: str, limit: int = MAX_HASHTAGS) -> str:
+    """Caption plus hashtags for one platform: tags already at the end of the caption are merged,
+    duplicates dropped, #shorts kept for YouTube only, and at most ``limit`` tags."""
+    words = (caption or "").split()
+    trailing = []
+    while words and words[-1].startswith("#"):
+        trailing.insert(0, words.pop())
+    text = " ".join(words) if trailing else (caption or "").strip()
+    tags, seen = [], set()
+    for t in trailing + list(hashtags or []):
+        t = "#" + t.lstrip("#").strip()
+        if len(t) < 2 or t.lower() in seen or (t.lower() == "#shorts" and platform != "youtube"):
+            continue
+        seen.add(t.lower())
+        tags.append(t)
+    return (text + "\n\n" + " ".join(tags[:limit])).strip()
+
+
 @dataclass
 class PublishOutcome:
     status: str                 # published | private_uploaded | manual_action_required | processing
@@ -170,7 +191,7 @@ class InstagramAdapter:
     def publish(self, req: PublishRequest) -> PublishOutcome:
         if not req.public_video_url:
             raise PolicyError("Instagram pulls video from a PUBLIC URL - configure S3/CDN storage or PUBLIC_BASE_URL")
-        caption = (req.caption + "\n\n" + " ".join(req.hashtags)).strip()[:2200]
+        caption = post_text(req.caption, req.hashtags, "instagram")[:2200]
         r = httpx.post(f"{self.base}/{self.uid}/media", params={"access_token": self.token}, data={
             "media_type": "REELS", "video_url": req.public_video_url, "caption": caption, "share_to_feed": "true"},
             timeout=60)
@@ -228,7 +249,7 @@ class FacebookReelsAdapter:
                             headers={"Authorization": f"OAuth {self.token}", "offset": "0", "file_size": str(size)},
                             content=fh.read(), timeout=1800)
         _raise_for(up, "facebook-upload")
-        desc = (req.caption + "\n\n" + " ".join(req.hashtags)).strip()
+        desc = post_text(req.caption, req.hashtags, "facebook")
         fin = httpx.post(f"{self.base}/{self.page}/video_reels", data={
             "upload_phase": "finish", "video_id": vid, "video_state": "PUBLISHED", "description": desc,
             "access_token": self.token}, timeout=60)
@@ -280,7 +301,7 @@ class TikTokAdapter:
             raise PolicyError(f"TikTok account does not allow public posting via API (options={options})")
         size = req.video_path.stat().st_size
         init = httpx.post(f"{self.BASE}/post/publish/video/init/", headers={"Authorization": f"Bearer {self.token}"},
-                          json={"post_info": {"title": (req.caption + " " + " ".join(req.hashtags))[:2200],
+                          json={"post_info": {"title": post_text(req.caption, req.hashtags, "tiktok")[:2200],
                                               "privacy_level": "PUBLIC_TO_EVERYONE",
                                               "is_aigc": bool(req.disclosure.get("ai_generated_visuals")),
                                               "brand_content_toggle": bool(req.disclosure.get("paid_promotion"))},

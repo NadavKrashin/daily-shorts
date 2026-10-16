@@ -38,6 +38,8 @@ from waitwhy.models import (AgentRun, Approval, AuditLog, Experiment, FactCheck,
                             WorkflowJob)
 from waitwhy.providers import registry
 from waitwhy.publishing import service as pub
+from waitwhy.publishing.adapters import post_text
+from waitwhy.publishing.cover import portrait_cover
 from waitwhy.settings import get_config, secrets
 from waitwhy.states import KANBAN_COLUMNS, S
 
@@ -326,10 +328,11 @@ def manual_package(pid: uuid.UUID, u: str = Depends(user), s: Session = Depends(
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_STORED) as z:
         z.write(store.local_path(vv.storage_key), "video.mp4")
-        if vv.thumbnail_key:
-            z.write(store.local_path(vv.thumbnail_key), "cover.jpg")
+        cover = (vv.manifest or {}).get("cover_key") or vv.thumbnail_key
+        if cover:
+            z.writestr("cover.jpg", portrait_cover(store.local_path(cover)))
         md = pj.metadata_ or {}
-        z.writestr("caption.txt", (md.get("caption", "") + "\n\n" + " ".join(md.get("hashtags", []))).strip())
+        z.writestr("caption.txt", post_text(md.get("caption", ""), md.get("hashtags", []), pj.platform))
         z.writestr("disclosure.json", json.dumps(md.get("disclosure", {}), indent=1))
     buf.seek(0)
     audit(s, f"user:{u}", "publication.package_downloaded", "publication_job", pid)

@@ -160,8 +160,14 @@ def _store_version(session: Session, cfg: dict, video: Video, ep: dict, fetch) -
             suffix = Path(ep["thumbnail_url"].split("?")[0]).suffix or ".png"
             th = fetch(ep["thumbnail_url"], Path(d) / f"thumb{suffix}")
             thumb_key = store.put_file(th, f"videos/{video.id}/thumb_v{n}{suffix}")
+        cover_key = None
+        if ep.get("cover_url"):  # 9:16 cover for TikTok and Reels; the package falls back to the thumbnail
+            suffix = Path(ep["cover_url"].split("?")[0]).suffix or ".jpg"
+            cv = fetch(ep["cover_url"], Path(d) / f"cover{suffix}")
+            cover_key = store.put_file(cv, f"videos/{video.id}/cover_v{n}{suffix}")
     vv = VideoVersion(video_id=video.id, version=n, storage_key=key, thumbnail_key=thumb_key,
                       manifest={"source": "claude_higgsfield_run", "source_url": ep["video_url"],
+                                "cover_key": cover_key, "cover_url": ep.get("cover_url"),
                                 "episode_number": ep.get("number"), "credits_spent": ep.get("credits_spent"),
                                 "sources": ep.get("sources", []),
                                 "rights": [{"asset": "Higgsfield generations (video, images, narration)",

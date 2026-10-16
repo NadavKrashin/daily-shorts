@@ -270,3 +270,43 @@ def test_owner_cancelled_job_is_not_revived(session, cfg):
     pj.status = "cancelled"
     session.commit()
     assert pub.catch_up_platforms(session, get_config(session)) == []
+
+
+def test_post_text_merges_dedupes_and_caps_hashtags():
+    tags = ["#shorts", "#traffic", "#science", "#physics", "#claymation", "#cars"]
+    cap = "The jam with no cause. #shorts #traffic #science #physics #claymation"
+    tt = ad.post_text(cap, tags, "tiktok")
+    assert tt == "The jam with no cause.\n\n#traffic #science #physics #claymation #cars"
+    yt = ad.post_text(cap, tags, "youtube")
+    assert yt.split("\n\n")[1].split() == ["#shorts", "#traffic", "#science", "#physics", "#claymation"]
+    assert ad.post_text("Plain caption", [], "instagram") == "Plain caption"
+
+
+def test_tiktok_package_has_portrait_cover_and_five_tags(session, cfg, tmp_path):
+    import io
+    import zipfile
+
+    from fastapi.testclient import TestClient
+    from PIL import Image
+
+    from waitwhy.api.app import app
+    from waitwhy.providers import registry
+    v = f.ready_video(session, cfg)
+    store = registry.storage(cfg)
+    thumb = tmp_path / "thumb.png"
+    Image.new("RGB", (5504, 3072), (90, 160, 220)).save(thumb)
+    vv = session.get(f.VideoVersion, v.current_version_id)
+    vv.thumbnail_key = store.put_file(thumb, f"videos/{v.slug}/thumb.png")
+    v.publish_metadata = {**v.publish_metadata, "tiktok_caption": "Why jams happen. #shorts #traffic #science",
+                          "hashtags": ["#shorts", "#traffic", "#science", "#physics", "#claymation", "#cars"]}
+    pub.schedule_video(session, get_config(session), v, "test")
+    session.commit()
+    pj = session.query(PublicationJob).filter_by(platform="tiktok").one()
+    r = TestClient(app).get(f"/publications/{pj.id}/package", auth=("ceo", "test-pass"))
+    assert r.status_code == 200
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    cover = Image.open(io.BytesIO(z.read("cover.jpg")))
+    assert cover.size == (1080, 1920) and cover.format == "JPEG" and len(z.read("cover.jpg")) < 2_000_000
+    caption = z.read("caption.txt").decode()
+    tags = caption.split("\n\n")[1].split()
+    assert len(tags) == 5 and "#shorts" not in tags and len(set(tags)) == 5

@@ -115,6 +115,11 @@ dashboard Agents page. Never claim it is live without checking.
 - Alerts: `notifications.channels` is `[log, telegram]`. Telegram works once the owner runs
   `scripts/telegram_setup.py` on the Mac (until then the telegram channel just logs "not configured").
   TikTok "Action needed" alerts link to `dashboard_url`/calendar.
+- Captions: `publishing.adapters.post_text` builds every platform's caption: tags already in the
+  caption are merged, duplicates dropped, at most 5 tags, `#shorts` only on YouTube. (Before
+  2026-10-16 the TikTok package and Instagram doubled the tags.) The TikTok package's `cover.jpg` is a
+  1080x1920 JPEG: the episode's `cover_url` if the run made one, else the landscape thumbnail
+  letterboxed on a blurred copy (`publishing/cover.py`).
 - TikTok: the owner posts by hand from the dashboard's download package (owner's choice,
   2026-10-16). Automatic posting via Upload-Post (Basic plan, $24/mo then) is the chosen future option
   once the channel earns money. The comparison and switch steps are in `docs/setup-guide.md` → TikTok.

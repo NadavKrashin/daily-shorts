@@ -124,11 +124,16 @@ follow them, except where this file says otherwise.
    writes overlay previews: composite and look at one per overlay, fix overlaps or wrong timing, then run
    it without `--still` (background, about 2 minutes) and PUT `final_v.mp4` as the episode video.
    It fails loudly if an `at`/`until` phrase is not in the captions.
-7. **Thumbnail.** Follow `thumbnail-generation` with the faceless Phase-8b handoff (non-photoreal clay
-   medium, people-free, one variant). Verify the baked text. Upload it.
+7. **Thumbnail and cover.** Follow `thumbnail-generation` with the faceless Phase-8b handoff
+   (non-photoreal clay medium, people-free, one variant). Verify the baked text. Upload it.
+   Also make a **9:16 cover** for TikTok and Reels: same scene and hook text, composed for portrait
+   (text in the upper-middle third, clear of the bottom 20% where the app's buttons sit). Export it as a
+   1080x1920 JPEG under 2 MB, verify the text letter for letter, upload it, and record it as `cover_url`.
+   TikTok rejected episode 1's 25 MB landscape PNG; the app's fallback letterboxes the thumbnail.
 8. **Record.** Append the episode to `channel/episodes.json` in episode 1's shape: urls, credits spent
    (balance before minus after), sources, known issues, `category`, `description` and `hashtags`
-   (yt-seo rules), `caption`, and `checks` with `narration_strict`, `captions` and `visual_review`
+   (yt-seo rules; at most 5, as TikTok allows no more; the app keeps `#shorts` for YouTube only and
+   drops it elsewhere), `caption`, `cover_url`, and `checks` with `narration_strict`, `captions` and `visual_review`
    set to `passed` only if that check really ran and passed. Use status `produced_not_published`. The
    app's `import_episodes` job picks it up from there, runs its own technical QC, and publishes on the
    schedule once platforms are connected. Update `HANDOFF.md` (latest episode, credits left, any new
