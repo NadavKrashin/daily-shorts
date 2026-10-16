@@ -24,7 +24,7 @@
   {
    "n": 1,
    "arc_role": "hook",
-   "vo_line": "Your eyesight contains a permanent, invisible hole. Nobody notices, yet it's considerably wider than ten moons, and here's why you'll never see it.",
+   "vo_line": "Each of your eyes has a blind spot. There's an area in your vision where you see absolutely nothing, and you've never noticed.",
    "location": "loc_test_card",
    "through_line_state": "the red dot sits bright on the cream test card beside the cross, then sinks out of sight",
    "shots": [
@@ -44,30 +44,16 @@
    "overlays": [
     {
      "type": "card",
-     "text": "A *HOLE* IN\nYOUR EYESIGHT",
-     "at": "invisible hole",
-     "until": "considerably wider"
-    },
-    {
-     "type": "field",
-     "mode": "moons",
-     "title": "*10+* MOONS WIDE",
-     "at": "considerably wider",
-     "until": "and here's why",
-     "y": 0.24
-    },
-    {
-     "type": "card",
-     "text": "HERE'S *WHY*",
-     "at": "and here's why",
-     "dur": "rest"
+     "text": "A patch where you\nsee *nothing*",
+     "at": "an area in your vision",
+     "until": "and you've never"
     }
    ]
   },
   {
    "n": 2,
    "arc_role": "build",
-   "vo_line": "The explanation sits at the back of each eyeball, where the optic nerve departs through a circular disc containing absolutely no light-detecting photoreceptors.",
+   "vo_line": "Behind each eyeball, your optic nerve connects to your brain, and where it attaches, there are no light sensors, so it's blind.",
    "location": "loc_eye_cutaway",
    "through_line_state": "a small red bead, the red dot's light, rolls into the eye and lands on the pale disc where nothing responds",
    "shots": [
@@ -86,14 +72,8 @@
    "overlays": [
     {
      "type": "card",
-     "text": "OPTIC NERVE\n*EXITS* HERE",
-     "at": "where the optic nerve",
-     "until": "containing absolutely"
-    },
-    {
-     "type": "card",
-     "text": "*ZERO* LIGHT\nDETECTORS",
-     "at": "containing absolutely",
+     "text": "No light sensors,\nso it's *blind*",
+     "at": "there are no light sensors",
      "dur": "rest"
     }
    ]
@@ -101,7 +81,7 @@
   {
    "n": 3,
    "arc_role": "build",
-   "vo_line": "Centuries ago, the French scientist Edme Mariotte reported it after a white spot vanished while his single open eye stared elsewhere.",
+   "vo_line": "Centuries ago, French scientist Edme Mariotte discovered it. With one eye covered, he watched a small white spot on the wall completely disappear.",
    "location": "loc_study_room",
    "through_line_state": "the red dot is the mark being stared at; the white spot beside it disappears",
    "shots": [
@@ -119,27 +99,16 @@
    "overlays": [
     {
      "type": "card",
-     "text": "EDME MARIOTTE\n*FRANCE*",
-     "at": "centuries ago",
-     "until": "after a white spot"
-    },
-    {
-     "type": "chain",
-     "steps": [
-      "ONE EYE\nOPEN",
-      "STARE AT\nONE SPOT",
-      "THE OTHER\nVANISHES"
-     ],
-     "at": "after a white spot",
-     "gap": 1.2,
-     "dur": "rest"
+     "text": "Edme *Mariotte*\nfound it first",
+     "at": "french scientist",
+     "until": "with one eye"
     }
    ]
   },
   {
    "n": 4,
    "arc_role": "build",
-   "vo_line": "Cover your left eye, concentrate on a cross, and a red dot positioned fifteen degrees rightward lands directly on that disc, disappearing completely.",
+   "vo_line": "Try it. Cover your left eye, focus on a cross, then gradually move closer, and a red dot to the right eventually disappears.",
    "location": "loc_field_board",
    "through_line_state": "the red dot sits inside the dashed oval on the board and fades away",
    "shots": [
@@ -158,23 +127,10 @@
    "direction_note": "The eyeball only moves forward, toward the board. The red dot is always to the RIGHT of the cross.",
    "overlays": [
     {
-     "type": "card",
-     "text": "COVER YOUR\n*LEFT* EYE",
-     "at": "cover your left eye",
-     "until": "fifteen degrees"
-    },
-    {
-     "type": "stat",
-     "text": "15°",
-     "label": "TO THE *RIGHT*",
-     "at": "fifteen degrees",
-     "until": "lands directly"
-    },
-    {
      "type": "field",
      "mode": "test",
-     "title": "THE DOT *VANISHES*",
-     "at": "lands directly on that disc",
+     "title": "Try it: the dot *vanishes*",
+     "at": "cover your left eye",
      "dur": "rest",
      "y": 0.24
     }
@@ -183,7 +139,7 @@
   {
    "n": 5,
    "arc_role": "turn",
-   "vo_line": "Here's the surprise: your brain never displays emptiness. It paints the gap using surrounding colours and patterns, so missing details look completely ordinary.",
+   "vo_line": "Here's the surprise: you never actually see a dark hole. Your brain fills the gap with whatever surrounds it, like stripes or sky.",
    "location": "loc_striped_wall",
    "through_line_state": "the red dot pops out leaving a dark hole, and the stripes are rolled over it until nothing is missing",
    "shots": [
@@ -201,16 +157,10 @@
    "direction_note": "The roller moves only left to right, on its own.",
    "overlays": [
     {
-     "type": "card",
-     "text": "HERE'S THE\n*SURPRISE*",
-     "at": "here's the surprise",
-     "until": "it paints the gap"
-    },
-    {
      "type": "field",
      "mode": "fill",
-     "title": "THE BRAIN *FILLS IT IN*",
-     "at": "it paints the gap",
+     "title": "Your brain *fills it in*",
+     "at": "your brain fills",
      "dur": "rest",
      "y": 0.24
     }
@@ -219,7 +169,7 @@
   {
    "n": 6,
    "arc_role": "payoff",
-   "vo_line": "With both eyes open, each compensates for its partner's gap, and whenever one closes, your brain quietly invents whatever probably belongs there.",
+   "vo_line": "So with both eyes open, each one covers the other's blind spot, and when one closes, your brain invents whatever probably belongs there.",
    "location": "loc_window_desk",
    "through_line_state": "with both eyeballs uncovered the red dot stays bright on the card",
    "shots": [
@@ -239,14 +189,14 @@
    "overlays": [
     {
      "type": "card",
-     "text": "BOTH EYES OPEN:\n*NO* GAP",
-     "at": "with both eyes",
-     "until": "and whenever one"
+     "text": "Both eyes open:\n*no gap*",
+     "at": "so with both eyes",
+     "until": "and when one closes"
     },
     {
      "type": "card",
-     "text": "ONE EYE CLOSED:\nTHE BRAIN *INVENTS*",
-     "at": "and whenever one",
+     "text": "One eye closed:\nyour brain *invents it*",
+     "at": "and when one closes",
      "dur": "rest"
     }
    ]
@@ -258,8 +208,7 @@
   "https://doi.org/10.1038/nrn1869",
   "https://pubmed.ncbi.nlm.nih.gov/17574069/",
   "https://www.encyclopedia.com/people/science-and-technology/physics-biographies/edme-mariotte",
-  "https://en.wikipedia.org/wiki/Blind_spot_(vision)",
-  "https://www.astronomy.com/?p=44220"
+  "https://en.wikipedia.org/wiki/Blind_spot_(vision)"
  ],
  "palette_lock": "painted sky-blue backdrop with cotton-wool clouds, cream, warm sand, grass green and wooden-brown clay; signal red ONLY on the red clay dot"
 }

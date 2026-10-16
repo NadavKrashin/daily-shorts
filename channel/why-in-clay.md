@@ -16,18 +16,28 @@ worked example: copy its file shapes.
 | Palette | sky blue, grass green, warm sand, cream; ONE signal-red accent reserved for the episode's through-line prop and warning marks |
 | Narrator | **Kevin**, `voice_id f1373f24-3b96-433f-9a68-e595810ef608`, `voice_type preset`, model `text2speech_v2` variant `elevenlabs` |
 | Prompt format (every line) | `[curious] {line}`: one plain tag, nothing else (`[excited]` made Kevin rush past the rate limit). Descriptive brackets and per-line moods get SPOKEN by this voice (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
-| Captions | bottom centre, sentence case, max 4 words a cue: `subtitle_paper_burn.py --style bold --no-caps --font-key montserrat --stroke-frac 0.045 --profile faceless` |
-| On-screen text + diagrams | `channel/tools/overlays.py`: cream paper cards (Montserrat ExtraBold, ink brown, signal-red key word), count-up stats, cause-and-effect chains and animated diagrams, all in the upper third and timed to the spoken words. The clay scenes themselves stay text-free (video models garble letters) |
+| Captions | large and raised clear of the Shorts UI (owner, 2026-10-16: the old ones were too small and too low), sentence case, max 3 words and 16 characters a cue: `audio_to_captions.py ... --max-words 3 --max-chars 16`, then `subtitle_paper_burn.py --style bold --no-caps --font-key montserrat --stroke-frac 0.045 --profile default --single-line --fontsize-frac 0.040 --bottom-frac 0.32 --maxw-frac 0.72`. Use `--profile default`: the `faceless` profile pins captions at 83% height whatever `--bottom-frac` says. The tool picks ONE size for the whole video that fits the longest cue, so one long word ("photoreceptors") shrinks every caption; that is why cues are capped at 16 characters |
+| On-screen text + diagrams | `channel/tools/overlays.py`: torn-paper scraps with a wobbly edge and a slight tilt (not vector boxes), sentence case, ink brown with one signal-red key word; count-up stats, cause-and-effect chains and animated diagrams, all in the upper third and timed to the spoken words. About one per scene. The clay scenes themselves stay text-free (video models garble letters) |
 | Thumbnail | 16:9, `nano_banana_pro` 4k, clay medium, people-free, hook text 3-4 words baked in and checked letter for letter |
 
 ## Writing rules
 
-- **Kevin talks fast.** Write 21-23 words per scene line and prefer longer words ("accelerating",
-  "instructed", "noticeably") over short ones. Short-word lines read above the 2.9 words/second
-  limit and fail. Numbers are written as words.
+- **Plain, spoken words (owner, 2026-10-16).** Write the way you'd explain it to a friend. Never
+  reach for textbook or thesaurus words ("photoreceptors", "compensates", "considerably",
+  "positioned rightward") to slow Kevin down: episode 2's first cut sounded AI-written because of them.
+  Numbers are written as words.
+- **Kevin talks fast.** With 21-23 everyday words he lands at about 3.1-3.5 words/second and often
+  under 7.2 s of speech, so plain lines fail the timing gate. What works without sounding stiff:
+  names and everyday multi-syllable words ("centuries", "discovered", "completely", "eventually",
+  "gradually"), a list of short clauses, and one concrete detail more per line. A comma or full stop
+  barely slows him. A 3.1-3.3 words/second take is acceptable if the line is plain English; never
+  trade clarity for the 2.9 target.
 - **Hook (scene 1):** write five candidate first lines, score them with
   `python3 .claude/skills/yt-script/hookscore.py hooks.txt`, and use the best. Aim for a verdict
   above WEAK. The hook confirms the title and opens a question the viewer cannot close.
+  Clarity beats the score: a first-time viewer must understand the hook on one listen. No
+  comparison or number that needs explaining (episode 2's "wider than ten moons" confused the
+  owner); say the plain fact first ("Each of your eyes has a blind spot").
 - **Through-line:** one signal-red element that changes state in every scene and resolves in the
   payoff. It must be something the viewer already understands (brake lights, a warning sign, a
   thermometer) or something the narration names. Abstract symbols the voice never explains read as
@@ -39,12 +49,16 @@ worked example: copy its file shapes.
   text, and put the reverse motion in the negatives (episode 1 had a car reversing at 0:37).
 - **Arc:** hook (1), build (2-4), turn (5), payoff (6). The payoff answers the hook.
 - **On-screen text and diagrams (owner request, every episode):** give every block an `overlays`
-  list (format in the `overlays.py` docstring; episode 1 is the worked example). Aim for 2 per scene:
-  - the hook names the mystery in 2-5 words (`card`), with one red key word;
-  - every number the voice says gets a `stat` or a `card`, timed to that word;
-  - a mechanism gets a `chain` (cause, then effect, then result) or a diagram, at least once per episode;
-  - the turn states the surprise in a `card`; the payoff restates the answer in 3-6 words.
-  Text repeats or condenses the narration, never adds a new claim. Keep each card at 2 lines or fewer.
+  list (format in the `overlays.py` docstring; episode 2 is the worked example). About ONE per
+  scene; a card has to earn its place (owner, 2026-10-16: two or three echo cards per scene looked
+  templated and AI-made):
+  - the hook names the mystery in plain words (`card`);
+  - a number the voice says gets a `stat`;
+  - a mechanism gets a diagram or a `chain`, at least once per episode;
+  - the payoff restates the answer.
+  Skip cards that only echo the voice ("HERE'S WHY", "HERE'S THE SURPRISE"). Write cards in sentence
+  case, in words a person would say ("No light sensors, so it's blind", not "ZERO LIGHT
+  DETECTORS"), at most 2 short lines, one red key word. Text never adds a new claim.
   `ring` and `wave` are traffic-specific; for another topic, add a diagram type to `overlays.py` that
   is drawn from a real model or real numbers, or use cards and chains.
 - **Explanatory clay shots:** in build and turn blocks, use at least one diagram-like clay shot
@@ -102,6 +116,9 @@ follow them, except where this file says otherwise.
      names in a separate folder and pass it as `--voice-dir` with `--per-block`.
    - Lines with numbers align badly (Whisper writes digits). Add `--minimum-similarity 0.70` after
      confirming the take says the right words.
+   - Captions: the flags in Channel DNA (raised to about 68% height, large, `--profile default`).
+     Check one frame per scene: the caption must sit above the Shorts title/handle area and stay
+     clear of the right-hand buttons (inside the middle ~72% of the width).
    - `sandbox_exec` foreground calls time out at 60 s; run long work with `background:true` and poll.
    Inspect frames at a few cue midpoints before `media_confirm`.
 6b. **Overlays** (no credits): upload `channel/tools/overlays.py` and the manifest, then

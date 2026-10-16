@@ -100,7 +100,7 @@
     "visual_review": "passed"
    },
    "overlays": "14 text and diagram overlays drawn by channel/tools/overlays.py, including a new to-scale blind-spot diagram (`field`)",
-   "hold_reason": "Owner feedback 2026-10-16: captions too small and too low, cards look templated, narration stiff. Fix, then set status back to produced_not_published so the app imports it."
+   "hold_reason": "Owner feedback 2026-10-16: captions too small and too low, cards look templated, narration stiff, hook not understandable. Script, cards, captions and recipe are fixed (not yet rendered). Blocked on narration: Kevin reads plain wording too fast to fill the 10-second scenes (lines 1-2 come out at about 6.6-6.9 s, the assembler needs at least 7.2 s); waiting on the owner's choice. Set status back to produced_not_published only after the new cut is rendered."
   }
  ]
 }

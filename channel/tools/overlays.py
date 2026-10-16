@@ -35,6 +35,7 @@ import math
 import re
 import subprocess
 import sys
+import zlib
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -130,6 +131,31 @@ def fit_font(lines, px: int, max_w: float) -> ImageFont.FreeTypeFont:
     return font(px)
 
 
+def paper(d: ImageDraw.ImageDraw, box, seed: int, fill=CREAM, outline=EDGE, r: float = 30 * SS) -> None:
+    """A torn-paper scrap instead of a vector box: a rounded rectangle whose edge wobbles a little
+    (seeded, so every frame of a card is identical), with a soft shadow and a slightly darker rim."""
+    x0, y0, x1, y1 = box
+    rng = np.random.default_rng(seed)
+    pts = []
+    for (ax, ay, bx, by) in ((x0 + r, y0, x1 - r, y0), (x1, y0 + r, x1, y1 - r),
+                             (x1 - r, y1, x0 + r, y1), (x0, y1 - r, x0, y0 + r)):
+        n = max(4, int(math.hypot(bx - ax, by - ay) / (26 * SS)))
+        nx, ny = (by - ay), -(bx - ax)
+        ln = math.hypot(nx, ny) or 1
+        for i in range(n):
+            t = i / n
+            j = rng.uniform(-1, 1) * 5 * SS
+            pts.append((ax + (bx - ax) * t + nx / ln * j, ay + (by - ay) * t + ny / ln * j))
+    sh = [(x + 6 * SS, y + 12 * SS) for x, y in pts]
+    d.polygon(sh, fill=SHADOW)
+    d.polygon(pts, fill=fill, outline=outline, width=5 * SS)
+
+
+def tilt(img: Image.Image, seed: int, max_deg: float = 1.8) -> Image.Image:
+    deg = (seed % 1000) / 1000 * 2 * max_deg - max_deg
+    return img.rotate(deg, resample=Image.BICUBIC, expand=True)
+
+
 def card_sprite(text: str, W: int, px: int = 92, fill=CREAM, colour=INK, accent=RED, label: str = "",
                 label_px: int = 60, max_frac: float = 0.82) -> Image.Image:
     lines = rich_lines(text)
@@ -145,14 +171,14 @@ def card_sprite(text: str, W: int, px: int = 92, fill=CREAM, colour=INK, accent=
     img = Image.new("RGBA", (w + 20 * SS, h + 26 * SS), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     r = 38 * SS
-    d.rounded_rectangle((10 * SS, 22 * SS, w + 10 * SS, h + 22 * SS), r, fill=SHADOW)
-    d.rounded_rectangle((10 * SS, 8 * SS, w + 10 * SS, h + 8 * SS), r, fill=fill, outline=EDGE, width=7 * SS)
+    seed = zlib.crc32((text + label).encode())
+    paper(d, (10 * SS, 8 * SS, w + 10 * SS, h + 8 * SS), seed, fill=fill)
     cx = 10 * SS + w / 2
     draw_rich(d, lines, f, cx, 8 * SS + pad - f.size * 0.12, colour, accent)
     if lf:
         draw_rich(d, rich_lines(label), lf, cx, 8 * SS + pad + len(lines) * f.size * 1.12 + lf.size * 0.2,
                   colour, accent)
-    return img
+    return tilt(img, seed)
 
 
 def place(canvas: Image.Image, sprite: Image.Image, cx: float, cy: float, scale: float, alpha: float) -> None:
@@ -197,9 +223,7 @@ def panel(W: int, Hp: int, title: str, wfrac: float = 0.8, title_px: int = 58):
     w = int(W * wfrac)
     img = Image.new("RGBA", (w * SS, Hp * SS), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.rounded_rectangle((8 * SS, 20 * SS, w * SS - 8 * SS, Hp * SS - 2 * SS), 40 * SS, fill=SHADOW)
-    d.rounded_rectangle((8 * SS, 6 * SS, w * SS - 8 * SS, Hp * SS - 16 * SS), 40 * SS, fill=CREAM,
-                        outline=EDGE, width=7 * SS)
+    paper(d, (8 * SS, 6 * SS, w * SS - 8 * SS, Hp * SS - 16 * SS), zlib.crc32(title.encode()))
     lines = rich_lines(title)
     f = fit_font(lines, title_px * SS, (w - 120) * SS)
     draw_rich(d, lines, f, w * SS / 2, 34 * SS)
