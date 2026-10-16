@@ -109,3 +109,21 @@ Over the first day, confirm these three things:
   `s3://<bucket>/backups/`, so they survive if the Mac's disk fails.
 - After a power cut the Mac restarts, logs in, starts Docker and then the app. The scheduler runs any
   report or publish slot missed in the last 6 hours.
+
+## Native install (no Docker): automatic updates
+
+The Mac mini currently runs the app natively instead of in Docker: Homebrew Postgres, a venv in
+`~/daily-shorts/.venv`, and launchd services `co.whyinclay.api`, `co.whyinclay.worker` and
+`co.whyinclay.scheduler` in `~/Library/LaunchAgents/`. On that install, code updates deploy
+themselves:
+
+- `scripts/mac-mini-update.sh` runs every 15 minutes as the launchd service `co.whyinclay.update`.
+  It pulls `main` and compares it with the commit the services were last started from
+  (`.git/deployed-rev`).
+- Changes only to `channel/`, `docs/` or `.md` files: nothing to restart.
+- Any other change: reinstall the package if `pyproject.toml` changed, run migrations, then restart
+  api, worker and scheduler. The worker finishes its current job first. If the install or a migration
+  fails, the old version keeps running.
+- Install or refresh the service with `bash scripts/mac-mini-update.sh --install`. To deploy now
+  instead of waiting: `launchctl kickstart gui/$(id -u)/co.whyinclay.update`.
+- What each run did is in `~/daily-shorts/logs/update.log`.

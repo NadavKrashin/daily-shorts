@@ -34,8 +34,11 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
   - It runs **natively, not in Docker**:
     - Code: `~/daily-shorts`, on branch **`main`**.
     - Postgres: a Homebrew service that only accepts connections from the Mac itself.
-    - Four launchd services start at login and restart if they crash: dashboard (listens on localhost
-      only; Tailscale forwards to it), worker, scheduler, and `git pull` every 15 minutes.
+    - Three launchd services start at login and restart if they crash: dashboard (listens on localhost
+      only; Tailscale forwards to it), worker and scheduler.
+    - Code updates deploy themselves: every 15 minutes `scripts/mac-mini-update.sh` pulls `main` and,
+      if anything besides episodes or docs changed, migrates and restarts the services. A push to
+      `main` is live on the Mac within about 15 minutes. Details: `docs/deploy-mac-mini.md`.
     - Logs: `~/daily-shorts/logs/`.
   - A separate `whyinclay` folder on the Mac is an older copy on the other branch; it isn't used.
   - The owner's Cloudflare tunnel and studio.animoment.co.il are separate and must stay untouched.
