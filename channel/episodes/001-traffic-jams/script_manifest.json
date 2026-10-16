@@ -40,7 +40,21 @@
     "prop_blue_car"
    ],
    "audio": "soft clay squish as the camera pushes in, a low toy-engine hum bed, a soft brake squeak, a quick whoosh as the blue car pulls away",
-   "direction_note": "Every car in the jam is sand-beige; the cobalt-blue car is the only blue car. All cars face the same way and only move forward."
+   "direction_note": "Every car in the jam is sand-beige; the cobalt-blue car is the only blue car. All cars face the same way and only move forward.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "NO CRASH.\nNO *CAUSE*?",
+     "at": "has no cause",
+     "until": "no accident"
+    },
+    {
+     "type": "card",
+     "text": "*NO* ACCIDENT\n*NO* ROADWORK",
+     "at": "no accident",
+     "dur": "rest"
+    }
+   ]
   },
   {
    "n": 2,
@@ -60,7 +74,30 @@
     "prop_sand_car",
     "prop_blue_car"
    ],
-   "audio": "soft clay pops as cars drop onto the track one by one, a steady toy-engine hum bed, light ticking of turning wheels"
+   "audio": "soft clay pops as cars drop onto the track one by one, a steady toy-engine hum bed, light ticking of turning wheels",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "2008 · JAPAN",
+     "at": "in two thousand eight",
+     "until": "twenty-two cars"
+    },
+    {
+     "type": "stat",
+     "text": "22",
+     "label": "CARS ON A RING",
+     "at": "twenty-two cars",
+     "until": "instructed drivers"
+    },
+    {
+     "type": "ring",
+     "mode": "even",
+     "title": "TARGET: *30 KM/H*",
+     "at": "instructed drivers",
+     "dur": "rest",
+     "y": 0.25
+    }
+   ]
   },
   {
    "n": 3,
@@ -81,7 +118,26 @@
     "prop_sand_car"
    ],
    "audio": "a short squeaky brake scrape, a whoosh as the gap opens, a firm clay thud as the brake lights flare",
-   "direction_note": "All cars face the same way and only move forward."
+   "direction_note": "All cars face the same way and only move forward.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "SMOOTH...\nFOR *A MOMENT*",
+     "at": "smooth driving",
+     "until": "whenever one"
+    },
+    {
+     "type": "chain",
+     "steps": [
+      "ONE CAR\nEASES OFF",
+      "THE NEXT\nREACTS LATE",
+      "AND BRAKES\nHARDER"
+     ],
+     "at": "whenever one",
+     "gap": 2.0,
+     "dur": "rest"
+    }
+   ]
   },
   {
    "n": 4,
@@ -101,7 +157,23 @@
     "prop_sand_car"
    ],
    "audio": "rolling toy-engine rumble bed, quick ticks on each tail-light flare, a soft squeak of brakes, a bump thud on the full stop",
-   "direction_note": "Every car faces the same direction and only ever moves forward (nose first). No car ever reverses or moves backwards."
+   "direction_note": "Every car faces the same direction and only ever moves forward (nose first). No car ever reverses or moves backwards.",
+   "overlays": [
+    {
+     "type": "ring",
+     "mode": "jam",
+     "title": "A TINY WOBBLE *GROWS*",
+     "at": "every following driver",
+     "until": "complete stop",
+     "y": 0.25
+    },
+    {
+     "type": "card",
+     "text": "STOP-AND-GO\n*TRAFFIC WAVE*",
+     "at": "complete stop",
+     "dur": "rest"
+    }
+   ]
   },
   {
    "n": 5,
@@ -121,7 +193,29 @@
     "prop_red_strip",
     "prop_sand_car"
    ],
-   "audio": "soft sliding clay sounds as tokens climb, a slow sticky clay stretch as the strip slides back, a clay thud as the arrow lands"
+   "audio": "soft sliding clay sounds as tokens climb, a slow sticky clay stretch as the strip slides back, a clay thud as the arrow lands",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "HERE'S THE\n*SURPRISE*",
+     "at": "here's the surprise",
+     "until": "the wave travels"
+    },
+    {
+     "type": "wave",
+     "title": "THE JAM MOVES *BACKWARDS*",
+     "at": "the wave travels",
+     "until": "fifteen to twenty",
+     "y": 0.17
+    },
+    {
+     "type": "stat",
+     "text": "15–20",
+     "label": "KM/H *UPSTREAM*",
+     "at": "fifteen to twenty",
+     "dur": "rest"
+    }
+   ]
   },
   {
    "n": 6,
@@ -142,7 +236,21 @@
     "prop_sand_car"
    ],
    "audio": "calm toy-engine hum bed, a gentle whoosh of flowing cars, a soft settling click at the end",
-   "direction_note": "The lavender car is the smooth driver and is clearly visible in shots 1-3. All cars face the same way and only move forward."
+   "direction_note": "The lavender car is the smooth driver and is clearly visible in shots 1-3. All cars face the same way and only move forward.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "ONE SMOOTH DRIVER\nCAN *CALM* THE WAVE",
+     "at": "one smoothly driven car",
+     "until": "so the jam"
+    },
+    {
+     "type": "card",
+     "text": "THE CAUSE AND CURE:\n*YOU*",
+     "at": "so the jam",
+     "dur": "rest"
+    }
+   ]
   }
  ],
  "sources": [

@@ -125,6 +125,12 @@ def content_planning(session: Session, cfg: dict) -> dict:
     from waitwhy.pipeline import start_production
 
     inv = inventory(session)
+    if cfg.get("production_source", "app") == "claude_runs":
+        # Videos come from the scheduled Claude + Higgsfield runs and arrive via import_episodes;
+        # the built-in renderer and its paid research/script calls stay idle.
+        record_decision(session, "coo", "content_planning",
+                        "production_source=claude_runs: no in-app production started", output={"inventory": inv})
+        return {"inventory": inv, "actions": ["production handled by scheduled Claude runs"]}
     tgt = cfg["inventory_targets"]
     actions = []
     if inv["candidate_topics"] < tgt["candidate_topics"]:

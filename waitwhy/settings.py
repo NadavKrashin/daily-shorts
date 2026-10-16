@@ -18,7 +18,10 @@ from typing import Any
 import yaml
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-ROOT = Path(__file__).resolve().parent.parent
+# The project directory (config/, seeds/, migrations/, channel/). From a source checkout it is the
+# package's parent; an installed package (the Docker image runs `pip install .`) lives in
+# site-packages instead, so the image sets WAITWHY_ROOT=/app.
+ROOT = Path(os.environ.get("WAITWHY_ROOT") or Path(__file__).resolve().parent.parent)
 
 
 class Secrets(BaseSettings):
@@ -101,7 +104,9 @@ def _yaml_config(path: str) -> dict:
 
 
 def load_company_config(overrides: dict[str, Any] | None = None) -> dict:
-    cfg = _yaml_config(os.environ.get("COMPANY_CONFIG_PATH", secrets().company_config_path))
+    # A fresh copy each call: the YAML is cached, and callers (or the invariants below) must never
+    # mutate the cached dict for every later job in the process.
+    cfg = copy.deepcopy(_yaml_config(os.environ.get("COMPANY_CONFIG_PATH", secrets().company_config_path)))
     if overrides:
         cfg = _deep_merge(cfg, overrides)
     # Invariants that cannot be configured away.

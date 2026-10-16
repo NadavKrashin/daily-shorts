@@ -98,6 +98,20 @@ def cmd_report(a):
         print(reports.render_daily(f, reports.recommendations(f, cfg)))
 
 
+def cmd_import(a):
+    from pathlib import Path
+
+    from waitwhy import importer
+    from waitwhy.db import session_scope
+    from waitwhy.settings import get_config
+    with session_scope() as s:
+        cfg = get_config(s)
+        if a.pull:
+            print(importer.git_pull())
+        for slug, result in importer.import_all(s, cfg, Path(a.file) if a.file else None).items():
+            print(f"{slug}: {result}")
+
+
 def cmd_tick(_):
     from waitwhy.jobs import scheduler
     print("\n".join(scheduler.tick()))
@@ -142,6 +156,10 @@ def main(argv=None):
     a.add_argument("--notes", default="")
     a.add_argument("--user", default="owner")
     a.set_defaults(fn=cmd_approve)
+    im = sub.add_parser("import-episodes", help="import finished episodes from channel/episodes.json")
+    im.add_argument("--file", default="")
+    im.add_argument("--pull", action="store_true", help="git pull --ff-only first")
+    im.set_defaults(fn=cmd_import)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("tick", help="enqueue due scheduled jobs once").set_defaults(fn=cmd_tick)
     sub.add_parser("backup").set_defaults(fn=cmd_backup)

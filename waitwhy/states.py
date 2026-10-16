@@ -39,7 +39,8 @@ class S(str, enum.Enum):
 _SIDE = {S.NEEDS_REVISION, S.BLOCKED, S.FAILED, S.CANCELLED}
 
 TRANSITIONS: dict[S, set[S]] = {
-    S.IDEA: {S.RESEARCHING},
+    S.IDEA: {S.RESEARCHING, S.QUALITY_CHECK},             # QUALITY_CHECK = finished episode imported
+                                                          # from a production run (waitwhy/importer.py)
     S.RESEARCHING: {S.RESEARCH_APPROVED},
     S.RESEARCH_APPROVED: {S.SCRIPTING},
     S.SCRIPTING: {S.SCRIPT_APPROVED},
@@ -55,7 +56,8 @@ TRANSITIONS: dict[S, set[S]] = {
     S.PUBLISHED: {S.ANALYZING},
     S.ANALYZING: set(),
     # Repair loop: a revision re-enters the pipeline at the earliest affected stage.
-    S.NEEDS_REVISION: {S.RESEARCHING, S.SCRIPTING, S.STORYBOARDING, S.GENERATING, S.EDITING},
+    S.NEEDS_REVISION: {S.RESEARCHING, S.SCRIPTING, S.STORYBOARDING, S.GENERATING, S.EDITING,
+                       S.QUALITY_CHECK},                  # QUALITY_CHECK = a new imported cut
     S.BLOCKED: set(),      # resumes to state_before_block (see unblock)
     S.FAILED: {S.RESEARCHING, S.SCRIPTING, S.STORYBOARDING, S.GENERATING, S.EDITING, S.QUALITY_CHECK},
     S.CANCELLED: set(),

@@ -2,7 +2,9 @@
 
 > **Now produced with Higgsfield.** Episodes are made by scheduled Claude runs following
 > [`channel/why-in-clay.md`](channel/why-in-clay.md) (Claymotion look, Kevin narration). This app handles approvals,
-> publishing, analytics and reports, and runs in autonomous mode (`config/company.yaml`).
+> publishing, analytics and reports, and runs in autonomous mode (`config/company.yaml`): its
+> `import_episodes` job picks up each finished episode from `channel/episodes.json`. What only the owner can
+> do (accounts, server, credits) is listed in [docs/setup-guide.md](docs/setup-guide.md).
 
 *The world is weirder than you think.* A production-minded system that discovers topics, researches and
 fact-checks them, writes scripts, storyboards scenes, renders 60-second vertical animated explainers, runs

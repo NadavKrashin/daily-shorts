@@ -15,6 +15,8 @@ COPY seeds ./seeds
 COPY scripts ./scripts
 RUN useradd -m -u 10001 app && mkdir -p /data/media /backups && chown -R app /data /backups /app
 USER app
-ENV STORAGE_LOCAL_ROOT=/data/media BACKUP_DIR=/backups
+# The package is installed into site-packages; point it at the project files copied above.
+# channel/ (the episode log written by the production runs) is mounted by docker-compose.
+ENV WAITWHY_ROOT=/app STORAGE_LOCAL_ROOT=/data/media BACKUP_DIR=/backups
 HEALTHCHECK --interval=30s --timeout=5s CMD curl -fs http://localhost:8000/healthz || exit 1
 CMD ["waitwhy", "api"]

@@ -8,7 +8,7 @@
    "thumbnail_hook": "The Jam With No Cause",
    "produced_on": "2026-10-15",
    "status": "produced_not_published",
-   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/5ad033e8-5d2e-42bb-862e-ac6f79be8c86.mp4",
+   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/e3fa913d-9646-4721-9e23-5613ac164da4.mp4",
    "thumbnail_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/5df59c23-26b6-4eea-8f0e-bafa47bfd13a.png",
    "credits_spent": 255.35,
    "sources": [
@@ -23,7 +23,8 @@
    ],
    "superseded_video_urls": [
     "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/c9c976a4-05ac-498e-b5f7-9b1c24d07476.mp4",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/a548f119-f2e8-4719-97b9-6efccec1ae6e.mp4"
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/a548f119-f2e8-4719-97b9-6efccec1ae6e.mp4",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/5ad033e8-5d2e-42bb-862e-ac6f79be8c86.mp4"
    ],
    "fixed_after_owner_review": [
     "Lines 2, 4 and 5 had tone-instruction words spoken aloud ('Matter', 'Mezder', 'Supposed to you'); regenerated with a plain [curious] tag and checked with channel/tools/check_takes.py",
@@ -31,9 +32,26 @@
     "Scene 4: car was reversing (0:37); regenerated with every car moving forward",
     "Scenes 1, 3 and 6: removed the remaining unexplained red dots; the through-line is now the brake lights on the sand car",
     "Scene 1: the jam is all sand-coloured cars (no stray blue or lavender cars)",
-    "Scene 6: the lavender car is the smooth driver"
+    "Scene 6: the lavender car is the smooth driver",
+    "Added on-screen explanatory text and diagrams (owner request): key-point cards, a cause-and-effect chain, a ring-road diagram where the jam forms, and a lane diagram showing the jam moving backwards"
    ],
-   "credits_note": "195.35 for the first cut; about 60 more for owner-reported fixes (scenes 1, 3 and 6 regenerated), allowed past the 200 cap by CLAUDE.md"
+   "credits_note": "195.35 for the first cut; about 60 more for owner-reported fixes (scenes 1, 3 and 6 regenerated), allowed past the 200 cap by CLAUDE.md",
+   "category": "everyday_mysteries",
+   "description": "Why do traffic jams appear when there's no accident? In a 2008 experiment, 22 cars driving in a circle formed a stop-and-go jam all by themselves. Here's how one small tap of the brakes grows into a wave that travels backwards, and how one smooth driver can calm it.",
+   "caption": "The traffic jam with no cause, explained in clay.",
+   "hashtags": [
+    "#shorts",
+    "#traffic",
+    "#science",
+    "#physics",
+    "#claymation"
+   ],
+   "checks": {
+    "narration_strict": "passed",
+    "captions": "passed",
+    "visual_review": "passed"
+   },
+   "overlays": "13 text and diagram overlays drawn by channel/tools/overlays.py (no credits)"
   }
  ]
 }

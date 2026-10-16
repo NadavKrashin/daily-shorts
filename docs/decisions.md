@@ -31,3 +31,26 @@
 * The traffic script originally said jams drift backwards at "15 km/h". The primary source (Sugiyama 2008) reports
   about **20 km/h**; highway studies report about 15 ± 5 km/h. The script now says "roughly fifteen to twenty", and the
   fact sheet records all three sources.
+
+## D-015 On-screen text and diagrams are drawn in code, over the clay scenes (2026-10-16)
+The owner asked for more text and explanatory animation. Video models garble lettering, so the clay
+scenes stay text-free. `channel/tools/overlays.py` draws cards, count-up stats, cause-and-effect chains
+and diagrams, timed to the narration through the caption timings. It costs no credits, every word is
+spelled exactly, and the traffic diagrams come from a real car-following model (optimal velocity,
+Bando et al. 1995) rather than hand-drawn motion.
+
+## D-016 The app imports episodes instead of producing them (2026-10-16)
+`production_source: claude_runs` keeps the built-in research/script/render pipeline idle. The
+`import_episodes` job (every 30 min) turns `channel/episodes.json` entries into videos:
+- technical QC with the same ffprobe checks as before, against the episode format (1440x2560, 24 fps, -16 LUFS);
+- the run's own recorded checks (strict narration, captions, frame-strip review) must say `passed`;
+- the same auto-approval gate as before (QC passed, score of at least 90, autonomous mode), then scheduling.
+
+A new cut replaces a version only before approval. A late cut raises an alert instead of swapping a
+scheduled video.
+
+## D-017 Higgsfield output rights (2026-10-16)
+Higgsfield's help center (checked 2026-10-16) says users own their outputs and the Terms of Use
+(section 4.4) don't restrict commercial use, on any plan. The account is on the paid Plus plan.
+Recorded as `episodes.higgsfield_commercial_use_confirmed: true`; setting it to `false` blocks publishing.
+

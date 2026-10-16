@@ -104,6 +104,15 @@ def h_tick(session: Session, job: WorkflowJob):
     return coo.production_tick(session, get_config(session))
 
 
+@handler("import_episodes")
+def h_import(session: Session, job: WorkflowJob):
+    from waitwhy import importer
+    cfg = get_config(session)
+    if cfg.get("episodes", {}).get("git_pull"):
+        importer.git_pull()
+    return importer.import_all(session, cfg)
+
+
 @handler("publish_due")
 def h_publish_due(session: Session, job: WorkflowJob):
     from waitwhy.agents import coo

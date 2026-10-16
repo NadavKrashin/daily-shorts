@@ -115,8 +115,14 @@ def stage_edit(session: Session, cfg: dict, video: Video, job_id=None) -> dict:
 def stage_qc(session: Session, cfg: dict, video: Video, job_id=None) -> dict:
     _enter(session, video, S.QUALITY_CHECK, AGENT)
     review = qc.run(session, cfg, video, job_id)
+    return after_qc(session, cfg, video, review)
+
+
+def after_qc(session: Session, cfg: dict, video: Video, review, actor: str = "agent:qc") -> dict:
+    """Act on a QC review: failed -> NEEDS_REVISION; passed -> auto-approve and schedule (autonomous
+    mode) or ask the owner. Shared by the in-app pipeline and imported episodes."""
     if not review.passed:
-        transition(session, video, S.NEEDS_REVISION, "agent:qc", "; ".join(review.blocking_issues)[:900])
+        transition(session, video, S.NEEDS_REVISION, actor, "; ".join(review.blocking_issues)[:900])
         alert(session, "low", "quality", f"QC failed: {video.title}", "\n".join(review.blocking_issues),
               dedupe_key=f"qc:{video.id}:{review.id}", video_id=video.id)
         return {"passed": False, "blocking": review.blocking_issues}
@@ -130,7 +136,7 @@ def stage_qc(session: Session, cfg: dict, video: Video, job_id=None) -> dict:
         session.add(Approval(video_id=video.id, kind="publication", status="pending", target_type="video_version",
                              target_id=str(video.current_version_id),
                              reason=f"QC passed (score {review.score}). {review.notes}"))
-        transition(session, video, S.READY_FOR_REVIEW, "agent:qc", "awaiting human approval")
+        transition(session, video, S.READY_FOR_REVIEW, actor, "awaiting human approval")
     return {"passed": True, "score": review.score, "notes": review.notes}
 
 

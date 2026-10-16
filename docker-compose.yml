@@ -9,6 +9,9 @@ x-app: &app
   volumes:
     - media:/data/media
     - backups:/backups
+    # The episode log pushed by the scheduled production runs. Keep it current on the host with
+    # `git pull` (see docs/deployment.md); the import_episodes job reads it every 30 minutes.
+    - ./channel:/app/channel:ro
   depends_on:
     db: {condition: service_healthy}
   restart: unless-stopped

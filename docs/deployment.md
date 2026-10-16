@@ -55,7 +55,25 @@ as a release command. Keep exactly one scheduler. Extra schedulers are harmless 
 Python 3.12+, FFmpeg ≥ 6 with libass, Postgres 16, Inter font. `pip install .`, then run the three processes
 under systemd. Same commands as above.
 
+### Episodes from the production runs
+The scheduled Claude runs push each finished episode to `channel/episodes.json` on the branch
+`claude/happy-cannon-dzuzwj`. Compose mounts `./channel` into the containers read-only, and the
+`import_episodes` job reads it every 30 minutes, so the host checkout must stay current:
+
+```bash
+( crontab -l; echo '*/15 * * * * git -C ~/daily-shorts pull --ff-only -q' ) | crontab -
+```
+
+The server needs read access to the private repository (a read-only deploy key). To import by hand:
+`docker compose exec worker waitwhy import-episodes`. Without Docker, set `episodes.git_pull: true`
+instead and the job runs `git pull --ff-only` itself.
+
 ## Status of this deployment
 The Compose file and Dockerfile are written but were **not executed in the build environment** (no Docker daemon
-there). The application itself was run and tested natively against PostgreSQL 16 and FFmpeg 6.1. Run
-`docker compose up --build` once on your server and check `/healthz` before relying on it.
+there). What was checked on 2026-10-16:
+- The app was run and tested natively against PostgreSQL 16 and FFmpeg 6.1.
+- The image's install layout (package in site-packages, `WAITWHY_ROOT=/app`) was simulated: `migrate`,
+  `init` and `import-episodes` all ran. Without `WAITWHY_ROOT` the migrate step failed, which is the bug
+  the variable fixes.
+
+Run `docker compose up --build` once on your server and check `/healthz` before relying on it.

@@ -32,6 +32,21 @@ target_cost_per_video_usd: 20
 max_cost_per_video_usd: 35            # per-video ceiling; exceeding pauses that video for approval
 budget_alert_thresholds: [0.5, 0.8, 0.95]
 max_generation_retries_per_scene: 2
+# --- Where videos come from ------------------------------------------------------
+# claude_runs: scheduled Claude + Higgsfield runs make each episode (channel/why-in-clay.md) and list it
+# in channel/episodes.json; the import_episodes job brings it into QC -> approval -> publishing.
+# app: the built-in research/script/render pipeline (needs ANTHROPIC + ELEVENLABS keys).
+production_source: claude_runs
+episodes:
+  file: channel/episodes.json
+  git_pull: false                     # set true on the server so each import first runs `git pull --ff-only`
+  video: {width: 1440, height: 2560, fps: 24, target_loudness_lufs: -16}
+  # Checked 2026-10-16: Higgsfield's help center ("Who owns my generations and can I use them
+  # commercially?") says outputs belong to the user and Terms of Use section 4.4 does not restrict
+  # commercial use, on any plan. Account plan: plus (paid, watermark-free). Set false to block publishing
+  # if the terms change.
+  higgsfield_commercial_use_confirmed: true
+
 max_ai_scenes_per_video: 4            # cost guard: everything else is deterministic motion graphics
 
 # --- Autonomy & safety ----------------------------------------------------------
@@ -66,6 +81,7 @@ schedules:
   publish_due:       {cron: "*/5 * * * *"}
   recover_stalled:   {cron: "*/5 * * * *"}
   production_tick:   {cron: "15 * * * *"}
+  import_episodes:   {cron: "*/30 * * * *"}   # pick up episodes pushed by the scheduled Claude runs
   db_backup:         {cron: "30 3 * * *"}
 
 # Publication slots are expressed in the AUDIENCE timezone, not the owner's.

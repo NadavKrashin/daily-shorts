@@ -17,6 +17,7 @@ worked example: copy its file shapes.
 | Narrator | **Kevin**, `voice_id f1373f24-3b96-433f-9a68-e595810ef608`, `voice_type preset`, model `text2speech_v2` variant `elevenlabs` |
 | Prompt format (every line) | `[curious] {line}`: one plain tag, nothing else (`[excited]` made Kevin rush past the rate limit). Descriptive brackets and per-line moods get SPOKEN by this voice (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
 | Captions | bottom centre, sentence case, max 4 words a cue: `subtitle_paper_burn.py --style bold --no-caps --font-key montserrat --stroke-frac 0.045 --profile faceless` |
+| On-screen text + diagrams | `channel/tools/overlays.py`: cream paper cards (Montserrat ExtraBold, ink brown, signal-red key word), count-up stats, cause-and-effect chains and animated diagrams, all in the upper third and timed to the spoken words. The clay scenes themselves stay text-free (video models garble letters) |
 | Thumbnail | 16:9, `nano_banana_pro` 4k, clay medium, people-free, hook text 3-4 words baked in and checked letter for letter |
 
 ## Writing rules
@@ -37,6 +38,17 @@ worked example: copy its file shapes.
 - **Direction of travel:** for anything that moves, state which way it faces and moves in the shot
   text, and put the reverse motion in the negatives (episode 1 had a car reversing at 0:37).
 - **Arc:** hook (1), build (2-4), turn (5), payoff (6). The payoff answers the hook.
+- **On-screen text and diagrams (owner request, every episode):** give every block an `overlays`
+  list (format in the `overlays.py` docstring; episode 1 is the worked example). Aim for 2 per scene:
+  - the hook names the mystery in 2-5 words (`card`), with one red key word;
+  - every number the voice says gets a `stat` or a `card`, timed to that word;
+  - a mechanism gets a `chain` (cause, then effect, then result) or a diagram, at least once per episode;
+  - the turn states the surprise in a `card`; the payoff restates the answer in 3-6 words.
+  Text repeats or condenses the narration, never adds a new claim. Keep each card at 2 lines or fewer.
+  `ring` and `wave` are traffic-specific; for another topic, add a diagram type to `overlays.py` that
+  is drawn from a real model or real numbers, or use cards and chains.
+- **Explanatory clay shots:** in build and turn blocks, use at least one diagram-like clay shot
+  (a clay chart board, a cutaway, arrows stamped in clay) as in episode 1's scene 5, with no letters.
 - **Facts:** every claim traces to a primary or reputable source found this run. Put the URLs in
   the manifest's `sources`. Prefer "roughly" over a false-precise number. Never invent a figure,
   study or quote. Skip topics with any `risk_flags`.
@@ -92,10 +104,19 @@ follow them, except where this file says otherwise.
      confirming the take says the right words.
    - `sandbox_exec` foreground calls time out at 60 s; run long work with `background:true` and poll.
    Inspect frames at a few cue midpoints before `media_confirm`.
+6b. **Overlays** (no credits): upload `channel/tools/overlays.py` and the manifest, then
+   `python3 overlays.py script_manifest.json work/output/final.words.json work/output/final.mp4 final_v.mp4 --still T ...`
+   writes overlay previews: composite and look at one per overlay, fix overlaps or wrong timing, then run
+   it without `--still` (background, about 2 minutes) and PUT `final_v.mp4` as the episode video.
+   It fails loudly if an `at`/`until` phrase is not in the captions.
 7. **Thumbnail.** Follow `thumbnail-generation` with the faceless Phase-8b handoff (non-photoreal clay
    medium, people-free, one variant). Verify the baked text. Upload it.
-8. **Record.** Append the episode to `channel/episodes.json` (urls, credits spent = balance before
-   minus after, sources, known issues). Commit `channel/` and push to the working branch.
+8. **Record.** Append the episode to `channel/episodes.json` in episode 1's shape: urls, credits spent
+   (balance before minus after), sources, known issues, `category`, `description` and `hashtags`
+   (yt-seo rules), `caption`, and `checks` with `narration_strict`, `captions` and `visual_review`
+   set to `passed` only if that check really ran and passed. Use status `produced_not_published`. The
+   app's `import_episodes` job picks it up from there, runs its own technical QC, and publishes on the
+   schedule once platforms are connected. Commit `channel/` and push to the working branch.
 9. **Report** in the final message: the video and thumbnail links, title, description draft
    (`yt-seo` rules), the sources, what failed and was fixed, and credits spent and remaining.
 
