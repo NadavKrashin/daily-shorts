@@ -15,7 +15,9 @@ into chat: put them in `.env` on the server.
 
 - Episodes are made in their own Claude Code session, **"Why in Clay: episode production"**. Your
   normal chats are separate, so you can archive them freely.
-- Don't archive the production session. The scheduled task "Why in Clay episode" fires into it.
+- Don't archive the production session (the one titled "Why in Clay: episode production", created
+  2026-10-16 18:40 UTC). The scheduled task "Why in Clay episode" fires into it. The older session
+  titled "old production session (retired)" can be archived.
 - Keep its permission mode on **Auto**, as it is now. A tool-approval prompt with nobody there stalls
   the run.
 

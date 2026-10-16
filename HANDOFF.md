@@ -24,20 +24,25 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
   - All four problems the owner reported are fixed: spoken words at 0:11 and 0:31, a red dot at 0:17
     and a reversing car at 0:37.
   - v5 adds 14 on-screen text and diagram overlays (owner request: "more text and explanatory animations").
-- **Production is automatic.** The scheduled task `trig_0182qs4pQ7PAjPxr7pJdhums` ("Why in Clay
-  episode") runs Mon/Wed/Fri at 08:58 Asia/Jerusalem.
-  - It fires into a dedicated production session, `session_019RDtGY8g3sTANrfbpeBBTg` ("Why in Clay:
-    episode production", tag `why-in-clay:production`, Auto mode). That session has the repo and the
-    Higgsfield connector, which shows up there under a server-ID tool name. Its setup was checked on
-    2026-10-16.
-  - Each run follows `channel/why-in-clay.md` steps 0-9, including step 6b (overlays).
+- **Production is automatic.** The scheduled task `trig_01CEgLKfbqhP4NayT7eajnhN` ("Why in Clay
+  episode") runs Mon/Wed/Fri at 08:58 Asia/Jerusalem; first run Mon 2026-10-19.
+  - It fires into the production session `session_01DtafAJxfTY1uP7XuuBwz3G` ("Why in Clay: episode
+    production", tag `why-in-clay:production`, Auto mode, checkout `/home/user/whyinclay` on `main`).
+    Created 2026-10-16 18:40 UTC. Checked then: Higgsfield `balance` and a sandbox command both ran
+    **without a permission prompt** (the owner had set the Higgsfield connector's tools to "Always
+    allow", and the repo's `.claude/settings.json` allows them).
+  - Why it was replaced: the first production session (`session_019RDtGY8g3sTANrfbpeBBTg`, now titled
+    "old production session (retired)") started before those settings existed and kept asking the owner
+    to approve every Higgsfield sandbox command. Its task `trig_0182qs4pQ7PAjPxr7pJdhums` is disabled.
+    Connector and settings changes only reach sessions started after them.
+  - Each run follows `channel/why-in-clay.md`, which is the source of truth for voice, captions and cards.
   - Why a dedicated session: scheduled tasks that start a fresh session can't attach connectors on
     this account, so a fresh session would have no Higgsfield.
   - If the production session is archived, the task stops. To fix it, create a new session from the
-    repo with `create_session` (permission_mode auto), confirm Higgsfield `balance` works there, then
-    point a new task at it with `create_trigger` and `persistent_session_id`, reusing the prompt
-    (`list_triggers`).
-- **Credits:** 415.85 on the Higgsfield Plus plan after episode 2 (2026-10-16), enough for about two
+    repo with `create_session` (permission_mode auto), confirm Higgsfield `balance` and a sandbox
+    command run there without a prompt, then point a new task at it with `create_trigger` and
+    `persistent_session_id`, reusing the prompt (`list_triggers`), and disable the old task.
+- **Credits:** 400.7 on the Higgsfield Plus plan after episode 2's rework (2026-10-16), enough for about two
   more episodes before the 200 floor pauses runs. An episode costs about 150, and runs
   pause by themselves under 200. Buying credits or changing the plan is the owner's call.
 - **App: running on the owner's Mac mini** (reported by the owner 2026-10-16; this cloud session can't
