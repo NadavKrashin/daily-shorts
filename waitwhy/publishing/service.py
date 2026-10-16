@@ -150,6 +150,12 @@ def publish(session: Session, cfg: dict, pj: PublicationJob, actor: str = "agent
         pj.status, pj.last_error = "blocked", "approval missing or revoked"
         _evaluate(session, video, actor)
         return pj.status
+    live = not cfg.get("dry_run_mode")
+    if pj.dry_run == live:
+        # Scheduled under the other mode (e.g. dry-run switched off after scheduling): the adapter
+        # follows the current mode, so the record must too, or a real post is filed as a mock.
+        pj.dry_run = not live
+        audit(session, actor, "publication.mode_changed", "publication_job", pj.id, dry_run=pj.dry_run)
     vv = session.get(VideoVersion, pj.video_version_id)
     if not pj.dry_run and not vv.manifest.get("publishable"):
         pj.status, pj.last_error = "blocked", "version not publishable (licensing/mock content)"

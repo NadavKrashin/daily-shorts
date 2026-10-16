@@ -45,7 +45,9 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
   - Config: `production_source: claude_runs`. Every 30 minutes the `import_episodes` job turns
     `channel/episodes.json` entries into videos, runs QC, then auto-approves and schedules them.
   - Episode 1 is imported (QC 95.5) and scheduled.
-  - `dry_run_mode` is still true, so nothing posts until the owner turns it off in the dashboard.
+  - `dry_run_mode` is **off** (owner, 2026-10-16 afternoon): posts are real. Episode 1 was scheduled
+    while dry-run was on; `publish()` now re-files such jobs under the current mode, so its posts are
+    recorded as real ones.
 - **Repo: `NadavKrashin/whyinclay`, one branch: `main`** (owner's choices, 2026-10-16).
   - Everything, including the production runs, commits and pushes straight to `main`, and the Mac
     pulls it every 15 minutes. Never force-push `main`.
@@ -80,7 +82,7 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
      private until it is approved)
    - TikTok stays a manual handoff
    No R2 bucket is needed.
-6. Turn off `dry_run_mode` in the dashboard to go live.
+6. ~~Turn off `dry_run_mode`~~ Done 2026-10-16 (as reported by the owner).
 
 When the owner reports one of these done, help verify it: run the health check and look at the
 dashboard Agents page. Never claim it is live without checking.

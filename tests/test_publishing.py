@@ -172,3 +172,21 @@ def test_imported_episode_uses_its_cdn_copy_for_instagram():
     assert pub.public_video_url(Bucket(), imported) == "https://media.example/videos/x/v1.mp4"
     assert pub.public_video_url(NoPublicStorage(),
                                 VideoVersion(storage_key="k", manifest={"source_url": "file:///tmp/a.mp4"})) is None
+
+
+def test_job_scheduled_in_dry_run_publishes_live_after_switch(session, cfg, monkeypatch):
+    """Owner turns dry-run off after a video was scheduled: the post is real, so it is recorded as real."""
+    set_setting(session, "mock_publish_scenario", {"youtube": "ok"})
+    v = f.ready_video(session, cfg)
+    pub.schedule_video(session, get_config(session), v, "test")
+    session.commit()
+    pj = session.query(PublicationJob).filter_by(platform="youtube").one()
+    assert pj.dry_run
+    set_setting(session, "dry_run_mode", False)
+    live = get_config(session)
+    seen = []
+    monkeypatch.setattr(pub, "adapter_for", lambda s, c, p: seen.append(c["dry_run_mode"])
+                        or ad.MockAdapter(p, {"youtube": "ok"}))
+    assert pub.publish(session, live, pj) == "published"
+    assert seen == [False] and pj.dry_run is False
+    assert session.query(PlatformPost).filter_by(platform="youtube").one().is_mock is False
