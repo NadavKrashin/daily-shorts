@@ -164,3 +164,32 @@ def test_every_dashboard_page_works_with_imported_episode(session, cfg, ep):
     for path in ("/", "/pipeline", "/library", "/approvals", "/calendar", "/analytics", "/finance",
                  "/sponsors", "/agents", "/incidents", "/settings", "/api/status", "/api/videos"):
         assert c.get(path, auth=("ceo", "test-pass")).status_code == 200, path
+
+
+def test_held_episode_alerts_the_owner_loudly(session, cfg, ep, monkeypatch):
+    """An imported episode can't be repaired inside the app, so a failed check is a high alert."""
+    from waitwhy.models import Notification
+
+    def report(path, cfg_video):
+        return {"checks": [{"name": "no_excessive_silence", "category": "technical", "passed": False,
+                            "mandatory": True, "detail": "silences >= 1.5s: [(9.3, 10.9)]"}],
+                "probe": {"duration_s": 60.1}}
+    monkeypatch.setattr(importer.probe, "technical_report", report)
+    importer.import_episode(session, _cleared(cfg), ep)
+    n = session.execute(select(Notification)).scalar_one()
+    assert n.severity == "high" and n.title.startswith("Episode held, not posted")
+    assert "no_excessive_silence" in n.body
+
+
+def test_qc_script_matches_the_import_check(cfg, ep, tmp_path, capsys):
+    import importlib.util
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location("qc_episode", root / "scripts" / "qc_episode.py")
+    qc = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(qc)
+    ok = qc.check(_cleared(cfg), {**ep, "known_issues": []}, Path(ep["video_url"][7:]))
+    out = capsys.readouterr().out
+    assert ok and "would be approved and posted automatically" in out
+    assert not qc.check(_cleared(cfg), {**ep, "checks": {}}, Path(ep["video_url"][7:]))
+    assert "HELD on the Mac" in capsys.readouterr().out

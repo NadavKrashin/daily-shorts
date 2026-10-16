@@ -75,7 +75,11 @@ Each step names the Higgsfield workflow script to use. Load `get_workflow_instru
 `faceless-video`, `narration`, `video-montage` and `thumbnail-generation` at the start of a run and
 follow them, except where this file says otherwise.
 
-0. **Credit guard.** Call `balance`. If below 200 credits, stop: make nothing and report
+0. **Held episodes first.** Run `python3 scripts/qc_episode.py --all` (needs `pip install -e .` once,
+   and ffmpeg). It runs the exact check the owner's Mac runs on import. Any episode it reports as HELD
+   was never posted: fix that one first (re-edit in the sandbox where possible, which costs no
+   credits), check it again, update its `video_url`, and push, before starting a new episode.
+   **Credit guard.** Call `balance`. If below 200 credits, stop: make nothing new and report
    "paused: N credits left". One episode costs about 150 credits. Never buy credits or change the plan.
 1. **Topic.** Take the highest-scoring topic in `seeds/topics.json` whose slug is not in
    `channel/episodes.json` and has no `risk_flags`.
@@ -130,13 +134,18 @@ follow them, except where this file says otherwise.
    (text in the upper-middle third, clear of the bottom 20% where the app's buttons sit). Export it as a
    1080x1920 JPEG under 2 MB, verify the text letter for letter, upload it, and record it as `cover_url`.
    TikTok rejected episode 1's 25 MB landscape PNG; the app's fallback letterboxes the thumbnail.
+7b. **The Mac's check, before anything is pushed.** Write the episode's `channel/episodes.json` entry
+   (step 8), then run `python3 scripts/qc_episode.py N --file <final video>`. It must end with "would be
+   approved and posted automatically" (exit code 0). Anything else means the Mac would hold the episode
+   and it would never be posted: fix the named check and run it again. Episode 2 was held for 1.6 s of
+   silence between scenes (the limit is 1.5 s); keep every gap between lines under about 1 s.
 8. **Record.** Append the episode to `channel/episodes.json` in episode 1's shape: urls, credits spent
    (balance before minus after), sources, known issues, `category`, `description` and `hashtags`
    (yt-seo rules; at most 5, as TikTok allows no more; the app keeps `#shorts` for YouTube only and
    drops it elsewhere), `caption`, `cover_url`, and `checks` with `narration_strict`, `captions` and `visual_review`
    set to `passed` only if that check really ran and passed. Use status `produced_not_published`. The
-   app's `import_episodes` job picks it up from there, runs its own technical QC, and publishes on the
-   schedule once platforms are connected. Update `HANDOFF.md` (latest episode, credits left, any new
+   app's `import_episodes` job picks it up from there, runs the same check as step 7b, and publishes at
+   the next free slot. Update `HANDOFF.md` (latest episode, credits left, any new
    open items), then commit `channel/` and `HANDOFF.md` and push to `main`, the only branch. The app on
    the owner's Mac pulls `main`, so an unpushed episode never gets published. If the push is rejected,
    `git pull --rebase` and push again. Never force-push.

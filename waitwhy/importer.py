@@ -88,17 +88,14 @@ def review_inputs(cfg: dict, ep: dict) -> dict:
             "known_issues": ep.get("known_issues", [])}
 
 
-def review(session: Session, cfg: dict, video: Video, vv: VideoVersion, ep: dict) -> QualityReview:
-    """QC for an imported episode: the technical checks the app's own renders get, plus the production
-    run's own recorded checks. Visual/narration review already happened in the run (frame strips,
-    strict word check); this records it and blocks if the run did not report it."""
+def evaluate(cfg: dict, ep: dict, path: Path, disclosure_set: bool = True) -> dict:
+    """The import QC as a pure function of the video file, its episodes.json entry and the config.
+
+    The Mac runs exactly this on import, and ``scripts/qc_episode.py`` runs it before a production run
+    pushes, so a video that would be held on the Mac never gets pushed in the first place."""
     ecfg = cfg.get("episodes", {})
-    store = registry.storage(cfg)
-    path = store.local_path(vv.storage_key)
     tech = probe.technical_report(path, {**cfg["video"], **ecfg.get("video", {})})
     checks = tech["checks"]
-    vv.probe = {k: v for k, v in tech["probe"].items() if k in ("duration_s", "loudness", "black", "silence")}
-    vv.duration_s = tech["probe"].get("duration_s")
 
     def add(name, category, passed, detail, mandatory=True):
         checks.append({"name": name, "category": category, "passed": bool(passed), "mandatory": mandatory,
@@ -119,19 +116,29 @@ def review(session: Session, cfg: dict, video: Video, vv: VideoVersion, ep: dict
     dur = tech["probe"].get("duration_s") or 0
     too_long = [p for p, mx in PLATFORM_MAX_S.items() if cfg["platforms"].get(p, {}).get("enabled") and dur > mx]
     add("platform_duration_limits", "platform", not too_long, f"too long for {too_long}" if too_long else "ok")
-    add("disclosures_resolved", "platform", bool((video.publish_metadata or {}).get("disclosure")), "set on import")
+    add("disclosures_resolved", "platform", disclosure_set, "set on import")
     issues = ep.get("known_issues", [])
     add("no_known_issues", "editorial", not issues, "; ".join(issues) or "none", mandatory=False)
 
     blocking = [f"{c['name']}: {c['detail']}" for c in checks if c["mandatory"] and not c["passed"]]
-    passed = not blocking
     score = round(100 * sum(c["passed"] for c in checks) / max(1, len(checks)), 1)
-    rev = QualityReview(video_version_id=vv.id, reviewer="automated:import", passed=passed, score=score,
-                        checks=checks, blocking_issues=blocking, repair_scenes=[],
-                        notes="PUBLISHABLE" if passed else "FAILED")
+    return {"checks": checks, "blocking": blocking, "passed": not blocking, "score": score, "probe": tech["probe"]}
+
+
+def review(session: Session, cfg: dict, video: Video, vv: VideoVersion, ep: dict) -> QualityReview:
+    """QC for an imported episode: the technical checks the app's own renders get, plus the production
+    run's own recorded checks. Visual/narration review already happened in the run (frame strips,
+    strict word check); this records it and blocks if the run did not report it."""
+    store = registry.storage(cfg)
+    r = evaluate(cfg, ep, store.local_path(vv.storage_key), bool((video.publish_metadata or {}).get("disclosure")))
+    vv.probe = {k: v for k, v in r["probe"].items() if k in ("duration_s", "loudness", "black", "silence")}
+    vv.duration_s = r["probe"].get("duration_s")
+    rev = QualityReview(video_version_id=vv.id, reviewer="automated:import", passed=r["passed"], score=r["score"],
+                        checks=r["checks"], blocking_issues=r["blocking"], repair_scenes=[],
+                        notes="PUBLISHABLE" if r["passed"] else "FAILED")
     session.add(rev)
-    vv.status = "qc_passed" if passed else "qc_failed"
-    vv.manifest = {**vv.manifest, "publishable": passed, "review_inputs": review_inputs(cfg, ep)}
+    vv.status = "qc_passed" if r["passed"] else "qc_failed"
+    vv.manifest = {**vv.manifest, "publishable": r["passed"], "review_inputs": review_inputs(cfg, ep)}
     session.flush()
     return rev
 

@@ -123,8 +123,16 @@ def after_qc(session: Session, cfg: dict, video: Video, review, actor: str = "ag
     mode) or ask the owner. Shared by the in-app pipeline and imported episodes."""
     if not review.passed:
         transition(session, video, S.NEEDS_REVISION, actor, "; ".join(review.blocking_issues)[:900])
-        alert(session, "low", "quality", f"QC failed: {video.title}", "\n".join(review.blocking_issues),
-              dedupe_key=f"qc:{video.id}:{review.id}", video_id=video.id)
+        vv = session.get(VideoVersion, video.current_version_id)
+        if (vv.manifest or {}).get("source") == "claude_higgsfield_run":
+            # Nothing in the app can repair an episode made by the production runs, so tell the owner now.
+            alert(session, "high", "quality", f"Episode held, not posted: {video.title}",
+                  "It failed the app's check:\n- " + "\n- ".join(review.blocking_issues)
+                  + "\n\nThe next production run fixes held episodes first; ask the production session to "
+                  "fix it now if it should go out sooner.", dedupe_key=f"qc:{video.id}:{review.id}", video_id=video.id)
+        else:
+            alert(session, "low", "quality", f"QC failed: {video.title}", "\n".join(review.blocking_issues),
+                  dedupe_key=f"qc:{video.id}:{review.id}", video_id=video.id)
         return {"passed": False, "blocking": review.blocking_issues}
     if _auto_approvable(session, cfg, video, review):
         session.add(Approval(video_id=video.id, kind="publication", status="approved", decided_by="policy:auto",

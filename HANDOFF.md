@@ -115,6 +115,11 @@ dashboard Agents page. Never claim it is live without checking.
 - Alerts: `notifications.channels` is `[log, telegram]`. Telegram works once the owner runs
   `scripts/telegram_setup.py` on the Mac (until then the telegram channel just logs "not configured").
   TikTok "Action needed" alerts link to `dashboard_url`/calendar.
+- **Held episodes:** the Mac's import check is `importer.evaluate`; `scripts/qc_episode.py` runs the same
+  check anywhere. A failed check holds the episode (NEEDS_REVISION, never posted) and, for episodes from
+  the production runs, raises a high alert ("Episode held, not posted"). Production runs check before
+  pushing (recipe step 7b) and fix held episodes before making new ones (step 0). Episode 2 v2 was held
+  2026-10-16 for 1.6 s of silence at 9.3-10.9 s; the production session is re-editing it.
 - Captions: `publishing.adapters.post_text` builds every platform's caption: tags already in the
   caption are merged, duplicates dropped, at most 5 tags, `#shorts` only on YouTube. (Before
   2026-10-16 the TikTok package and Instagram doubled the tags.) The TikTok package's `cover.jpg` is a
