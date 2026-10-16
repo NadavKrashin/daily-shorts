@@ -312,12 +312,29 @@ def calendar(request: Request, u: str = Depends(user), s: Session = Depends(db))
     start = datetime.now(timezone.utc) - timedelta(days=7)
     jobs = s.execute(select(PublicationJob).where(PublicationJob.scheduled_at >= start)
                      .order_by(PublicationJob.scheduled_at)).scalars().all()
+    cfg = get_config(s)
+    tz = ZoneInfo(cfg.get("timezone", "UTC"))
     days: dict[str, list] = {}
     for j in jobs:
-        days.setdefault(j.scheduled_at.date().isoformat(), []).append((j, s.get(Video, j.video_id)))
+        label, cls, dry = pub.status_label(j, bool(cfg.get("dry_run_mode")))
+        day = j.scheduled_at.astimezone(tz).strftime("%a %d %b")
+        days.setdefault(day, []).append((j, s.get(Video, j.video_id), label, cls, dry))
+    waiting = []  # finished videos that have no publishing slot yet, and why
+    for v in s.execute(select(Video).where(Video.state.in_(["QUALITY_CHECK", "NEEDS_REVISION", "READY_FOR_REVIEW",
+                                                            "APPROVED"])).order_by(Video.created_at)).scalars():
+        if v.current_version_id is None or s.execute(select(PublicationJob.id).where(
+                PublicationJob.video_id == v.id)).first():
+            continue
+        rev = s.execute(select(QualityReview).where(QualityReview.video_version_id == v.current_version_id)
+                        .order_by(QualityReview.created_at.desc())).scalars().first()
+        why = {"QUALITY_CHECK": "being checked", "READY_FOR_REVIEW": "waiting for your approval (Approvals page)",
+               "APPROVED": "approved; gets a slot within a few minutes"}.get(v.state, "failed a check")
+        if v.state == "NEEDS_REVISION" and rev and rev.blocking_issues:
+            why = "failed a check: " + "; ".join(str(b) for b in rev.blocking_issues)[:300]
+        waiting.append((v, why))
     manual = s.execute(select(PublicationJob).where(PublicationJob.status.in_(["manual_action_required",
                                                                                "private_uploaded", "blocked"]))).scalars().all()
-    return render(request, "calendar.html", {"days": days, "manual": [(j, s.get(Video, j.video_id)) for j in manual]}, u, s)
+    return render(request, "calendar.html", {"days": days, "waiting": waiting, "manual": [(j, s.get(Video, j.video_id)) for j in manual]}, u, s)
 
 
 @app.get("/publications/{pid}/package")

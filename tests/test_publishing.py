@@ -310,3 +310,25 @@ def test_tiktok_package_has_portrait_cover_and_five_tags(session, cfg, tmp_path)
     caption = z.read("caption.txt").decode()
     tags = caption.split("\n\n")[1].split()
     assert len(tags) == 5 and "#shorts" not in tags and len(set(tags)) == 5
+
+
+def test_calendar_speaks_plainly(session, cfg):
+    """Owner's screenshot 2026-10-16: an off platform read as 'cancelled', stale 'dry run' tags after
+    going live, and a video that failed QC missing from the calendar with no explanation."""
+    from fastapi.testclient import TestClient
+
+    from waitwhy.api.app import app
+    from waitwhy.models import QualityReview
+    v = f.ready_video(session, cfg)
+    pub.schedule_video(session, get_config(session), v, "test")       # scheduled while dry-run is on
+    fb = session.query(PublicationJob).filter_by(platform="facebook").one()
+    fb.status, fb.last_error = "cancelled", f"facebook {pub.SWITCHED_OFF}"
+    held = f.ready_video(session, cfg, approved=False, state="NEEDS_REVISION")
+    session.add(QualityReview(video_version_id=held.current_version_id, reviewer="automated", passed=False,
+                              score=80, checks=[], blocking_issues=["no_excessive_silence: silence 9.3-10.9 s"]))
+    set_setting(session, "dry_run_mode", False)
+    session.commit()
+    html = TestClient(app).get("/calendar", auth=("ceo", "test-pass")).text
+    assert "skipped: facebook is off" in html and "waiting for its slot" in html
+    assert "dry run" not in html                                      # live now: no stale test-post tags
+    assert "Not scheduled yet" in html and "no_excessive_silence" in html and held.title in html

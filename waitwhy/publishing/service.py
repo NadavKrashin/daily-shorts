@@ -288,6 +288,7 @@ def catch_up_platforms(session: Session, cfg: dict, actor: str = "agent:publishe
                 session.add(pj)
             else:
                 pj.status, pj.last_error, pj.scheduled_at, pj.video_version_id = "scheduled", None, when, vv.id
+                pj.dry_run = bool(cfg.get("dry_run_mode"))
             session.flush()
             queue.enqueue(session, "publish", {"publication_job_id": str(pj.id)}, run_at=when,
                           idempotency_key=f"publish:{pj.id}:{when.isoformat()}", video_id=video.id)
@@ -295,6 +296,26 @@ def catch_up_platforms(session: Session, cfg: dict, actor: str = "agent:publishe
                   scheduled_at=when.isoformat())
             done.append(f"{video.slug}:{platform}@{when.isoformat()}")
     return done
+
+
+STATUS_LABELS = {"published": ("posted", "ok"), "scheduled": ("waiting for its slot", "muted"),
+                 "uploading": ("uploading now", "muted"), "manual_action_required": ("your turn: post it by hand", "warn"),
+                 "private_uploaded": ("uploaded as private: make it public", "warn"), "blocked": ("blocked", "bad"),
+                 "failed": ("failed", "bad"), "cancelled": ("cancelled", "muted")}
+
+
+def status_label(pj: PublicationJob, dry_run_mode: bool) -> tuple[str, str, bool]:
+    """Plain-words status for the dashboard: (label, css class, show the dry-run tag)."""
+    label, cls = STATUS_LABELS.get(pj.status, (pj.status, "muted"))
+    if pj.status == "cancelled" and SWITCHED_OFF in (pj.last_error or ""):
+        label = f"skipped: {pj.platform} is off"
+    elif pj.status in ("blocked", "failed") and pj.last_error:
+        label = f"{label}: {pj.last_error[:80]}"
+    # The tag means "this was / will be a test post": only for test posts that happened, or for
+    # waiting posts while dry-run is still on. A job's flag is re-set to the live mode when it runs.
+    done = pj.status in ("published", "private_uploaded", "manual_action_required")
+    show_dry = (done and pj.dry_run) or (pj.status == "scheduled" and dry_run_mode)
+    return label, cls, show_dry
 
 
 def cancel_video_publications(session: Session, video_id: uuid.UUID, actor: str) -> int:
