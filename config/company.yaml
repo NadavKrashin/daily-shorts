@@ -202,8 +202,8 @@ platforms:
     enabled: true
     publishing_mode: api                       # needs professional account + content_publish permission
   facebook:
-    enabled: true
-    publishing_mode: api                       # Page token with pages_manage_posts
+    enabled: false                             # no Facebook Page yet (2026-10-16); set true once a Page
+    publishing_mode: api                       # exists and META_PAGE_* are set. Page token: pages_manage_posts
   tiktok:
     enabled: true
     publishing_mode: pending_compliance_review # manual_handoff until an audited integration exists

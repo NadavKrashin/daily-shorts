@@ -69,28 +69,53 @@ Instagram and Facebook fetch the video from a public URL. Do this:
 
 ## 6. Connect the platforms (one at a time, YouTube first)
 
-### YouTube
-1. Google Cloud Console → new project → enable **YouTube Data API v3** and **YouTube Analytics API**.
-2. OAuth consent screen (External, add yourself as a test user) → OAuth client of type "Desktop app".
-3. Get a refresh token for the channel's Google account with scopes `youtube.upload`,
-   `youtube.readonly` and `yt-analytics.readonly`. Google's OAuth Playground with your own client works.
-4. Put `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET` and `YOUTUBE_REFRESH_TOKEN` in `.env`.
-5. **Apply for the YouTube API audit** (YouTube API Services audit form). Until Google approves it,
-   uploads from a new API project are forced to **private**. The app detects this and leaves you a
-   "make public in YouTube Studio" task for each video.
+The keys go into `~/daily-shorts/.env` on the Mac. Restart the app's services after changing it.
+Nothing posts until you turn dry-run off (step 8), so connecting a platform is safe.
 
-### Instagram + Facebook
-1. developers.facebook.com → create a Business app → add the Instagram API and Facebook Login for Business.
-2. Request `instagram_business_basic`, `instagram_business_content_publish`,
-   `instagram_business_manage_insights`, `pages_manage_posts`, `pages_read_engagement` and
-   `pages_show_list`. Your own accounts work in development mode as app roles. Other people's need App Review.
-3. Generate long-lived tokens and set `INSTAGRAM_USER_ID`, `INSTAGRAM_ACCESS_TOKEN`, `META_PAGE_ID` and
-   `META_PAGE_ACCESS_TOKEN`.
+### YouTube (about 15 minutes)
+1. Open https://console.cloud.google.com, signed in as the Google account that owns the Why in Clay
+   channel. Create a project called "Why in Clay".
+2. APIs & Services → Library: enable **YouTube Data API v3** and **YouTube Analytics API**.
+3. APIs & Services → OAuth consent screen: choose External, app name "Why in Clay", and your email.
+   Then, under Audience, click **Publish app** so the status reads "In production". In "Testing", Google
+   expires the sign-in after 7 days and uploads would stop. Google calls it "unverified"; that is
+   fine for your own channel.
+4. APIs & Services → Credentials → Create credentials → OAuth client ID → type **Desktop app** →
+   Download JSON.
+5. On the Mac: `cd ~/daily-shorts && python3 scripts/youtube_auth.py ~/Downloads/client_secret_*.json`
+   - Sign in, pick the **Why in Clay** channel, and tick every permission. The "Google hasn't verified
+     this app" page is your own app: click Advanced → Go to Why in Clay.
+   - The script prints the channel name it connected to and saves the three YouTube keys to `.env`.
+6. **Apply for the YouTube API audit** (YouTube API Services audit and quota extension form). Until
+   Google approves it, uploads from a new API project are forced to **private**. The app detects this
+   and gives you a "make public in YouTube Studio" task for each video.
+
+### Instagram (about 20 minutes; needs the R2 bucket from step 5 to post)
+The app uses Instagram's own login, so no Facebook Page is needed.
+1. In the Instagram app: Settings → Account type and tools → **Switch to professional account** →
+   Creator → category Education.
+2. Open https://developers.facebook.com → My Apps → Create app → type **Business**. Name it
+   "Why in Clay".
+3. Add the **Instagram** product → "API setup with Instagram login".
+4. Under "Generate access tokens", add the @whyinclay account and approve.
+5. Copy the account's **user ID** and the **access token** it shows into `.env` as
+   `INSTAGRAM_USER_ID` and `INSTAGRAM_ACCESS_TOKEN`.
+   - Your own account works while the app stays in development mode; no App Review is needed.
+   - The token lasts about 60 days. The app does not renew it yet, so generate a new one before then.
+     When it expires the app raises a "publishing auth error" alert.
+
+### Facebook (off for now)
+`platforms.facebook.enabled` is `false` because there is no Facebook Page. To add it later:
+1. Create a Page and link it to the Instagram account.
+2. Add Facebook Login for Business to the same Meta app, with `pages_manage_posts`,
+   `pages_read_engagement` and `pages_show_list`.
+3. Set `META_PAGE_ID` and `META_PAGE_ACCESS_TOKEN`, then set `enabled: true`.
 
 ### TikTok
-The default is a **manual handoff**: the dashboard's Calendar offers a "Download post package" (video,
-cover, caption) and a "Mark as posted" box. To automate it, apply for TikTok's Content Posting API
-audit (developers.tiktok.com). Once it's approved, set the `TIKTOK_*` values and `TIKTOK_APP_AUDITED=true`.
+The default is a **manual handoff**. For each video, the dashboard's Calendar offers a "Download post
+package" (video, cover, caption) and a "Mark as posted" box. TikTok only allows automatic posting
+for apps that pass its Content Posting API audit (developers.tiktok.com). Once it's approved, set the
+`TIKTOK_*` values and `TIKTOK_APP_AUDITED=true`.
 
 ## 7. Notifications (optional, free)
 

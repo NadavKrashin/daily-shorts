@@ -77,6 +77,16 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
 When the owner reports one of these done, help verify it: run the health check and look at the
 dashboard Agents page. Never claim it is live without checking.
 
+## Platform accounts (2026-10-16)
+
+- The owner created the YouTube, TikTok and Instagram accounts for Why in Clay. There is no Facebook
+  Page, so `platforms.facebook.enabled: false`.
+- Connecting them is the owner's part (`docs/setup-guide.md` step 6). YouTube uses
+  `scripts/youtube_auth.py`.
+- Known gap (to-do): the Instagram long-lived token expires after about 60 days and the app doesn't
+  refresh it yet. Add a scheduled job that calls `graph.instagram.com/refresh_access_token` and stores
+  the new token, or at least warns a week before it expires.
+
 ## Open quality items (fix in future episodes, not urgent)
 
 - Episode 1's hook scored WEAK (31) on `hookscore.py`, and its thumbnail text is 5 words (limit 3).

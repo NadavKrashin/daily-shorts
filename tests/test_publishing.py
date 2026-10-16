@@ -11,6 +11,12 @@ from waitwhy.publishing import service as pub
 from waitwhy.settings import get_config
 
 
+@pytest.fixture(autouse=True)
+def all_platforms_on(session):
+    """These tests cover all four adapters; the live config may have some switched off."""
+    set_setting(session, "platforms", {p: {"enabled": True} for p in ("youtube", "instagram", "facebook", "tiktok")})
+
+
 def _publish_all(session):
     for j in session.query(WorkflowJob).filter_by(type="publish", status="queued").all():
         j.run_at = datetime.now(timezone.utc)
