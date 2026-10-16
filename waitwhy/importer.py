@@ -98,6 +98,7 @@ def review(session: Session, cfg: dict, video: Video, vv: VideoVersion, ep: dict
     tech = probe.technical_report(path, {**cfg["video"], **ecfg.get("video", {})})
     checks = tech["checks"]
     vv.probe = {k: v for k, v in tech["probe"].items() if k in ("duration_s", "loudness", "black", "silence")}
+    vv.duration_s = tech["probe"].get("duration_s")
 
     def add(name, category, passed, detail, mandatory=True):
         checks.append({"name": name, "category": category, "passed": bool(passed), "mandatory": mandatory,

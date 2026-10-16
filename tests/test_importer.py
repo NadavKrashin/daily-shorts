@@ -136,3 +136,31 @@ def test_app_production_stays_idle_for_claude_runs(session, cfg):
     out = coo.content_planning(session, cfg)
     assert out["actions"] == ["production handled by scheduled Claude runs"]
     assert not session.execute(select(WorkflowJob)).scalars().all()
+
+
+def test_dashboard_page_for_imported_episode(session, cfg, ep):
+    from fastapi.testclient import TestClient
+
+    from waitwhy.api.app import app
+    importer.import_episode(session, _cleared(cfg), ep)
+    v = session.execute(select(Video)).scalar_one()
+    vv = session.get(VideoVersion, v.current_version_id)
+    assert vv.duration_s == 60.1
+    vv.duration_s = None  # episodes imported before the fix have no length stored
+    session.commit()
+    r = TestClient(app).get(f"/videos/{v.id}", auth=("ceo", "test-pass"))
+    assert r.status_code == 200
+    assert "length unknown" in r.text and "Publishing details" in r.text
+    assert "No crash, no roadwork" in r.text and "AI-generated visuals: yes" in r.text
+
+
+def test_every_dashboard_page_works_with_imported_episode(session, cfg, ep):
+    from fastapi.testclient import TestClient
+
+    from waitwhy.api.app import app
+    importer.import_episode(session, _cleared(cfg), ep)
+    session.commit()
+    c = TestClient(app)
+    for path in ("/", "/pipeline", "/library", "/approvals", "/calendar", "/analytics", "/finance",
+                 "/sponsors", "/agents", "/incidents", "/settings", "/api/status", "/api/videos"):
+        assert c.get(path, auth=("ceo", "test-pass")).status_code == 200, path

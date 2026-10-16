@@ -6,10 +6,20 @@
  <div>
   {% set cur = versions[0] if versions else none %}
   {% if cur %}<video controls preload="metadata" poster="/media/{{ cur.thumbnail_key }}" src="/media/{{ cur.storage_key }}"></video>
-   <p class="muted">v{{ cur.version }} · {{ "%.1f"|format(cur.duration_s) }}s · {{ cur.status }}
-   · <a href="/media/{{ cur.captions_key }}">captions.srt</a> · <a href="/media/{{ cur.thumbnail_key }}">cover</a></p>
+   <p class="muted">v{{ cur.version }} · {{ ("%.1f"|format(cur.duration_s) ~ "s") if cur.duration_s is not none else "length unknown" }} · {{ cur.status }}
+   {% if cur.captions_key %}· <a href="/media/{{ cur.captions_key }}">captions.srt</a> {% endif %}{% if cur.thumbnail_key %}· <a href="/media/{{ cur.thumbnail_key }}">cover</a>{% endif %}
+   {% if cur.manifest.source_url %}· made by the production runs{% endif %}</p>
    {% if cur.manifest.publishable is false %}<p class="warn"><b>Not publishable:</b> {{ cur.manifest.qc_waivers|join('; ') }}</p>{% endif %}
   {% endif %}
+  {% set md = v.publish_metadata or {} %}{% if md %}<div class="card"><h3>Publishing details</h3>
+   <p><b>Title:</b> {{ md.youtube_title or v.title }}</p>
+   <p><b>Description:</b></p><pre style="white-space:pre-wrap">{{ md.youtube_description }}</pre>
+   {% if md.hashtags %}<p><b>Hashtags:</b> {{ md.hashtags|join(' ') }}</p>{% endif %}
+   {% if md.instagram_caption %}<p><b>Instagram / TikTok caption:</b> {{ md.instagram_caption }}</p>{% endif %}
+   {% if md.disclosure %}<p><b>Disclosure:</b> AI-generated visuals: {{ 'yes' if md.disclosure.ai_generated_visuals else 'no' }}
+    · realistic synthetic media: {{ 'yes' if md.disclosure.realistic_synthetic_media else 'no' }}
+    · paid promotion: {{ 'yes' if md.disclosure.paid_promotion else 'no' }}</p>{% endif %}
+  </div>{% endif %}
   <div class="card"><h3>Actions</h3>
    <form class="inline" method="post" action="/videos/{{ v.id }}/revise"><input type="hidden" name="csrf" value="{{ csrf }}">
     <select name="from_stage"><option value="edit">Re-edit (reuse assets)</option><option value="generate">Regenerate missing assets</option><option value="storyboard">New storyboard</option><option value="script">New script</option><option value="research">Redo research</option></select>
