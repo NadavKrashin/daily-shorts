@@ -89,6 +89,12 @@ dashboard Agents page. Never claim it is live without checking.
 
 ## Platform accounts (2026-10-16)
 
+- **Instagram disabled (2026-10-16 ~17:30 Israel):** Instagram suspended @whyinclay; the owner
+  appealed the same day ("about an hour" to review; if it fails the account is permanently disabled).
+  `platforms.instagram.enabled` is false until it is restored, so episode 1's Instagram job is
+  cancelled at publish time. After a restore: check the token still works (regenerate it if not),
+  set `enabled: true`, and post episode 1 to Instagram by hand or reschedule it. Don't open a second
+  account while the appeal is open.
 - TikTok: the owner posts by hand from the dashboard's download package (owner's choice,
   2026-10-16). Automatic posting via Upload-Post (Basic plan, $24/mo then) is the chosen future option
   once the channel earns money. The comparison and switch steps are in `docs/setup-guide.md` → TikTok.
