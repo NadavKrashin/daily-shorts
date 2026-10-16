@@ -39,7 +39,8 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
    try to work around that.
 2. Decide on credits: top up or upgrade, or cut the cadence.
 3. Claim "Why in Clay" / @whyinclay on YouTube, Instagram (Professional), Facebook Page and TikTok.
-4. Rent a server and deploy (`docs/deployment.md`): a read-only deploy key plus a host cron `git pull`.
+4. Deploy the app on the owner's Mac mini (`docs/deploy-mac-mini.md`; the owner chose this over Vercel,
+   which can't run the worker, scheduler or ffmpeg). A cloud VM per `docs/deployment.md` is the fallback.
 5. Set up an R2/S3 bucket, then platform credentials:
    - YouTube OAuth, plus the API audit (uploads stay private until Google approves it)
    - Meta app and tokens

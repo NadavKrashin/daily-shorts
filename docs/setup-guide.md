@@ -40,10 +40,14 @@ Create these, all named **Why in Clay**, handle `@whyinclay` where it's free:
 - a Facebook Page, linked to the Instagram account
 - a TikTok account
 
-## 4. A server for the app (your money: a small VM, typically a few tens of dollars a month)
+## 4. A machine for the app
 
-Any Linux VM with 4 vCPU / 8 GB RAM / 80 GB disk works, for example Hetzner, DigitalOcean or AWS Lightsail.
-Check the provider's current price. Then follow `docs/deployment.md`:
+**Your Mac mini (planned):** follow `docs/deploy-mac-mini.md`, about 30 minutes. It covers keeping the
+Mac awake, Docker Desktop, a deploy key, auto-pulling new episodes, and Tailscale for phone access.
+
+**Or a cloud VM (your money).** Any Linux VM with 4 vCPU / 8 GB RAM / 80 GB disk works, for example
+Hetzner, DigitalOcean or AWS Lightsail. Check the provider's current price. Then follow
+`docs/deployment.md`:
 
 ```bash
 git clone -b claude/happy-cannon-dzuzwj git@github.com:NadavKrashin/daily-shorts.git && cd daily-shorts
