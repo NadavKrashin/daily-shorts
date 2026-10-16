@@ -233,3 +233,40 @@ def test_manual_action_alert_links_to_the_dashboard(session, cfg):
         pub.adapter_for = orig
     n = session.query(Notification).filter(Notification.title.like("Action needed: tiktok%")).one()
     assert n.severity == "high" and "\n\nOpen: https://studio.example/calendar" in n.body
+
+
+def test_platform_switched_back_on_catches_up_missed_videos(session, cfg):
+    set_setting(session, "platforms", {"instagram": {"enabled": False}})
+    first, second = f.ready_video(session, cfg), f.ready_video(session, cfg)
+    c = get_config(session)
+    pub.schedule_video(session, c, first, "test")
+    session.commit()
+    ig = session.query(PublicationJob).filter_by(video_id=first.id, platform="instagram").one_or_none()
+    assert ig is None                                   # scheduled while Instagram was off
+    other = session.query(PublicationJob).filter_by(video_id=first.id, platform="youtube").one()
+    pub.schedule_video(session, get_config(session), second, "test")
+    set_setting(session, "platforms", {"instagram": {"enabled": True}})
+    session.commit()
+    # second video's Instagram job existed only as one cancelled because the platform was off
+    sec = session.query(PublicationJob).filter_by(video_id=second.id, platform="youtube").one()
+    pj2 = PublicationJob(video_id=second.id, video_version_id=sec.video_version_id, platform="instagram",
+                         idempotency_key=f"pub:{second.id}:instagram", status="cancelled", scheduled_at=sec.scheduled_at,
+                         last_error=f"instagram {pub.SWITCHED_OFF}", metadata_={})
+    session.add(pj2)
+    session.commit()
+    out = pub.catch_up_platforms(session, get_config(session))
+    assert len(out) == 2 and all(":instagram@" in o for o in out)
+    jobs = session.query(PublicationJob).filter_by(platform="instagram").all()
+    assert {j.status for j in jobs} == {"scheduled"}
+    slots = {j.scheduled_at for j in jobs} | {other.scheduled_at, sec.scheduled_at}
+    assert len(slots) == 4                              # each catch-up post gets its own free slot
+    assert pub.catch_up_platforms(session, get_config(session)) == []   # idempotent
+
+
+def test_owner_cancelled_job_is_not_revived(session, cfg):
+    v = f.ready_video(session, cfg)
+    pub.schedule_video(session, get_config(session), v, "test")
+    pj = session.query(PublicationJob).filter_by(platform="instagram").one()
+    pj.status = "cancelled"
+    session.commit()
+    assert pub.catch_up_platforms(session, get_config(session)) == []

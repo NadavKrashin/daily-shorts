@@ -201,8 +201,7 @@ platforms:
     made_for_kids: false
     category_id: "27"                          # Education
   instagram:
-    enabled: false                             # account disabled pending appeal (2026-10-16); turn back on
-                                               # once Instagram restores it and the token still works
+    enabled: true                              # restored 2026-10-16 after a suspension appeal
     publishing_mode: api                       # needs professional account + content_publish permission
   facebook:
     enabled: false                             # no Facebook Page yet (2026-10-16); set true once a Page

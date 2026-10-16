@@ -105,12 +105,11 @@ dashboard Agents page. Never claim it is live without checking.
 
 ## Platform accounts (2026-10-16)
 
-- **Instagram disabled (2026-10-16 ~17:30 Israel):** Instagram suspended @whyinclay; the owner
-  appealed the same day ("about an hour" to review; if it fails the account is permanently disabled).
-  `platforms.instagram.enabled` is false until it is restored, so episode 1's Instagram job is
-  cancelled at publish time. After a restore: check the token still works (regenerate it if not),
-  set `enabled: true`, and post episode 1 to Instagram by hand or reschedule it. Don't open a second
-  account while the appeal is open.
+- **Instagram restored (2026-10-16 evening):** the suspension appeal succeeded and
+  `platforms.instagram.enabled` is true again. Videos that skipped Instagram while it was off (episodes
+  1 and 2) are queued by `publication.service.catch_up_platforms`, which runs with every
+  `import_episodes` job and gives each its own next free slot. If the post fails with an auth error, the
+  access token died with the suspension: generate a new one in the Meta app and put it in `.env`.
 - Alerts: `notifications.channels` is `[log, telegram]`. Telegram works once the owner runs
   `scripts/telegram_setup.py` on the Mac (until then the telegram channel just logs "not configured").
   TikTok "Action needed" alerts link to `dashboard_url`/calendar.

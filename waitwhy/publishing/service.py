@@ -141,7 +141,7 @@ def publish(session: Session, cfg: dict, pj: PublicationJob, actor: str = "agent
     video = session.get(Video, pj.video_id)
     if not cfg["platforms"].get(pj.platform, {}).get("enabled"):
         # Switched off after the job was scheduled (e.g. Facebook, which has no Page): drop it quietly.
-        pj.status, pj.last_error = "cancelled", f"{pj.platform} is switched off in config"
+        pj.status, pj.last_error = "cancelled", f"{pj.platform} {SWITCHED_OFF}"
         audit(session, actor, "publication.cancelled", "publication_job", pj.id, reason=pj.last_error)
         _evaluate(session, video, actor)
         return pj.status
@@ -249,6 +249,52 @@ def _evaluate(session: Session, video: Video, actor: str) -> None:
     elif all(j.status in TERMINAL for j in jobs) and video.state == S.PUBLISHING.value:
         summary = ", ".join(f"{j.platform}={j.status}" for j in jobs)
         transition(session, video, S.BLOCKED, actor, f"no public publication yet ({summary})")
+
+
+SWITCHED_OFF = "is switched off in config"
+
+
+def catch_up_platforms(session: Session, cfg: dict, actor: str = "agent:publisher") -> list[str]:
+    """Queue approved videos on platforms they missed because the platform was off at the time.
+
+    A platform switched back on (e.g. Instagram after an account suspension) gets each such video in
+    its own next free slot. Jobs the owner cancelled are left alone; only ones never created, or
+    cancelled because the platform was off, are (re)queued."""
+    done = []
+    live = (S.SCHEDULED.value, S.PUBLISHING.value, S.PUBLISHED.value, S.BLOCKED.value)
+    for video in session.execute(select(Video).where(Video.state.in_(live)).order_by(Video.created_at)).scalars():
+        if not is_publication_approved(session, video):
+            continue
+        vv = session.get(VideoVersion, video.current_version_id)
+        if vv is None or vv.status != "qc_passed" or (not cfg.get("dry_run_mode") and not vv.manifest.get("publishable")):
+            continue
+        for platform, pcfg in cfg["platforms"].items():
+            if not pcfg.get("enabled"):
+                continue
+            key = f"pub:{video.id}:{platform}"
+            pj = session.execute(select(PublicationJob).where(PublicationJob.idempotency_key == key)).scalar_one_or_none()
+            if pj is not None and not (pj.status == "cancelled" and SWITCHED_OFF in (pj.last_error or "")):
+                continue
+            when = next_slot(session, cfg)
+            meta = video.publish_metadata or {}
+            if pj is None:
+                pj = PublicationJob(video_id=video.id, video_version_id=vv.id, platform=platform, idempotency_key=key,
+                                    status="scheduled", scheduled_at=when, dry_run=bool(cfg.get("dry_run_mode")),
+                                    metadata_={"title": meta.get("youtube_title", video.title),
+                                               "caption": meta.get(f"{platform}_caption") or meta.get("instagram_caption", ""),
+                                               "description": meta.get("youtube_description", ""),
+                                               "hashtags": meta.get("hashtags", []),
+                                               "disclosure": meta.get("disclosure", {})})
+                session.add(pj)
+            else:
+                pj.status, pj.last_error, pj.scheduled_at, pj.video_version_id = "scheduled", None, when, vv.id
+            session.flush()
+            queue.enqueue(session, "publish", {"publication_job_id": str(pj.id)}, run_at=when,
+                          idempotency_key=f"publish:{pj.id}:{when.isoformat()}", video_id=video.id)
+            audit(session, actor, "publication.caught_up", "publication_job", pj.id, platform=platform,
+                  scheduled_at=when.isoformat())
+            done.append(f"{video.slug}:{platform}@{when.isoformat()}")
+    return done
 
 
 def cancel_video_publications(session: Session, video_id: uuid.UUID, actor: str) -> int:

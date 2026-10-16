@@ -110,7 +110,10 @@ def h_import(session: Session, job: WorkflowJob):
     cfg = get_config(session)
     if cfg.get("episodes", {}).get("git_pull"):
         importer.git_pull()
-    return importer.import_all(session, cfg)
+    from waitwhy.publishing import service as pub
+    out = importer.import_all(session, cfg)
+    caught_up = pub.catch_up_platforms(session, cfg)
+    return {**out, "caught_up": caught_up} if caught_up else out
 
 
 @handler("instagram_token_refresh")
