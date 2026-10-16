@@ -17,6 +17,10 @@ Overlay types (all drawn in the upper part of the frame, clear of the bottom cap
                                                                brake lights, so a jam visibly forms
   wave   {"title": "..."}                                      the same model unrolled into a lane:
                                                                cars drive right, the jam drifts left
+  field  {"mode": "test" | "moons" | "fill", "title": "..."}  one eye's visual field drawn to scale
+                                                               from measured blind-spot numbers: a red
+                                                               dot that vanishes, full moons inside
+                                                               the gap, or stripes filling it in
 Common keys: "at" (phrase, required), "dur" (seconds, default 3; "rest" = until the scene ends),
 "until" (phrase that ends it), "y" (centre, fraction of height).
 The ring and wave diagrams come from a real car-following model, not hand-drawn motion: they
@@ -189,7 +193,7 @@ def car_colour(v: float) -> tuple:
     return RED if v < 0.45 else SAND
 
 
-def panel(W: int, Hp: int, title: str, wfrac: float = 0.8):
+def panel(W: int, Hp: int, title: str, wfrac: float = 0.8, title_px: int = 58):
     w = int(W * wfrac)
     img = Image.new("RGBA", (w * SS, Hp * SS), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
@@ -197,7 +201,7 @@ def panel(W: int, Hp: int, title: str, wfrac: float = 0.8):
     d.rounded_rectangle((8 * SS, 6 * SS, w * SS - 8 * SS, Hp * SS - 16 * SS), 40 * SS, fill=CREAM,
                         outline=EDGE, width=7 * SS)
     lines = rich_lines(title)
-    f = fit_font(lines, 58 * SS, (w - 120) * SS)
+    f = fit_font(lines, title_px * SS, (w - 120) * SS)
     draw_rich(d, lines, f, w * SS / 2, 34 * SS)
     return img, d, w, f.size * len(lines) * 1.12 + 40 * SS
 
@@ -249,6 +253,76 @@ def wave_frame(W: int, title: str, p: float) -> Image.Image:
     return img
 
 
+# ------------------------------------------------------------------ visual field (blind spot)
+# Right eye's visual field, drawn to scale. The blind spot is centred about 15 degrees to the
+# temporal side of fixation and 1.5 degrees below it, roughly 5.5 degrees wide and 7.5 high
+# (MIL-STD-1472F figures); the full moon is about 0.5 degrees across.
+BS_X, BS_Y, BS_W, BS_H, MOON = 15.0, -1.5, 5.5, 7.5, 0.5
+FIELD_X = (-6.0, 22.0)  # degrees shown, left to right
+
+
+def field_frame(W: int, title: str, mode: str, p: float) -> Image.Image:
+    """mode 'test': cross + red dot, the dot fades away (it sits in the blind spot).
+    'moons': the blind spot outlined with full moons to scale inside it.
+    'fill': a striped field with a hole at the blind spot that fills in with the stripes."""
+    Hp = int(W * 0.62)
+    img, d, w, top = panel(W, Hp, title, 0.9, title_px=84)
+    x0, x1 = 60 * SS, w * SS - 60 * SS
+    # the moons view zooms in on the blind spot so the moons are big enough to count
+    span = (BS_X - 5.0, BS_X + 5.0) if mode == "moons" else FIELD_X
+    deg = (x1 - x0) / (span[1] - span[0])
+    y_mid = top + (Hp * SS - 16 * SS - top) * 0.52
+    box_top, box_bot = top + 6 * SS, Hp * SS - 40 * SS
+    if mode == "moons":  # fit the whole blind spot, centred in the panel
+        deg = min(deg, (box_bot - box_top) * 0.9 / BS_H)
+        y_mid = (box_top + box_bot) / 2 + BS_Y * deg
+        fx = lambda a: (x0 + x1) / 2 + (a - BS_X) * deg
+    else:
+        fx = lambda a: x0 + (a - span[0]) * deg
+    fy = lambda e: y_mid - e * deg
+    bx, by = fx(BS_X), fy(BS_Y)
+    rx, ry = BS_W / 2 * deg, BS_H / 2 * deg
+    if mode == "fill":
+        stripe = 2.0 * deg
+        k = 0
+        y = box_top
+        while y < box_bot:
+            d.rectangle((x0, y, x1, min(y + stripe / 2, box_bot)), fill=SAND if k % 2 == 0 else (150, 190, 110))
+            y += stripe / 2
+            k += 1
+        hole = max(0.0, 1.0 - max(0.0, p - 0.3) / 0.4)  # the hole shows, then closes
+        if hole > 0.01:
+            d.ellipse((bx - rx * hole, by - ry * hole, bx + rx * hole, by + ry * hole), fill=(40, 34, 30))
+    # fixation cross
+    c, t = 0.9 * deg, 7 * SS
+    cx0, cy0 = fx(0), fy(0)
+    if mode != "moons":
+        d.rectangle((cx0 - c, cy0 - t, cx0 + c, cy0 + t), fill=INK)
+        d.rectangle((cx0 - t, cy0 - c, cx0 + t, cy0 + c), fill=INK)
+    if mode in ("test", "moons"):
+        dash = 8
+        for i in range(0, 360, dash * 2):
+            d.arc((bx - rx, by - ry, bx + rx, by + ry), i, i + dash, fill=INK, width=6 * SS)
+    if mode == "test":
+        a = max(0.0, 1.0 - max(0.0, p - 0.35) / 0.3)
+        r = 0.9 * deg
+        if a > 0.01:
+            col = tuple(int(CREAM[i] + (RED[i] - CREAM[i]) * a) for i in range(3))
+            d.ellipse((bx - r, by - r, bx + r, by + r), fill=col)
+    if mode == "moons":
+        n = min(int(BS_W / MOON), max(1, int(1 + p * 1.6 * BS_W / MOON)))
+        mr = MOON / 2 * deg
+        left = bx - (BS_W / MOON) * mr
+        for i in range(n):
+            mx = left + mr + i * 2 * mr
+            d.ellipse((mx - mr, by - mr, mx + mr, by + mr), fill=(250, 240, 200), outline=INK, width=2 * SS)
+    if mode != "moons":
+        lf = font(56 * SS)
+        lab = "look here"
+        d.text((cx0 - lf.getlength(lab) / 2, cy0 + c + 14 * SS), lab, font=lf, fill=INK)
+    return img
+
+
 def arrow(d, a, b, colour, width=12 * SS, head=30 * SS):
     (ax, ay), (bx, by) = a, b
     ang = math.atan2(by - ay, bx - ax)
@@ -280,10 +354,15 @@ class Element:
             place(canvas, sp, cx, cy, *envelope(lt, self.dur))
         elif typ == "chain":
             self._chain(canvas, lt, cx, cy)
-        elif typ in ("ring", "wave"):
+        elif typ in ("ring", "wave", "field"):
             p = min(max(lt / self.dur, 0.0), 1.0)
-            img = ring_frame(self.W, self.s.get("title", ""), self.s.get("mode", "jam"), p) if typ == "ring" \
-                else wave_frame(self.W, self.s.get("title", ""), p)
+            title, mode = self.s.get("title", ""), self.s.get("mode", "")
+            if typ == "ring":
+                img = ring_frame(self.W, title, mode or "jam", p)
+            elif typ == "wave":
+                img = wave_frame(self.W, title, p)
+            else:
+                img = field_frame(self.W, title, mode or "test", p)
             scale, alpha = envelope(lt, self.dur)
             place(canvas, img, cx, cy, min(scale, 1.0) if lt > 0.35 else scale, alpha)
         else:

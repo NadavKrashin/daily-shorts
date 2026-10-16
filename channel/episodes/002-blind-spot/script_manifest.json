@@ -1,0 +1,265 @@
+{
+ "topic": "Why your brain fills in your blind spot",
+ "genre": "education",
+ "animation_mode": "fully_animated",
+ "channel_type": "Explainer",
+ "style": "Claymotion",
+ "through_line": {
+  "name": "the red test dot",
+  "asset": "prop_red_dot",
+  "progression": "the red dot sinks out of sight on the test card, its light lands on the blind disc inside the eye, it is the mark Mariotte stares at, it vanishes inside the blind-spot oval, then pops out and the stripes are painted over its hole",
+  "resolution": "with both eyes open the red dot stays bright on the card"
+ },
+ "arc": {
+  "hook": 1,
+  "build": [
+   2,
+   3,
+   4
+  ],
+  "turn": 5,
+  "payoff": 6
+ },
+ "blocks": [
+  {
+   "n": 1,
+   "arc_role": "hook",
+   "vo_line": "Your eyesight contains a permanent, invisible hole. Nobody notices, yet it's considerably wider than ten moons, and here's why you'll never see it.",
+   "location": "loc_test_card",
+   "through_line_state": "the red dot sits bright on the cream test card beside the cross, then sinks out of sight",
+   "shots": [
+    "WIDE frontal: a clay eyeball on a little stand faces the cream test card with the dark cross and the red dot, slow push-in",
+    "CU low angle: the signal-red clay dot on the card wobbles slightly",
+    "MEDIUM lateral: the clay eyeball's blue iris swivels toward the dark cross and holds",
+    "ECU macro: the dark clay cross pressed into the cream card, fingerprint texture visible",
+    "MEDIUM high angle: the red dot shrinks and sinks into the card, leaving a smooth empty patch, then everything settles"
+   ],
+   "assets_used": [
+    "loc_test_card",
+    "prop_red_dot",
+    "prop_clay_eyeball"
+   ],
+   "audio": "soft clay squish as the camera pushes in, a gentle wooden creak as the iris swivels, a soft pop as the red dot sinks away",
+   "direction_note": "The eyeball only swivels in place; it never rolls away. The red dot is always to the RIGHT of the cross.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "A *HOLE* IN\nYOUR EYESIGHT",
+     "at": "invisible hole",
+     "until": "considerably wider"
+    },
+    {
+     "type": "field",
+     "mode": "moons",
+     "title": "*10+* MOONS WIDE",
+     "at": "considerably wider",
+     "until": "and here's why",
+     "y": 0.24
+    },
+    {
+     "type": "card",
+     "text": "HERE'S *WHY*",
+     "at": "and here's why",
+     "dur": "rest"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "arc_role": "build",
+   "vo_line": "The explanation sits at the back of each eyeball, where the optic nerve departs through a circular disc containing absolutely no light-detecting photoreceptors.",
+   "location": "loc_eye_cutaway",
+   "through_line_state": "a small red bead, the red dot's light, rolls into the eye and lands on the pale disc where nothing responds",
+   "shots": [
+    "WIDE overhead: the giant clay eyeball sliced in half, the bumpy pink retina lining its inside and the cream optic nerve cord trailing out the back",
+    "CU lateral: a tiny signal-red clay bead rolls in through the pupil opening toward the back wall",
+    "ECU macro: the pale smooth disc where the nerve cord leaves, with no bumps, surrounded by tiny clay bumps everywhere else",
+    "MEDIUM low angle: the red bead settles on the pale disc and stays still while the bumps around it glow softly",
+    "WIDE high angle: the cream nerve cord stretches away across the tabletop, then the whole scene settles"
+   ],
+   "assets_used": [
+    "loc_eye_cutaway",
+    "prop_red_dot"
+   ],
+   "audio": "a soft rolling clay rattle, a quiet squelch as the bead lands, a low warm hum bed",
+   "direction_note": "The bead rolls only inward, from the front opening to the back wall.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "OPTIC NERVE\n*EXITS* HERE",
+     "at": "where the optic nerve",
+     "until": "containing absolutely"
+    },
+    {
+     "type": "card",
+     "text": "*ZERO* LIGHT\nDETECTORS",
+     "at": "containing absolutely",
+     "dur": "rest"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "arc_role": "build",
+   "vo_line": "Centuries ago, the French scientist Edme Mariotte reported it after a white spot vanished while his single open eye stared elsewhere.",
+   "location": "loc_study_room",
+   "through_line_state": "the red dot is the mark being stared at; the white spot beside it disappears",
+   "shots": [
+    "WIDE frontal: a candlelit clay study, a dark clay wall with the red clay dot on the left and a round white clay spot on the right",
+    "MEDIUM lateral: a clay candle flame flickers on the wooden desk beside a clay quill and inkpot",
+    "CU low angle: on the dark wall the red clay dot glows steady and bright in the candlelight",
+    "ECU macro: the round white clay spot on the wall shrinks and fades into the dark wall",
+    "WIDE high angle: the wall now shows only the red dot while the candle glows, then the scene settles"
+   ],
+   "assets_used": [
+    "loc_study_room",
+    "prop_red_dot"
+   ],
+   "audio": "a soft candle crackle, a faint scratch of a quill, a gentle clay hiss as the white spot fades",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "EDME MARIOTTE\n*FRANCE*",
+     "at": "centuries ago",
+     "until": "after a white spot"
+    },
+    {
+     "type": "chain",
+     "steps": [
+      "ONE EYE\nOPEN",
+      "STARE AT\nONE SPOT",
+      "THE OTHER\nVANISHES"
+     ],
+     "at": "after a white spot",
+     "gap": 1.2,
+     "dur": "rest"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "arc_role": "build",
+   "vo_line": "Cover your left eye, concentrate on a cross, and a red dot positioned fifteen degrees rightward lands directly on that disc, disappearing completely.",
+   "location": "loc_field_board",
+   "through_line_state": "the red dot sits inside the dashed oval on the board and fades away",
+   "shots": [
+    "MEDIUM frontal: the upright cream clay board with a dark cross on the left and the red dot inside a dashed oval on the right",
+    "CU lateral: the clay eyeball on its stand slides slowly forward toward the board",
+    "ECU macro: the red dot sitting inside the dashed oval pressed into the clay",
+    "WIDE overhead: a clay arrow stamped into the board points from the cross to the dashed oval",
+    "MEDIUM low angle: the red dot shrinks into the board leaving the dashed oval empty, then settles"
+   ],
+   "assets_used": [
+    "loc_field_board",
+    "prop_red_dot",
+    "prop_clay_eyeball"
+   ],
+   "audio": "a soft wooden slide as the eyeball moves, a firm clay thud as the arrow lands, a soft pop as the dot fades",
+   "direction_note": "The eyeball only moves forward, toward the board. The red dot is always to the RIGHT of the cross.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "COVER YOUR\n*LEFT* EYE",
+     "at": "cover your left eye",
+     "until": "fifteen degrees"
+    },
+    {
+     "type": "stat",
+     "text": "15°",
+     "label": "TO THE *RIGHT*",
+     "at": "fifteen degrees",
+     "until": "lands directly"
+    },
+    {
+     "type": "field",
+     "mode": "test",
+     "title": "THE DOT *VANISHES*",
+     "at": "lands directly on that disc",
+     "dur": "rest",
+     "y": 0.24
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "arc_role": "turn",
+   "vo_line": "Here's the surprise: your brain never displays emptiness. It paints the gap using surrounding colours and patterns, so missing details look completely ordinary.",
+   "location": "loc_striped_wall",
+   "through_line_state": "the red dot pops out leaving a dark hole, and the stripes are rolled over it until nothing is missing",
+   "shots": [
+    "WIDE frontal: a wall of horizontal sand and grass-green clay stripes with the red clay dot pressed into the middle",
+    "CU low angle: the red dot pops out of the wall, leaving a round dark hole",
+    "MEDIUM lateral: a clay paint roller rolls by itself from left to right across the hole",
+    "ECU macro: the sand and green stripes now run unbroken where the hole was",
+    "WIDE high angle: the whole wall shows seamless stripes with no hole, then settles"
+   ],
+   "assets_used": [
+    "loc_striped_wall",
+    "prop_red_dot"
+   ],
+   "audio": "a soft pop as the dot comes out, a sticky rolling squish of the roller, a gentle settling tap",
+   "direction_note": "The roller moves only left to right, on its own.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "HERE'S THE\n*SURPRISE*",
+     "at": "here's the surprise",
+     "until": "it paints the gap"
+    },
+    {
+     "type": "field",
+     "mode": "fill",
+     "title": "THE BRAIN *FILLS IT IN*",
+     "at": "it paints the gap",
+     "dur": "rest",
+     "y": 0.24
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "arc_role": "payoff",
+   "vo_line": "With both eyes open, each compensates for its partner's gap, and whenever one closes, your brain quietly invents whatever probably belongs there.",
+   "location": "loc_window_desk",
+   "through_line_state": "with both eyeballs uncovered the red dot stays bright on the card",
+   "shots": [
+    "MEDIUM frontal: two clay eyeballs on little stands side by side face a cream test card with a dark cross and the red dot",
+    "CU lateral: a small clay cap drops over the left eyeball",
+    "ECU macro: the red dot on the card, still bright",
+    "WIDE high angle: the cap lifts off and both eyeballs look together at the card, sunlight through the window",
+    "MEDIUM low angle: the red dot stays bright on the card while cotton-wool clouds drift past the window, then settles"
+   ],
+   "assets_used": [
+    "loc_window_desk",
+    "prop_clay_eyeball",
+    "prop_red_dot"
+   ],
+   "audio": "a soft clay tap as the cap lands, a light pop as it lifts, a calm breezy hum bed",
+   "direction_note": "Two eyeballs, both the same blue-iris clay eyeball. The red dot is always to the RIGHT of the cross.",
+   "overlays": [
+    {
+     "type": "card",
+     "text": "BOTH EYES OPEN:\n*NO* GAP",
+     "at": "with both eyes",
+     "until": "and whenever one"
+    },
+    {
+     "type": "card",
+     "text": "ONE EYE CLOSED:\nTHE BRAIN *INVENTS*",
+     "at": "and whenever one",
+     "dur": "rest"
+    }
+   ]
+  }
+ ],
+ "sources": [
+  "https://www.ncbi.nlm.nih.gov/books/NBK11145/",
+  "https://doi.org/10.3389/fnhum.2014.00534",
+  "https://doi.org/10.1038/nrn1869",
+  "https://pubmed.ncbi.nlm.nih.gov/17574069/",
+  "https://www.encyclopedia.com/people/science-and-technology/physics-biographies/edme-mariotte",
+  "https://en.wikipedia.org/wiki/Blind_spot_(vision)",
+  "https://www.astronomy.com/?p=44220"
+ ],
+ "palette_lock": "painted sky-blue backdrop with cotton-wool clouds, cream, warm sand, grass green and wooden-brown clay; signal red ONLY on the red clay dot"
+}

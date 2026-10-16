@@ -1,0 +1,34 @@
+{
+ "loc_test_card": {
+  "id": "c31d0daf-730d-4d31-9c08-d4a24a30b9bf",
+  "desc": "LOCATION (upright cream clay test card with a dark brown clay cross on its left half, on a sky-blue clay table)"
+ },
+ "loc_eye_cutaway": {
+  "id": "d247ebcc-3226-4b47-869c-ee6f3fabd5c0",
+  "desc": "LOCATION (giant clay eyeball sliced in half on a sand tabletop: bumpy pink retina inside, a smooth pale disc where a cream nerve cord leaves the back)"
+ },
+ "loc_study_room": {
+  "id": "c3bcbbf5-d7dd-4dcd-b12b-9014c6e1da9e",
+  "desc": "LOCATION (candlelit 17th-century clay study: dark brown wall with one white clay spot on the right, wooden desk with candle, quill and inkpot)"
+ },
+ "loc_field_board": {
+  "id": "b4d0581c-18b8-48ce-a9e4-56aba54b7a07",
+  "desc": "LOCATION (upright cream clay board on green clay ground: dark cross on the left, empty dashed oval pressed into the right)"
+ },
+ "loc_striped_wall": {
+  "id": "8732d413-3331-43d7-9c50-71d4b28abd36",
+  "desc": "LOCATION (clay wall of horizontal sand and grass-green stripes, small cream shelf with a cream clay paint roller)"
+ },
+ "loc_window_desk": {
+  "id": "b1e41aeb-c502-4442-b3cf-414633644f9a",
+  "desc": "LOCATION (sunny clay desk by a window with clouds and trees outside, a cream test card with a dark cross on its left half, two small wooden stands)"
+ },
+ "prop_red_dot": {
+  "id": "fbf626f7-95ae-4fdf-ab65-c55166bff711",
+  "desc": "PROP round flat signal-red clay dot (the only red thing in every scene)"
+ },
+ "prop_clay_eyeball": {
+  "id": "5e1a1a5f-620f-4909-a7fa-e6c14a555940",
+  "desc": "PROP white clay eyeball with a sky-blue iris on a small wooden stand (repeat it for a second eyeball)"
+ }
+}

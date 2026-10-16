@@ -4,6 +4,13 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
 
 ## State right now
 
+- **Episode 2 is finished:** "Why Your Brain Hides a Blind Spot 10 Moons Wide" (slug
+  `why-your-brain-fills-in-your-blind-spot`, status `produced_not_published`), made 2026-10-16 on the
+  owner's request. 170.05 credits.
+  - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4
+  - Files: `channel/episodes/002-blind-spot/` (manifest + assets). Sandbox working files: `~/ep2/`.
+  - New overlay diagram `field` in `channel/tools/overlays.py`: one eye's visual field drawn to scale
+    (blind spot 15 degrees out, about 5.5 x 7.5 degrees; moon 0.5 degrees).
 - **Episode 1 is finished:** "Why Traffic Jams Appear Out of Nowhere", v5 (status
   `produced_not_published`, not posted anywhere).
   - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/e3fa913d-9646-4721-9e23-5613ac164da4.mp4
@@ -24,7 +31,8 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
     repo with `create_session` (permission_mode auto), confirm Higgsfield `balance` works there, then
     point a new task at it with `create_trigger` and `persistent_session_id`, reusing the prompt
     (`list_triggers`).
-- **Credits:** 585.9 on the Higgsfield Plus plan as of 2026-10-16. An episode costs about 150, and runs
+- **Credits:** 415.85 on the Higgsfield Plus plan after episode 2 (2026-10-16), enough for about two
+  more episodes before the 200 floor pauses runs. An episode costs about 150, and runs
   pause by themselves under 200. Buying credits or changing the plan is the owner's call.
 - **App: running on the owner's Mac mini** (reported by the owner 2026-10-16; this cloud session can't
   reach the Mac, so those details are as reported, not checked from here).
@@ -56,12 +64,10 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
     Mac, whose launchd services use that path.
   - The old `claude/happy-cannon-dzuzwj` branch is deleted, and `main` is the default branch
     (checked 2026-10-16).
-  - The scheduled task's stored prompt now says main-only (the owner had the production session apply
-    it; checked 2026-10-16).
-- **Episode 2 ("Why your brain fills in your blind spot") is not on `main` yet.** The 2026-10-16 08:58
-  run died when the production session's worker restarted (no credits spent). The owner then asked the
-  production session to run it again; check `channel/episodes.json` on `main` for whether it landed.
-  When it does, the Mac imports it within about 45 minutes (15-minute pull + 30-minute import).
+  - The scheduled task's prompt now says `main` (applied 2026-10-16 on the owner's word).
+- **Next scheduled run:** Mon 2026-10-19 08:58 makes episode 3 (next topic by score:
+  `why-airplanes-fly-curved-routes`). Pushed episodes reach the Mac's import within about 45 minutes
+  (15-minute pull + 30-minute import).
 
 ## What the owner still has to do (details in `docs/setup-guide.md`)
 
@@ -147,6 +153,8 @@ dashboard Agents page. Never claim it is live without checking.
 - The `ring`/`wave` overlay diagrams are traffic-specific. For a new topic, add a diagram type to
   `channel/tools/overlays.py` drawn from a real model or real numbers, or use cards and chains.
 
+- Episode 2's hook scored WORKABLE (57); weakest property is specificity.
+
 ## How things work (gotchas learned the hard way)
 
 - **Higgsfield sandbox:**
@@ -155,6 +163,12 @@ dashboard Agents page. Never claim it is live without checking.
   - Foreground commands time out at 60 s; use `background: true` and poll.
   - Episode 1's working files are in the sandbox under `~/clay/` (they may expire).
 - **Narration:** use the plain `[curious]` tag only. Descriptive tags get spoken aloud.
+  - Kevin reads short words fast: in episode 2, five of six first takes were RUSHED (over 2.9 words/s)
+    at 21-23 words. Write with long, multi-syllable words from the start ("considerably",
+    "photoreceptors", "compensates"); one-syllable lines fail.
+  - Moving the manifest into the sandbox: a plain `cat > file <<'EOF'` heredoc or a small python
+    patch in the command works fine (only base64 is refused). Keep the local and sandbox copies'
+    md5 equal.
   - `channel/tools/check_takes.py` is the real check; the workflow's `verify_takes.py` missed bad takes.
 - **Overlays:** `python3 overlays.py manifest captions.json in.mp4 out.mp4 --still T` renders previews.
   - Run it without `--still` for the full render, about 2 minutes in the background.
