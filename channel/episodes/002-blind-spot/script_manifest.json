@@ -81,7 +81,7 @@
   {
    "n": 3,
    "arc_role": "build",
-   "vo_line": "Centuries ago, French scientist Edme Mariotte discovered it. With one eye covered, he watched a small white spot on the wall completely disappear.",
+   "vo_line": "Centuries ago, French scientist Edme Mariotte found it. He covered one eye, and a white spot on the wall disappeared.",
    "location": "loc_study_room",
    "through_line_state": "the red dot is the mark being stared at; the white spot beside it disappears",
    "shots": [
@@ -99,16 +99,16 @@
    "overlays": [
     {
      "type": "card",
-     "text": "Edme *Mariotte*\nfound it first",
+     "text": "Edme *Mariotte*\nfound it in France",
      "at": "french scientist",
-     "until": "with one eye"
+     "until": "he covered one eye"
     }
    ]
   },
   {
    "n": 4,
    "arc_role": "build",
-   "vo_line": "Try it. Cover your left eye, focus on a cross, then gradually move closer, and a red dot to the right eventually disappears.",
+   "vo_line": "Try it. Cover your left eye, look at a cross, lean in, and a red dot to its right vanishes.",
    "location": "loc_field_board",
    "through_line_state": "the red dot sits inside the dashed oval on the board and fades away",
    "shots": [
@@ -139,7 +139,7 @@
   {
    "n": 5,
    "arc_role": "turn",
-   "vo_line": "Here's the surprise: you never actually see a dark hole. Your brain fills the gap with whatever surrounds it, like stripes or sky.",
+   "vo_line": "Here's the surprise: there's no dark hole. Your brain paints over it with whatever's around it, like stripes.",
    "location": "loc_striped_wall",
    "through_line_state": "the red dot pops out leaving a dark hole, and the stripes are rolled over it until nothing is missing",
    "shots": [
@@ -160,7 +160,7 @@
      "type": "field",
      "mode": "fill",
      "title": "Your brain *fills it in*",
-     "at": "your brain fills",
+     "at": "your brain paints",
      "dur": "rest",
      "y": 0.24
     }

@@ -4,10 +4,15 @@ Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md
 
 ## State right now
 
-- **Episode 2 is finished:** "Why Your Brain Hides a Blind Spot 10 Moons Wide" (slug
+- **Episode 2 is finished (v2):** "Why You Never Notice Your Blind Spot" (slug
   `why-your-brain-fills-in-your-blind-spot`, status `produced_not_published`), made 2026-10-16 on the
-  owner's request. 170.05 credits.
-  - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4
+  owner's request and reworked the same day after the owner's review (captions too small and low,
+  cards templated, narration stiff, hook not understandable). 185.2 credits in total (170.05 + 15.15
+  for the rework).
+  - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/55ccc4f6-3d7a-4d2c-a6bc-2ba59b495906.mp4
+    (v1, superseded: .../77b23ae6-5293-4435-aaef-df1041b4203c.mp4)
+  - **New narrator: Bram** (owner's pick after an audition, 2026-10-16). Kevin read plain wording at
+    3.1-3.8 words/s and could not fill the 10-second scenes; Bram reads it at about 2.6 words/s.
   - Files: `channel/episodes/002-blind-spot/` (manifest + assets). Sandbox working files: `~/ep2/`.
   - New overlay diagram `field` in `channel/tools/overlays.py`: one eye's visual field drawn to scale
     (blind spot 15 degrees out, about 5.5 x 7.5 degrees; moon 0.5 degrees).
@@ -155,7 +160,8 @@ dashboard Agents page. Never claim it is live without checking.
 - The `ring`/`wave` overlay diagrams are traffic-specific. For a new topic, add a diagram type to
   `channel/tools/overlays.py` drawn from a real model or real numbers, or use cards and chains.
 
-- Episode 2's hook scored WORKABLE (57); weakest property is specificity.
+- Episode 2 v2's hook scores WEAK (47) on `hookscore.py`; it was chosen for clarity on one listen
+  (owner priority) over the score.
 
 ## How things work (gotchas learned the hard way)
 
@@ -165,9 +171,10 @@ dashboard Agents page. Never claim it is live without checking.
   - Foreground commands time out at 60 s; use `background: true` and poll.
   - Episode 1's working files are in the sandbox under `~/clay/` (they may expire).
 - **Narration:** use the plain `[curious]` tag only. Descriptive tags get spoken aloud.
-  - Kevin reads short words fast: in episode 2, five of six first takes were RUSHED (over 2.9 words/s)
-    at 21-23 words. Write with long, multi-syllable words from the start ("considerably",
-    "photoreceptors", "compensates"); one-syllable lines fail.
+  - The narrator is Bram (`549ff70a-...`); he fits 20-23 plain words into a 10-second scene. Long
+    lines (23 words) can run over 9.5 s: trim them, don't pad. Never use textbook words to fix pace.
+  - Captions: `--profile default` (the faceless profile pins captions low), 3 words / 16 characters
+    a cue so one long word can't shrink every caption. Exact flags in the recipe.
   - Moving the manifest into the sandbox: a plain `cat > file <<'EOF'` heredoc or a small python
     patch in the command works fine (only base64 is refused). Keep the local and sandbox copies'
     md5 equal.

@@ -11,7 +11,7 @@ straight answer.
 
 ## How I actually talk
 
-Kevin, the narrator: fast, bright and punchy, but every word lands. Short sentences that turn on a
+Bram, the narrator (Kevin voiced episode 1): clear, warm and unhurried; every word lands. Short sentences that turn on a
 reveal. Example from episode 1:
 
 > This enormous traffic jam has no cause. Drive to its very front and you'll find no accident, no

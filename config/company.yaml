@@ -130,7 +130,7 @@ script:
   structure: [hook, mystery, setup, explanation, reveal, conclusion]
 
 brand:
-  voice: "bright, punchy, curious, fast but clear (narrator: Kevin); see channel/voice.md"
+  voice: "warm, curious, plain-spoken and clear (narrator: Bram); see channel/voice.md"
   visual_style: >-
     Handmade claymation miniatures (Higgsfield Claymotion preset); the locked formula is
     channel/style.txt and the full recipe is channel/why-in-clay.md.

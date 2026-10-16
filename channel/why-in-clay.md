@@ -14,8 +14,8 @@ worked example: copy its file shapes.
 | Look | Higgsfield explainer preset **Claymotion** (`1de0f39e-c602-4b00-b54a-38440c7f63f7`). Style key image job `313e8a54-0203-4435-9f21-af07936fc570`. Style formula: `channel/style.txt`, pasted verbatim into every image and video prompt |
 | Motion token | `smooth simple handcrafted motion, subtle stop-motion feel` (dimensional style: no "3D render" in negatives) |
 | Palette | sky blue, grass green, warm sand, cream; ONE signal-red accent reserved for the episode's through-line prop and warning marks |
-| Narrator | **Kevin**, `voice_id f1373f24-3b96-433f-9a68-e595810ef608`, `voice_type preset`, model `text2speech_v2` variant `elevenlabs` |
-| Prompt format (every line) | `[curious] {line}`: one plain tag, nothing else (`[excited]` made Kevin rush past the rate limit). Descriptive brackets and per-line moods get SPOKEN by this voice (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
+| Narrator | **Bram** (owner's pick, 2026-10-16), `voice_id 549ff70a-3ee7-4f04-a4d9-89a24fab7709`, `voice_type preset`, model `text2speech_v2` variant `elevenlabs`. Episode 1 used Kevin (`f1373f24-...`), who read plain wording too fast for the 10-second scenes |
+| Prompt format (every line) | `[curious] {line}`: one plain tag, nothing else (`[excited]` made Kevin rush past the rate limit). Descriptive brackets and per-line moods can get SPOKEN aloud (episode 1: "Matter 2008", "Supposed to you, here's the surprise") |
 | Captions | large and raised clear of the Shorts UI (owner, 2026-10-16: the old ones were too small and too low), sentence case, max 3 words and 16 characters a cue: `audio_to_captions.py ... --max-words 3 --max-chars 16`, then `subtitle_paper_burn.py --style bold --no-caps --font-key montserrat --stroke-frac 0.045 --profile default --single-line --fontsize-frac 0.040 --bottom-frac 0.32 --maxw-frac 0.72`. Use `--profile default`: the `faceless` profile pins captions at 83% height whatever `--bottom-frac` says. The tool picks ONE size for the whole video that fits the longest cue, so one long word ("photoreceptors") shrinks every caption; that is why cues are capped at 16 characters |
 | On-screen text + diagrams | `channel/tools/overlays.py`: torn-paper scraps with a wobbly edge and a slight tilt (not vector boxes), sentence case, ink brown with one signal-red key word; count-up stats, cause-and-effect chains and animated diagrams, all in the upper third and timed to the spoken words. About one per scene. The clay scenes themselves stay text-free (video models garble letters) |
 | Thumbnail | 16:9, `nano_banana_pro` 4k, clay medium, people-free, hook text 3-4 words baked in and checked letter for letter |
@@ -24,14 +24,12 @@ worked example: copy its file shapes.
 
 - **Plain, spoken words (owner, 2026-10-16).** Write the way you'd explain it to a friend. Never
   reach for textbook or thesaurus words ("photoreceptors", "compensates", "considerably",
-  "positioned rightward") to slow Kevin down: episode 2's first cut sounded AI-written because of them.
+  "positioned rightward") to slow the narrator down: episode 2's first cut sounded AI-written because of them.
   Numbers are written as words.
-- **Kevin talks fast.** With 21-23 everyday words he lands at about 3.1-3.5 words/second and often
-  under 7.2 s of speech, so plain lines fail the timing gate. What works without sounding stiff:
-  names and everyday multi-syllable words ("centuries", "discovered", "completely", "eventually",
-  "gradually"), a list of short clauses, and one concrete detail more per line. A comma or full stop
-  barely slows him. A 3.1-3.3 words/second take is acceptable if the line is plain English; never
-  trade clarity for the 2.9 target.
+- **Pace.** Bram reads 21-23 plain words in about 7.8-8.5 s (2.6-2.8 words/second), which fits the
+  10-second scenes. If a take still comes out short or rushed, add one concrete detail in plain words
+  rather than swapping in longer words. (Kevin, the episode-1 voice, ran 3.1-3.8 words/second on plain
+  wording; that is why the narrator changed.)
 - **Hook (scene 1):** write five candidate first lines, score them with
   `python3 .claude/skills/yt-script/hookscore.py hooks.txt`, and use the best. Aim for a verdict
   above WEAK. The hook confirms the title and opens a question the viewer cannot close.

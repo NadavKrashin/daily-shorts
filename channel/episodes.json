@@ -56,37 +56,31 @@
   {
    "number": 2,
    "slug": "why-your-brain-fills-in-your-blind-spot",
-   "title": "Why Your Brain Hides a Blind Spot 10 Moons Wide",
+   "title": "Why You Never Notice Your Blind Spot",
    "thumbnail_hook": "YOU CAN'T SEE THIS",
    "produced_on": "2026-10-16",
-   "status": "in_revision",
-   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4",
+   "status": "produced_not_published",
+   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/55ccc4f6-3d7a-4d2c-a6bc-2ba59b495906.mp4",
    "thumbnail_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/hf_20261016_142806_331565a1-444b-43e4-b2f4-72d231b1eff9.png",
-   "credits_spent": 170.05,
+   "credits_spent": 185.2,
    "sources": [
     "https://www.ncbi.nlm.nih.gov/books/NBK11145/",
     "https://doi.org/10.3389/fnhum.2014.00534",
     "https://doi.org/10.1038/nrn1869",
     "https://pubmed.ncbi.nlm.nih.gov/17574069/",
     "https://www.encyclopedia.com/people/science-and-technology/physics-biographies/edme-mariotte",
-    "https://en.wikipedia.org/wiki/Blind_spot_(vision)",
-    "https://www.astronomy.com/?p=44220"
+    "https://en.wikipedia.org/wiki/Blind_spot_(vision)"
    ],
    "known_issues": [
-    "Hook scored WORKABLE (57) on hookscore.py; weakest property is specificity",
-    "Scene 3 captions: the STT matched 86% of the line (it hears 'Edmey Marriott'), so a few word timings in that scene are interpolated; the caption text itself is the script's spelling",
-    "Scene 1 shows two eyeballs where the script asked for one (harmless; the payoff also uses two)"
+    "Hook scores WEAK (47) on hookscore.py; chosen for clarity on one listen over the score",
+    "Scene 4 narration is 7.65 s of speech (soft band, accepted after one retry)",
+    "Scene 3 captions: the STT hears 'Edmey Marriott', so a few word timings there are interpolated; caption text uses the script's spelling",
+    "Scene 1 shows two eyeballs where the script asked for one"
    ],
-   "fixed_during_run": [
-    "Narration: five of six first takes read faster than 2.9 words/s; rewrote them with longer words (line 1 needed a third version) and all six then passed measure_narration_takes.py and check_takes.py",
-    "Striped-wall set came back with a stray red fleck and a red roller; regenerated with no red so the red dot stays the only red",
-    "First thumbnail drew a long-armed Latin cross; regenerated with an equal-armed plus sign",
-    "Blind-spot diagrams were too small to read; enlarged the panel and fonts and zoomed the moons view"
-   ],
-   "credits_note": "Narration 8 takes, 9 images, 6 minimax_h3 scenes (120), 2 thumbnails; balance 585.9 -> 415.85",
+   "credits_note": "170.05 for the first cut (balance 585.9 -> 415.85); 15.15 for the owner-requested rework (narration retakes, voice audition, Bram takes; 415.85 -> 400.7). Allowed past the 200 cap by CLAUDE.md",
    "category": "psychology_behavior",
-   "description": "Why can't you see your blind spot? Every eye has a patch where the optic nerve leaves, with no light-detecting cells at all, and it's wider than ten full moons. Here's how your brain fills that gap with the colours and patterns around it, and how to find yours: cover your left eye, stare at a cross, and watch a dot vanish.",
-   "caption": "The hole in your vision you've never noticed, explained in clay.",
+   "description": "Why can't you see your blind spot? Each of your eyes has an area where it sees nothing, because the optic nerve leaves the eye there and there are no light sensors. Here's how your other eye and your brain cover the gap, and how to find yours: cover your left eye, look at a cross, lean in, and watch a red dot vanish.",
+   "caption": "There's a hole in your vision you've never noticed. Here's why, in clay.",
    "hashtags": [
     "#shorts",
     "#blindspot",
@@ -99,8 +93,23 @@
     "captions": "passed",
     "visual_review": "passed"
    },
-   "overlays": "14 text and diagram overlays drawn by channel/tools/overlays.py, including a new to-scale blind-spot diagram (`field`)",
-   "hold_reason": "Owner feedback 2026-10-16: captions too small and too low, cards look templated, narration stiff, hook not understandable. Script, cards, captions and recipe are fixed (not yet rendered). Blocked on narration: Kevin reads plain wording too fast to fill the 10-second scenes (lines 1-2 come out at about 6.6-6.9 s, the assembler needs at least 7.2 s); waiting on the owner's choice. Set status back to produced_not_published only after the new cut is rendered."
+   "overlays": "7 cards and diagrams drawn by channel/tools/overlays.py (paper-scrap style), including two to-scale blind-spot diagrams (`field`)",
+   "superseded_video_urls": [
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4"
+   ],
+   "narrator": {
+    "name": "Bram",
+    "voice_id": "549ff70a-3ee7-4f04-a4d9-89a24fab7709",
+    "voice_type": "preset"
+   },
+   "fixed_after_owner_review": [
+    "Captions made larger and raised clear of the Shorts title/buttons (default caption profile, 3 words / 16 characters a cue)",
+    "On-screen cards cut from 14 to 7, rewritten in plain sentence case and drawn as torn-paper scraps instead of vector boxes",
+    "Narration rewritten in plain spoken English (no 'photoreceptors', 'compensates', 'considerably')",
+    "Hook rewritten to be clear on one listen; the confusing 'wider than ten moons' comparison removed",
+    "Narrator changed from Kevin to Bram (owner's pick): Kevin read plain wording too fast for the 10-second scenes",
+    "Title changed to 'Why You Never Notice Your Blind Spot' (the old title referred to the removed moons comparison)"
+   ]
   }
  ]
 }
