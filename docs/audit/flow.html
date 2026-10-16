@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;width:1280px;min-height:720px;font-family:Helvetica,Arial,sans-serif;background:#fff;color:#1d2433}
+h1{font-size:34px;margin:36px 48px 6px} .sub{margin:0 48px 30px;color:#5a6475;font-size:18px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 26px;margin:0 48px}
+.s{border:2px solid #c9d1de;border-radius:14px;padding:16px 18px;background:#f7f9fc}
+.s b{display:block;font-size:20px;margin-bottom:6px} .s span{font-size:16px;line-height:1.45}
+.n{display:inline-block;width:30px;height:30px;border-radius:50%;background:#2b6cb0;color:#fff;text-align:center;line-height:30px;font-weight:bold;margin-right:8px}
+.yt{border-color:#e33;background:#fff5f5}
+</style></head><body>
+<h1>Why in Clay Publisher: user flow</h1>
+<p class="sub">The only user is the channel owner.</p>
+<div class="steps">
+ <div class="s"><b><span class="n">1</span>Owner signs in once</b><span>Google OAuth consent screen ("Why In Clay"): upload videos, view own YouTube account, view own YouTube Analytics. Token is stored only on the owner's computer.</span></div>
+ <div class="s"><b><span class="n">2</span>A finished Short is ready</b><span>The tool imports it and runs technical checks. The owner can review it in the private dashboard.</span></div>
+ <div class="s"><b><span class="n">3</span>Scheduled</b><span>The video gets the next publishing slot (at most one upload per day, about three per week).</span></div>
+ <div class="s yt"><b><span class="n">4</span>Upload</b><span>videos.insert uploads it to the owner's own channel with title, description, sources and AI-content disclosure.</span></div>
+ <div class="s yt"><b><span class="n">5</span>Own statistics</b><span>For about 35 days the tool reads the video's views, watch time and retention (videos.list, Analytics reports.query).</span></div>
+ <div class="s"><b><span class="n">6</span>Owner decides next topics</b><span>Statistics stay internal and help pick future videos. Access can be revoked at any time in the Google Account.</span></div>
+</div></body></html>

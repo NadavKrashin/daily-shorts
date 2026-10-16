@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;width:1280px;min-height:720px;font-family:Helvetica,Arial,sans-serif;background:#fff;color:#1d2433}
+h1{font-size:34px;margin:36px 48px 6px} .sub{margin:0 48px 26px;color:#5a6475;font-size:18px}
+.row{display:flex;gap:28px;margin:0 48px;align-items:stretch}
+.box{border:2px solid #c9d1de;border-radius:14px;padding:18px 20px;background:#f7f9fc;flex:1}
+.box h2{margin:0 0 10px;font-size:21px} .box p,.box li{font-size:16px;line-height:1.45;margin:0}
+.box ul{margin:6px 0 0;padding-left:20px}
+.yt{border-color:#e33;background:#fff5f5} .mac{border-color:#2b6cb0;background:#f1f6fd}
+.arrow{align-self:center;font-size:40px;color:#6b7686}
+.note{margin:22px 48px 0;font-size:16px;color:#3b4455;background:#fffbe6;border:1px solid #f0d77a;border-radius:10px;padding:12px 16px}
+</style></head><body>
+<h1>Why in Clay Publisher: architecture</h1>
+<p class="sub">Private, single-user internal tool. Runs on the channel owner's own computer; not reachable from the internet.</p>
+<div class="row">
+ <div class="box"><h2>1. Video production</h2><p>Our own studio workflow produces each finished Short (animation, narration, captions, fact-checked sources) and adds it to a private episode list.</p><p style="margin-top:8px;color:#5a6475">No YouTube API use in this step.</p></div>
+ <div class="arrow">→</div>
+ <div class="box mac"><h2>2. Why in Clay Publisher (owner's Mac)</h2><ul>
+  <li>Imports the finished episode</li><li>Technical checks (format, audio, length)</li>
+  <li>Schedules one upload (max 1/day)</li><li>Stores OAuth token + own stats locally (private database)</li>
+  <li>Owner dashboard over a private network (Tailscale)</li></ul></div>
+ <div class="arrow">→</div>
+ <div class="box yt"><h2>3. YouTube API Services</h2><ul>
+  <li><b>Data API v3</b>: videos.insert (upload own video), videos.list / channels.list (own channel)</li>
+  <li><b>Analytics API</b>: reports.query (own channel's views, watch time, retention)</li>
+  <li>OAuth 2.0, channel owner only: youtube.upload, youtube.readonly, yt-analytics.readonly</li></ul></div>
+</div>
+<p class="note">Only the Why In Clay channel is accessed. No other channels, no other users, no data shared or sold. Access can be revoked at any time in the owner's Google Account (Security → Third-party connections).</p>
+</body></html>
