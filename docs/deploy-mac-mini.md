@@ -7,6 +7,11 @@ publishing, analytics and the daily reports.
 You need any Apple Silicon or Intel Mac mini with at least 8 GB RAM and 30 GB free disk, on macOS 14 or
 newer, plugged into power and the internet.
 
+**Shortcut:** `scripts/setup-mac-mini.sh` does steps 2-5 and the sleep settings for you, and is safe to
+re-run. Download it from GitHub (the file's page → "Download raw file") and run
+`bash ~/Downloads/setup-mac-mini.sh`. It stops and tells you when it needs you: to install Docker
+Desktop or to add the deploy key. The sections below are the same steps done by hand.
+
 ## 1. Keep the Mac awake and self-restarting (5 minutes)
 
 1. Open System Settings → Energy (on older macOS: Energy Saver). Turn on **Prevent automatic sleeping
