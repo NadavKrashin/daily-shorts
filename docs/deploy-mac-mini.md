@@ -64,7 +64,8 @@ Set these values in `.env`:
 - `APP_ENV=production`
 - `DASHBOARD_PASSWORD`, `SECRET_KEY` and `POSTGRES_PASSWORD`: long random strings. `openssl rand -hex 24`
   makes one.
-- `PUBLIC_BASE_URL=http://<the Mac's name>.local:8000` (or the Tailscale address from step 6).
+- `PUBLIC_BASE_URL=` (leave it empty). Instagram fetches each video from the public Higgsfield CDN link;
+  a local or Tailscale address here can't be reached from the internet and made Instagram posts fail.
 
 Then start everything:
 

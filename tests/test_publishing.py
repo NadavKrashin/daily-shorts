@@ -169,7 +169,14 @@ def test_imported_episode_uses_its_cdn_copy_for_instagram():
     rendered = VideoVersion(storage_key="videos/y/v1.mp4", manifest={})
     assert pub.public_video_url(NoPublicStorage(), imported) == cdn
     assert pub.public_video_url(NoPublicStorage(), rendered) is None
-    assert pub.public_video_url(Bucket(), imported) == "https://media.example/videos/x/v1.mp4"
+    assert pub.public_video_url(Bucket(), imported) == cdn               # the QC'd CDN copy comes first
+    assert pub.public_video_url(Bucket(), rendered) == "https://media.example/videos/y/v1.mp4"
+
+    class LanServer:  # PUBLIC_BASE_URL=http://mac.local:8000: unreachable for Instagram (2026-10-16)
+        def public_url(self, key, expires_s=3600):
+            return f"http://atlass-mac-mini.local:8000/public-media/{key}"
+    assert pub.public_video_url(LanServer(), imported) == cdn
+    assert pub.public_video_url(LanServer(), rendered) is None
     assert pub.public_video_url(NoPublicStorage(),
                                 VideoVersion(storage_key="k", manifest={"source_url": "file:///tmp/a.mp4"})) is None
 

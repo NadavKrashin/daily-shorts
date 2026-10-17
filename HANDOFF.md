@@ -125,6 +125,13 @@ dashboard Agents page. Never claim it is live without checking.
   the production runs, raises a high alert ("Episode held, not posted"). Production runs check before
   pushing (recipe step 7b) and fix held episodes before making new ones (step 0). Episode 2 v2 was held
   2026-10-16 for 1.6 s of silence at 9.3-10.9 s; v3 (2026-10-17) passes the check.
+- **Instagram video link (fixed 2026-10-17):** episode 1's first Instagram post failed because
+  `PUBLIC_BASE_URL` on the Mac held a LAN address, which the app offered to Instagram. The owner's Mac
+  session cleared it and retried; the Reel is live (instagram.com/reel/Dek_itADRNh). The code now prefers
+  the episode's HTTPS CDN link and never offers a non-HTTPS link; the setup script leaves the variable empty.
+- **Tokens in logs (fixed 2026-10-17):** httpx logged every request URL, including Instagram's
+  `access_token`. Logging now masks token parameters and keeps httpx at WARNING. Older lines in
+  `~/daily-shorts/logs/` on the Mac still contain the token (local only; `logs/` is git-ignored).
 - Captions: `publishing.adapters.post_text` builds every platform's caption: tags already in the
   caption are merged, duplicates dropped, at most 5 tags, `#shorts` only on YouTube. (Before
   2026-10-16 the TikTok package and Instagram doubled the tags.) The TikTok package's `cover.jpg` is a

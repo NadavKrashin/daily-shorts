@@ -4,15 +4,33 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
 from datetime import datetime, timezone
 
 from sqlalchemy import select
 
 
+class _RedactSecrets(logging.Filter):
+    """Platform APIs (Instagram, Facebook) take the access token as a URL parameter, and httpx logs every
+    request URL at INFO, so tokens ended up in the log files. Mask them in every log line."""
+    PATTERN = re.compile(r"((?:access_token|client_secret|refresh_token|fb_exchange_token|code)=)[^&\s\"']+")
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        msg = record.getMessage()
+        clean = self.PATTERN.sub(r"\1[redacted]", msg)
+        if clean != msg:
+            record.msg, record.args = clean, None
+        return True
+
+
 def _setup_logging(level: str = "INFO") -> None:
     logging.basicConfig(level=getattr(logging, level), format='{"t":"%(asctime)s","lvl":"%(levelname)s",'
                         '"logger":"%(name)s","msg":"%(message)s"}')
+    for h in logging.getLogger().handlers:
+        h.addFilter(_RedactSecrets())
+    for noisy in ("httpx", "httpcore"):   # one INFO line per API call, each with the full URL
+        logging.getLogger(noisy).setLevel(logging.WARNING)
 
 
 def cmd_migrate(_):

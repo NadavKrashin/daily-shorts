@@ -73,7 +73,7 @@ if [ ! -f .env ]; then
       SECRET_KEY=*)        echo "SECRET_KEY=$(rand)" ;;
       DASHBOARD_PASSWORD=*) echo "DASHBOARD_PASSWORD=$PASS" ;;
       POSTGRES_PASSWORD=*) echo "POSTGRES_PASSWORD=$(rand)" ;;
-      PUBLIC_BASE_URL=*)   echo "PUBLIC_BASE_URL=http://$HOST:8000" ;;
+      PUBLIC_BASE_URL=*)   echo "PUBLIC_BASE_URL=" ;;   # Instagram must fetch videos from the public CDN, not the LAN
       *)                   echo "$line" ;;
     esac
   done < .env.example > .env

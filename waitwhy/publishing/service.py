@@ -53,14 +53,15 @@ def adapter_for(session: Session, cfg: dict, platform: str):
 def public_video_url(store, vv: VideoVersion) -> str | None:
     """A public HTTPS link to this exact file, for platforms that fetch the video (Instagram).
 
-    Storage's own public link when it has one (S3/R2, or a public server). Otherwise, for episodes
-    imported from the production runs, the CDN copy they were downloaded from: the same bytes that
-    passed QC, so no R2 bucket is needed."""
-    url = store.public_url(vv.storage_key, 6 * 3600)
-    if url:
-        return url
+    For episodes imported from the production runs, the CDN copy they were downloaded from comes first:
+    the same bytes that passed QC, reachable from anywhere. Otherwise storage's own link, but only an
+    HTTPS one: a LAN or tailnet address (e.g. PUBLIC_BASE_URL=http://mac.local:8000) can't be fetched by
+    Instagram, which is why episode 1's first Instagram post failed on 2026-10-16."""
     src = (vv.manifest or {}).get("source_url") or ""
-    return src if src.startswith("https://") else None
+    if src.startswith("https://"):
+        return src
+    url = store.public_url(vv.storage_key, 6 * 3600)
+    return url if url and url.startswith("https://") else None
 
 
 def is_publication_approved(session: Session, video: Video) -> bool:
