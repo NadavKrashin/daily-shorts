@@ -134,8 +134,8 @@ dashboard Agents page. Never claim it is live without checking.
   `~/daily-shorts/logs/` on the Mac still contain the token (local only; `logs/` is git-ignored).
 - **Rescheduling from a cloud session:** set `publish_at` (ISO time with offset) on the episode in
   `channel/episodes.json` and push. The Mac's next import moves that episode's waiting posts to that
-  time, once per value (`importer.apply_publish_at`). Episode 2 was moved this way to Sat 2026-10-17
-  19:00 Israel after weekend slots were turned on.
+  time, once per value (`importer.apply_publish_at`). Episode 2 was moved this way to Sun 2026-10-18
+  00:00 Israel (21:00 UTC Sat) after weekend slots were turned on.
 - Captions: `publishing.adapters.post_text` builds every platform's caption: tags already in the
   caption are merged, duplicates dropped, at most 5 tags, `#shorts` only on YouTube. (Before
   2026-10-16 the TikTok package and Instagram doubled the tags.) The TikTok package's `cover.jpg` is a
