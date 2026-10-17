@@ -5,7 +5,7 @@ Everything else runs by itself:
   (`channel/why-in-clay.md`) and push it to `channel/episodes.json`.
 - The app (`waitwhy`) imports each episode every 30 minutes and runs technical QC.
 - In autonomous mode the app then approves the episode and schedules it for the next audience slot
-  (12:00, 17:00 or 19:30 New York, weekdays). It publishes through the official APIs and collects
+  (12:00, 17:00 or 19:30 New York, every day). It publishes through the official APIs and collects
   analytics, and a morning report goes out at 09:00.
 
 The steps below need your logins, your money or your signature. Do them in order. Never paste secrets

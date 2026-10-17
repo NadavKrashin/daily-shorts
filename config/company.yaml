@@ -91,7 +91,7 @@ schedules:
 publishing_slots:
   timezone: America/New_York
   slots: ["12:00", "17:00", "19:30"]
-  days: [mon, tue, wed, thu, fri]
+  days: [mon, tue, wed, thu, fri, sat, sun]   # weekends on since 2026-10-17 (owner asked why not; no reason to skip)
 
 # --- Inventory targets (minimums, not reasons to overproduce) -------------------
 inventory_targets:
