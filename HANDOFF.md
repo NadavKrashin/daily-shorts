@@ -1,16 +1,21 @@
 # Handoff: where to pick up
 
-Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md`. Last updated 2026-10-16.
+Read this first in any new session, then `CLAUDE.md` and `channel/why-in-clay.md`. Last updated 2026-10-17.
 
 ## State right now
 
-- **Episode 2 is finished (v2):** "Why You Never Notice Your Blind Spot" (slug
+- **Episode 2 is finished (v3):** "Why You Never Notice Your Blind Spot" (slug
   `why-your-brain-fills-in-your-blind-spot`, status `produced_not_published`), made 2026-10-16 on the
   owner's request and reworked the same day after the owner's review (captions too small and low,
   cards templated, narration stiff, hook not understandable). 185.2 credits in total (170.05 + 15.15
   for the rework).
-  - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/55ccc4f6-3d7a-4d2c-a6bc-2ba59b495906.mp4
-    (v1, superseded: .../77b23ae6-5293-4435-aaef-df1041b4203c.mp4)
+  - Video: https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/5092e338-1cff-4f8e-bb3c-6758ed3e41ee.mp4
+    (v3, 2026-10-17, 54.5 s; superseded: v2 .../55ccc4f6-3d7a-4d2c-a6bc-2ba59b495906.mp4, v1 .../77b23ae6-5293-4435-aaef-df1041b4203c.mp4)
+  - v3 fixes the Mac's hold on v2 (1.59 s of silence between scenes 1 and 2) at 0 credits: each scene
+    clip is trimmed to its line plus about 0.45 s each side (`channel/tools/trim_dead_air.py`, recipe
+    step 6a), then captions and overlays are redone (`overlays.py --assembly`). Longest silence is
+    0.99 s. `scripts/qc_episode.py 2` on the hosted file: "would be approved and posted
+    automatically (score 95.5)". The Mac picks up the new `video_url` on its next import.
   - **New narrator: Bram** (owner's pick after an audition, 2026-10-16). Kevin read plain wording at
     3.1-3.8 words/s and could not fill the 10-second scenes; Bram reads it at about 2.6 words/s.
   - Files: `channel/episodes/002-blind-spot/` (manifest + assets). Sandbox working files: `~/ep2/`.
@@ -119,7 +124,7 @@ dashboard Agents page. Never claim it is live without checking.
   check anywhere. A failed check holds the episode (NEEDS_REVISION, never posted) and, for episodes from
   the production runs, raises a high alert ("Episode held, not posted"). Production runs check before
   pushing (recipe step 7b) and fix held episodes before making new ones (step 0). Episode 2 v2 was held
-  2026-10-16 for 1.6 s of silence at 9.3-10.9 s; the production session is re-editing it.
+  2026-10-16 for 1.6 s of silence at 9.3-10.9 s; v3 (2026-10-17) passes the check.
 - Captions: `publishing.adapters.post_text` builds every platform's caption: tags already in the
   caption are merged, duplicates dropped, at most 5 tags, `#shorts` only on YouTube. (Before
   2026-10-16 the TikTok package and Instagram doubled the tags.) The TikTok package's `cover.jpg` is a

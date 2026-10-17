@@ -60,7 +60,7 @@
    "thumbnail_hook": "YOU CAN'T SEE THIS",
    "produced_on": "2026-10-16",
    "status": "produced_not_published",
-   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/55ccc4f6-3d7a-4d2c-a6bc-2ba59b495906.mp4",
+   "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/5092e338-1cff-4f8e-bb3c-6758ed3e41ee.mp4",
    "thumbnail_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/hf_20261016_142806_331565a1-444b-43e4-b2f4-72d231b1eff9.png",
    "credits_spent": 185.2,
    "sources": [
@@ -75,7 +75,8 @@
     "Hook scores WEAK (47) on hookscore.py; chosen for clarity on one listen over the score",
     "Scene 4 narration is 7.65 s of speech (soft band, accepted after one retry)",
     "Scene 3 captions: the STT hears 'Edmey Marriott', so a few word timings there are interpolated; caption text uses the script's spelling",
-    "Scene 1 shows two eyeballs where the script asked for one"
+    "Scene 1 shows two eyeballs where the script asked for one",
+    "Scenes are 8.3-10.1 s instead of 10 s (trimmed to remove dead air), so the first and last shot of each scene are a little shorter than the 2 s the script planned"
    ],
    "credits_note": "170.05 for the first cut (balance 585.9 -> 415.85); 15.15 for the owner-requested rework (narration retakes, voice audition, Bram takes; 415.85 -> 400.7). Allowed past the 200 cap by CLAUDE.md",
    "category": "psychology_behavior",
@@ -91,11 +92,13 @@
    "checks": {
     "narration_strict": "passed",
     "captions": "passed",
-    "visual_review": "passed"
+    "visual_review": "passed",
+    "technical_qc": "passed"
    },
    "overlays": "7 cards and diagrams drawn by channel/tools/overlays.py (paper-scrap style), including two to-scale blind-spot diagrams (`field`)",
    "superseded_video_urls": [
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4"
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/77b23ae6-5293-4435-aaef-df1041b4203c.mp4",
+    "https://d2ol7oe51mr4n9.cloudfront.net/user_3GwgNHZqxuXDkDZnfXEEDAP3y0F/55ccc4f6-3d7a-4d2c-a6bc-2ba59b495906.mp4"
    ],
    "narrator": {
     "name": "Bram",
@@ -109,6 +112,9 @@
     "Hook rewritten to be clear on one listen; the confusing 'wider than ten moons' comparison removed",
     "Narrator changed from Kevin to Bram (owner's pick): Kevin read plain wording too fast for the 10-second scenes",
     "Title changed to 'Why You Never Notice Your Blind Spot' (the old title referred to the removed moons comparison)"
+   ],
+   "fixed_after_app_qc": [
+    "v2 was held by the Mac's import check (no_excessive_silence: 1.59 s of dead air at 9.27-10.86 s, where scene 1 meets scene 2), so it was never posted. v3 (2026-10-17, 0 credits) trims each scene clip to its line plus about 0.45 s each side (channel/tools/trim_dead_air.py), then re-captions and re-runs the overlays on the new scene timings. Longest silence is now 0.99 s and the video runs 54.5 s instead of 60.1 s. scripts/qc_episode.py 2 on the hosted file: every check passes, 'would be approved and posted automatically (score 95.5)'."
    ]
   }
  ]

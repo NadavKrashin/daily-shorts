@@ -10,7 +10,7 @@ worked example: copy its file shapes.
 |---|---|
 | Name | Why in Clay (handle `@whyinclay`) |
 | Promise | One everyday mystery, explained in 60 seconds of handmade clay |
-| Format | 9:16, 60 s = 6 scenes x 10 s, five hard-cut shots per scene (cuts at 2/4/6/8 s) |
+| Format | 9:16, 6 scenes generated as 10 s clips, five hard-cut shots per scene (cuts at 2/4/6/8 s); each clip is trimmed to its line (step 6a), so a finished episode runs about 55 s |
 | Look | Higgsfield explainer preset **Claymotion** (`1de0f39e-c602-4b00-b54a-38440c7f63f7`). Style key image job `313e8a54-0203-4435-9f21-af07936fc570`. Style formula: `channel/style.txt`, pasted verbatim into every image and video prompt |
 | Motion token | `smooth simple handcrafted motion, subtle stop-motion feel` (dimensional style: no "3D render" in negatives) |
 | Palette | sky blue, grass green, warm sand, cream; ONE signal-red accent reserved for the episode's through-line prop and warning marks |
@@ -123,6 +123,15 @@ follow them, except where this file says otherwise.
      clear of the right-hand buttons (inside the middle ~72% of the width).
    - `sandbox_exec` foreground calls time out at 60 s; run long work with `background:true` and poll.
    Inspect frames at a few cue midpoints before `media_confirm`.
+6a. **Trim dead air** (no credits; every run), right after `finish_video.sh` and before the captions
+   in step 6. `finish_video.sh` centres each line in its 10 s scene,
+   so with Bram's ~8.3 s lines two scenes meet with 1.5 s or more of silence, which the Mac holds
+   (episode 2 v2). Run `python3 trim_dead_air.py --sidecar work/output/final_clean.mp4.assembly.json
+   --blocks-dir work/blocks --voice-dir vdir --out-dir trimmed` (upload `channel/tools/trim_dead_air.py`):
+   it trims each clip to its line plus 0.45 s each side and writes a new sidecar. Caption the trimmed
+   `final_clean.mp4` with `audio_to_captions.py ... --per-block <new sidecar> --voice-dir vdir`, and pass
+   `--assembly <new sidecar>` to `overlays.py` in 6b so the scraps follow the shorter scenes. Episodes
+   come out about 55 s long.
 6b. **Overlays** (no credits): upload `channel/tools/overlays.py` and the manifest, then
    `python3 overlays.py script_manifest.json work/output/final.words.json work/output/final.mp4 final_v.mp4 --still T ...`
    writes overlay previews: composite and look at one per overlay, fix overlaps or wrong timing, then run
@@ -138,7 +147,7 @@ follow them, except where this file says otherwise.
    (step 8), then run `python3 scripts/qc_episode.py N --file <final video>`. It must end with "would be
    approved and posted automatically" (exit code 0). Anything else means the Mac would hold the episode
    and it would never be posted: fix the named check and run it again. Episode 2 was held for 1.6 s of
-   silence between scenes (the limit is 1.5 s); keep every gap between lines under about 1 s.
+   silence between scenes (the limit is 1.5 s); keep every gap between lines under about 1 s (step 6a).
 8. **Record.** Append the episode to `channel/episodes.json` in episode 1's shape: urls, credits spent
    (balance before minus after), sources, known issues, `category`, `description` and `hashtags`
    (yt-seo rules; at most 5, as TikTok allows no more; the app keeps `#shorts` for YouTube only and

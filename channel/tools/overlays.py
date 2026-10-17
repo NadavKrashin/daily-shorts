@@ -1,7 +1,7 @@
 """Explanatory text and diagram overlays for a Why in Clay episode.
 
 Usage (inside the Higgsfield sandbox, after captions are burned):
-    python3 overlays.py script_manifest.json CAPTIONS_WORDS_JSON IN.mp4 OUT.mp4
+    python3 overlays.py script_manifest.json CAPTIONS_WORDS_JSON IN.mp4 OUT.mp4 [--assembly SIDECAR.json]
 
 The clay scenes stay text-free: video models garble letters. Every word on screen is drawn here
 instead, so it is spelled exactly as written. Each block in the manifest may carry an `overlays`
@@ -431,15 +431,27 @@ class Element:
 
 
 # ------------------------------------------------------------------ main
-def build_elements(manifest: dict, clock: Clock, W: int, H: int) -> list[Element]:
+def block_spans(manifest: dict, assembly: dict | None) -> dict[int, tuple[float, float]]:
+    """{block n: (start, end)} in the final video: 10 s each, or the assembler sidecar's clip lengths."""
+    if not assembly:
+        return {b["n"]: ((b["n"] - 1) * 10.0, b["n"] * 10.0) for b in manifest["blocks"]}
+    spans, t = {}, 0.0
+    for b in assembly["per_block"]:
+        spans[b["n"]] = (t, t + float(b["clip_s"]))
+        t += float(b["clip_s"])
+    return spans
+
+
+def build_elements(manifest: dict, clock: Clock, W: int, H: int, assembly: dict | None = None) -> list[Element]:
     out = []
+    spans = block_spans(manifest, assembly)
     for b in manifest["blocks"]:
-        block_start = (b["n"] - 1) * 10.0
+        block_start, block_end = spans[b["n"]]
         for spec in b.get("overlays", []):
             t0 = clock.at(spec["at"], after=block_start) + float(spec.get("delay", 0.0))
             spec = dict(spec)
             if spec.get("dur") == "rest":  # hold until just before the scene cut
-                spec["dur"] = block_start + 10.0 - 0.2 - t0
+                spec["dur"] = block_end - 0.2 - t0
             elif "until" in spec:  # hold until the narration reaches this phrase
                 spec["dur"] = clock.at(spec["until"], after=t0) - 0.1 - t0
             out.append(Element(spec, t0, W, H))
@@ -464,12 +476,15 @@ def main() -> int:
     ap.add_argument("out")
     ap.add_argument("--still", type=float, action="append", default=[],
                     help="also write OUT.t<sec>.png previews of the overlay band at these times")
+    ap.add_argument("--assembly", help="assembler sidecar (final_clean.mp4.assembly.json) when the scenes "
+                                       "are not 10 s each, e.g. after trimming dead air")
     args = ap.parse_args()
     manifest = json.load(open(args.manifest))
     cues = json.load(open(args.captions_json))
     cues = cues["captions"] if isinstance(cues, dict) else cues
     W, H, fps, dur = probe(args.inp)
-    elements = build_elements(manifest, Clock(cues), W, H)
+    elements = build_elements(manifest, Clock(cues), W, H,
+                              json.load(open(args.assembly)) if args.assembly else None)
     y0, y1 = int(H * BAND[0]) // 2 * 2, int(H * BAND[1]) // 2 * 2
     bh = y1 - y0
     for el in elements:
