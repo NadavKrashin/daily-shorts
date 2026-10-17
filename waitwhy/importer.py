@@ -234,6 +234,42 @@ def import_episode(session: Session, cfg: dict, ep: dict, fetch=download) -> str
     return f"{outcome}: {result}"
 
 
+def apply_publish_at(session: Session, ep: dict) -> str | None:
+    """Honour an episode's ``publish_at`` (ISO time with offset) from channel/episodes.json.
+
+    This is how a cloud session reschedules a post without reaching the Mac: it sets the field and
+    pushes. Each value is applied once, so a later change in the dashboard's Reschedule box isn't
+    undone every 30 minutes. Only posts still waiting are moved, and only to a time in the future."""
+    from datetime import timedelta
+
+    from waitwhy.jobs import queue
+    from waitwhy.models import PublicationJob
+    raw = ep.get("publish_at")
+    if not raw:
+        return None
+    when = datetime.fromisoformat(raw)
+    if when.tzinfo is None:
+        raise ValueError(f"publish_at needs a timezone offset, e.g. 2026-10-17T19:00:00+03:00 (got {raw})")
+    when = when.astimezone(timezone.utc)
+    video = session.execute(select(Video).where(Video.slug == ep["slug"])).scalar_one_or_none()
+    if video is None or (video.publish_metadata or {}).get("publish_at_applied") == raw:
+        return None
+    if when <= datetime.now(timezone.utc) + timedelta(minutes=5):
+        return None
+    jobs = session.execute(select(PublicationJob).where(PublicationJob.video_id == video.id,
+                                                        PublicationJob.status == "scheduled")).scalars().all()
+    if not jobs:
+        return None  # not scheduled yet (e.g. approval still running): try again on the next import
+    for pj in jobs:
+        pj.scheduled_at = when
+        queue.enqueue(session, "publish", {"publication_job_id": str(pj.id)}, run_at=when, video_id=video.id,
+                      idempotency_key=f"publish:{pj.id}:{when.isoformat()}")
+    video.publish_metadata = {**(video.publish_metadata or {}), "publish_at_applied": raw}
+    audit(session, "owner:episodes.json", "publication.rescheduled", "video", video.id, when=when.isoformat(),
+          platforms=[j.platform for j in jobs])
+    return f"rescheduled {len(jobs)} post(s) to {when.isoformat()}"
+
+
 def import_all(session: Session, cfg: dict, path: Path | None = None, fetch=download) -> dict:
     import json
 
@@ -246,6 +282,9 @@ def import_all(session: Session, cfg: dict, path: Path | None = None, fetch=down
         try:
             with session.begin_nested():
                 out[ep["slug"]] = import_episode(session, cfg, ep, fetch)
+                moved = apply_publish_at(session, ep)
+                if moved:
+                    out[ep["slug"]] += f"; {moved}"
         except Exception as exc:  # one bad episode must not stop the rest
             log.exception("import failed for %s", ep.get("slug"))
             out[ep["slug"]] = f"failed: {exc}"[:300]

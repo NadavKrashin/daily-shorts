@@ -193,3 +193,27 @@ def test_qc_script_matches_the_import_check(cfg, ep, tmp_path, capsys):
     assert ok and "would be approved and posted automatically" in out
     assert not qc.check(_cleared(cfg), {**ep, "checks": {}}, Path(ep["video_url"][7:]))
     assert "HELD on the Mac" in capsys.readouterr().out
+
+
+def test_publish_at_moves_waiting_posts_once(session, cfg, ep):
+    from datetime import datetime, timedelta, timezone
+
+    from waitwhy.models import PublicationJob
+    from waitwhy.publishing import service as pub
+    from waitwhy.settings import get_config
+    importer.import_episode(session, _cleared(cfg), ep)
+    v = session.execute(select(Video)).scalar_one()
+    pub.schedule_video(session, get_config(session), v, "test")
+    session.commit()
+    soon = (datetime.now(timezone.utc) + timedelta(hours=3)).replace(microsecond=0)
+    ep["publish_at"] = soon.astimezone(timezone(timedelta(hours=3))).isoformat()
+    assert importer.apply_publish_at(session, ep).startswith("rescheduled")
+    jobs = session.execute(select(PublicationJob)).scalars().all()
+    assert jobs and {j.scheduled_at for j in jobs} == {soon}
+    later = soon + timedelta(days=1)
+    for j in jobs:                       # owner moves it again in the dashboard
+        j.scheduled_at = later
+    assert importer.apply_publish_at(session, ep) is None   # the same publish_at isn't re-applied
+    assert {j.scheduled_at for j in jobs} == {later}
+    ep["publish_at"] = "2020-01-01T10:00:00+00:00"           # past times are ignored
+    assert importer.apply_publish_at(session, ep) is None
